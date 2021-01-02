@@ -14,7 +14,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 
 [node name="colision" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0.575817, 125.02, 33.8736, 122.642, 65.9822, 113.723, 92.1448, 99.4523, 107.01, 77.452, 112.956, 53.0733, 104.037, 20.3701, 70.739, -24.2252, 39.225, -58.7122, 40.4142, -82.4963, 0.575795, -121.74, -45.8033, -84.2801, -41.641, -59.9014, -85.6417, -9.95469, -110.615, 29.2891, -115.372, 60.2085, -104.669, 91.7225, -66.6144, 117.29 )
+polygon = PoolVector2Array( 0.575817, 125.02, 33.8736, 122.642, 65.9822, 113.723, 92.1448, 99.4523, 107.01, 77.452, 112.956, 53.0733, 104.037, 20.3701, 70.739, -24.2252, 39.225, -58.7122, 51.4839, -89.3622, -1.41618, -126.66, -54.0876, -89.8079, -41.641, -59.9014, -85.6417, -9.95469, -110.615, 29.2891, -115.372, 60.2085, -104.669, 91.7225, -66.6144, 117.29 )
 
 [node name="fly_down" type="Timer" parent="."]
 wait_time = 5.0
@@ -25,6 +25,6 @@ one_shot = true
 autostart = true
 
 [node name="laser_gun" type="Position2D" parent="."]
-position = Vector2( -0.353958, -123.635 )
+position = Vector2( -1.59279, -126.526 )
 [connection signal="timeout" from="fly_down" to="." method="_on_fly_down_timeout"]
 [connection signal="timeout" from="boss_fire_cd" to="." method="_on_boss_fire_cd_timeout"]

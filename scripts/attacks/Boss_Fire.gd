@@ -4,7 +4,7 @@ onready var laser_end_point = $laser_end_point_pos;
 
 func _process(delta):
 	
-	scale.y += Global.game_speed * delta * 15;
+	scale.y += Global.game_speed * delta * 1;
 	
 
 func _on_laser_timer_timeout():
