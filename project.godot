@@ -1,0 +1,56 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "ResourceFormatLoader",
+"class": "HTerrainDataLoader",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
+}, {
+"base": "ResourceFormatSaver",
+"class": "HTerrainDataSaver",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
+} ]
+_global_script_class_icons={
+"HTerrainDataLoader": "",
+"HTerrainDataSaver": ""
+}
+
+[application]
+
+config/name="Milky_Way_from_scratch"
+config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://scripts/Global.gd"
+
+[display]
+
+window/size/width=480
+window/size/height=640
+window/dpi/allow_hidpi=true
+window/handheld/orientation="portrait"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-kra-psd-importer", "zylann.hterrain", "zylann.scatter" )
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+gles2/compatibility/disable_half_float=true
+environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_environment="res://default_env.tres"
