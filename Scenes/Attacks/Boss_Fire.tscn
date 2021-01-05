@@ -24,11 +24,12 @@ shape = SubResource( 1 )
 position = Vector2( 0, 256 )
 
 [node name="laser_timer" type="Timer" parent="."]
-one_shot = true
+wait_time = 0.3
 autostart = true
 
 [node name="rotate_laser" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.1
 autostart = true
+[connection signal="area_entered" from="." to="." method="_on_Boss_Fire_area_entered"]
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]
 [connection signal="timeout" from="rotate_laser" to="." method="_on_rotate_laser_timeout"]

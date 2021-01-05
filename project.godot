@@ -27,6 +27,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Milky_Way_from_scratch"
+boot_splash/image="res://bootsplash.png"
+boot_splash/bg_color=Color( 0, 0, 0, 0 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -37,6 +39,8 @@ Global="*res://scripts/Global.gd"
 
 window/size/width=480
 window/size/height=640
+window/size/test_width=700
+window/size/test_height=1600
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 

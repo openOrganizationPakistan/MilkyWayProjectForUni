@@ -21,10 +21,12 @@ wait_time = 5.0
 one_shot = true
 
 [node name="boss_fire_cd" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 autostart = true
 
 [node name="laser_gun" type="Position2D" parent="."]
 position = Vector2( -1.59279, -126.526 )
+[connection signal="area_entered" from="." to="." method="_on_Boss_area_entered"]
 [connection signal="timeout" from="fly_down" to="." method="_on_fly_down_timeout"]
 [connection signal="timeout" from="boss_fire_cd" to="." method="_on_boss_fire_cd_timeout"]
