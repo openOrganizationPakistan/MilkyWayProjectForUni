@@ -2,7 +2,7 @@ extends Area2D
 #extends "res://scripts/Players/player_controls.gd"
 
 func _ready():
-	scale = Vector2(0.5,0.5);
+	scale = Vector2(0.5,0.5) * Global.x_ratio;
 	Global.player_fire_damage = 5;
 
 func _process(delta):

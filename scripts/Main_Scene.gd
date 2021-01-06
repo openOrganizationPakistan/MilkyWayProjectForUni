@@ -12,8 +12,6 @@ onready var e_health_indic  = $Control/ehealth;
 
 func _ready():
 	
-	e_health_indic.rect_position.x = float(480/Global.x_ratio + e_health_indic.rect_size.x);
-	
 	player = main_players_scn.instance();
 	player.position = Vector2(480,640) / 2;
 	add_child(player);
