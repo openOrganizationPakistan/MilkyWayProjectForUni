@@ -36,6 +36,10 @@ config/icon="res://icon.png"
 
 Global="*res://scripts/Global.gd"
 
+[debug]
+
+settings/fps/force_fps=240
+
 [display]
 
 window/size/width=480

@@ -14,15 +14,4 @@ func _input(event):
 		
 		ongoing_drag = event.get_index();
 		
-	if ( (event is InputEventScreenDrag
-			or event is InputEventScreenTouch)
-			and
-			 event.get_index() == ongoing_drag):
-				
-				if Global.game_speed < 50:
-					Global.game_speed = 50;
-		 
-	
-	print(Global.game_speed)
-	
 	

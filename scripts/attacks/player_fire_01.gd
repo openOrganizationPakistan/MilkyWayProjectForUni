@@ -6,9 +6,14 @@ func _ready():
 	Global.player_fire_damage = 5;
 
 func _process(delta):
-	position.y -= Global.game_speed * 25 * delta;
+	position.y -= Global.game_speed * 25 * delta * Global.y_ratio;
 
 
 func _on_Timer_timeout():
 	queue_free();
-	pass # Replace with function body.
+
+
+func _on_player_fire_01_area_entered(area):
+	if !area.is_in_group("player"):
+		Global.current_score += 1;
+		queue_free();

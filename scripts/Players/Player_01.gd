@@ -8,7 +8,7 @@ func _ready():
 
 func _process(_delta):
 	if health <= 0:
-		queue_free();
+		Global.game_over = true;
 
 func _on_Player_01_area_entered(area):
 	if area.is_in_group("enemy"):

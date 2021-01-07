@@ -1,0 +1,11 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=1]
+
+[resource]
+size = 32
+outline_size = 1
+outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )

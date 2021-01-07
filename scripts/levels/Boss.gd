@@ -21,7 +21,7 @@ onready var fly_down_timer = $fly_down;
 onready var boss_fire_cd = $boss_fire_cd;
 
 func _ready():
-	position = Vector2(90,100)
+	position = Vector2(90*Global.x_ratio,100*Global.y_ratio);
 	scale = Vector2(0.75,0.75) * Global.x_ratio;
 	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
@@ -36,7 +36,7 @@ func _process(delta):
 		pass
 	
 	if health <= 0:
-		queue_free();
+		Global.game_over=true;
 	
 	if fly_down_bool and not anim_done:
 		if position.y <=100*Global.y_ratio:
