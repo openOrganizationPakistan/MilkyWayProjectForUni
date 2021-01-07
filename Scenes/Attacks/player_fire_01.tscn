@@ -9,6 +9,7 @@ extents = Vector2( 3, 32 )
 [node name="player_fire_01" type="Area2D" groups=[
 "player_fire",
 ]]
+z_index = -1
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

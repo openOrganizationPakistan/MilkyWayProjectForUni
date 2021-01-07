@@ -26,6 +26,7 @@ func _ready():
 	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
 	
+#	health =0;
 
 func _process(delta):
 	if position.x >= 390*Global.x_ratio:
@@ -34,9 +35,17 @@ func _process(delta):
 		dir_x = 1;
 	else:
 		pass
-	
 	if health <= 0:
-		Global.game_over=true;
+		dir_x=0;
+		fly_down_timer.stop();
+		boss_fire_cd.stop();
+		$sprite.hide();
+		$distroy.show();
+		$distroy.play("distroyed");
+		$colision.set_deferred("disabled",true);
+		
+		rotation += deg2rad(1);
+		
 	
 	if fly_down_bool and not anim_done:
 		if position.y <=100*Global.y_ratio:
@@ -75,8 +84,6 @@ func _on_boss_fire_cd_timeout():
 	boss_fire_cd.wait_time = (rand_range(1,2));
 	boss_fire_cd.start();
 	
-	
-
 
 func _on_Boss_area_entered(area):
 	if area.is_in_group("player"):
@@ -85,3 +92,8 @@ func _on_Boss_area_entered(area):
 		health -= Global.player_fire_damage;
 		Global.enemy_c_health = health;
 	
+
+
+func _on_distroy_animation_finished():
+	Global.game_over=true;
+	pass # Replace with function body.
