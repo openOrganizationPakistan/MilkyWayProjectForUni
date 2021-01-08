@@ -7,9 +7,7 @@ func _return_level(index):
 	return get_child(index).duplicate();
 	
 
-func _on_Boss_area_entered(area):
-	level_change.show();
-	level_change.text = str(boss.health);
+func _on_Boss_area_entered(_area):
 	
 	if boss.health<=0+Global.player_fire_damage:
 		level_change.text = "congrats\n\nYou won!"

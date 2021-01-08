@@ -43,7 +43,7 @@ func _process(_delta):
 		if Global.current_score>int(Global.high_score):
 			Global.high_score = Global.current_score;
 			Global._write_file(Global.high_score_path,Global.h_s_file);
-			
+		
 		var _ui_scn = get_tree().change_scene("res://Scenes/UI.tscn");
 		queue_free();
 		

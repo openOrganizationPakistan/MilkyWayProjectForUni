@@ -9,6 +9,7 @@ func _ready():
 func _process(_delta):
 	if health <= 0:
 		Global.game_over = true;
+		get_tree().change_scene("res://Scenes/UI.tscn");
 
 func _on_Player_01_area_entered(area):
 	if area.is_in_group("enemy"):

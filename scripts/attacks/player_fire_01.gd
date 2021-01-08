@@ -3,7 +3,7 @@ extends Area2D
 
 func _ready():
 	scale = Vector2(0.5,0.5) * Global.x_ratio;
-	Global.player_fire_damage = 10;
+	
 
 func _process(delta):
 	position.y -= Global.game_speed * 25 * delta * Global.y_ratio;

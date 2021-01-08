@@ -25,6 +25,7 @@ func _ready():
 	scale = Vector2(0.75,0.75) * Global.x_ratio;
 	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
+	Global.player_fire_damage=7
 	
 #	health =0;
 
@@ -96,4 +97,20 @@ func _on_Boss_area_entered(area):
 
 func _on_distroy_animation_finished():
 	Global.game_over=true;
-	pass # Replace with function body.
+	
+	get_tree().change_scene("res://Scenes/UI.tscn");
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

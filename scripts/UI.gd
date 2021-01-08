@@ -6,6 +6,8 @@ onready var score_scn = $Score;
 var score;
 
 func _ready():
+	
+	
 	$VBoxContainer.rect_global_position = (
 		((Vector2(240,320)
 		* Vector2(Global.x_ratio,Global.y_ratio))) 

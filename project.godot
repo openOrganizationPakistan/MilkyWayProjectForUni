@@ -38,18 +38,22 @@ window/handheld/orientation="portrait"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "godot-kra-psd-importer", "zylann.hterrain", "zylann.scatter" )
+enabled=PoolStringArray(  )
 
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
-vram_compression/import_bptc=true
+quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
-vram_compression/import_pvrtc=true
 gles2/compatibility/disable_half_float=true
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+gles2/compatibility/enable_high_float.Android=true
+environment/default_clear_color=Color( 0, 0, 0, 0 )
 environment/default_environment="res://default_env.tres"
