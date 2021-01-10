@@ -10,7 +10,7 @@ var player ;
 onready var p_health_indic  = $Control/phealth;
 onready var e_health_indic  = $Control/ehealth;
 onready var cpu  = $Control/cpu;
-onready var mem  = $Control/mem;
+#onready var mem  = $Control/mem;
 onready var fps  = $Control/fps;
 
 func _ready():
@@ -29,23 +29,23 @@ func _ready():
 	
 
 func _process(_delta):
-	
-	score_scn._set_score("Score: ",Global.current_score);
+	var score = Global.current_score;
+	score_scn._set_score("Score: ",score);
 	
 	p_health_indic.text = "Health: " + str(player.health);
 	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
 	
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
-	mem.text = "RAM: " + str(floor(Performance.get_monitor(3)/(1024*1024))) + "MB";
+#	mem.text = "RAM: " + str(floor(Performance.get_monitor(3)/(1024*1024))) + "MB";
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	
-	if Global.game_over:
-		if Global.current_score>int(Global.high_score):
-			Global.high_score = Global.current_score;
-			Global._write_file(Global.high_score_path,Global.h_s_file);
-		
-		var _ui_scn = get_tree().change_scene("res://Scenes/UI.tscn");
-		queue_free();
+#	if Global.game_over:
+#		if Global.current_score >= int(Global.high_score):
+#			Global.set_h_s(score);
+#
+#
+#		var _ui_scn = get_tree().change_scene("res://Scenes/UI.tscn");
+#		queue_free();
 		
 	
 

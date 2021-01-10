@@ -6,12 +6,15 @@ func _ready():
 	scale = Vector2(0.4,0.4) * Global.x_ratio ;
 	
 
-func _process(_delta):
+func _on_Player_01_area_entered(area):
 	if health <= 0:
+		if Global.current_score >= int(Global.high_score):
+			Global.set_h_s(Global.current_score);
+		
 		Global.game_over = true;
 		get_tree().change_scene("res://Scenes/UI.tscn");
-
-func _on_Player_01_area_entered(area):
+		
+	
 	if area.is_in_group("enemy"):
 		health -= Global.enemy_damage;
 		

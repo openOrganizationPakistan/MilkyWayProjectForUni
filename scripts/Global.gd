@@ -2,7 +2,7 @@ extends Node
 
 var game_speed = 25;
 var current_score=0;
-var high_score = 0 setget set_h_s
+var high_score = 0;
 #				, get_h_s;
 var player_health = 100;
 var player_fire_damage = 0;
@@ -16,7 +16,7 @@ onready var x_ratio;
 onready var y_ratio;
 
 var h_s_file = File.new()
-var high_score_path = "user://HS.nm" 
+var high_score_path = "user://HS.data" 
 
 
 
@@ -24,9 +24,9 @@ func _ready():
 	
 #	if not h_s_file.file_exists(high_score_path):
 #		_write_file(high_score_path,str(high_score));
-#
-#
-#	high_score = _read_file(high_score_path);
+#	_write_file(high_score_path,str(0));
+	
+	high_score = _read_file(high_score_path);
 	
 	x_ratio = _get_viewport_rect().x/480;
 	y_ratio = _get_viewport_rect().y/640;
@@ -38,7 +38,10 @@ func _get_viewport_rect():
 
 func _read_file(path):
 	var file = File.new();
-	if not file.file_exists(high_score_path) : _write_file(high_score_path,str(high_score));
+	if not file.file_exists(high_score_path) : 
+		_write_file(high_score_path,str(high_score));
+		
+	
 	file.open(path, File.READ);
 	var data = file.get_as_text();
 	file.close();
@@ -54,7 +57,7 @@ func _write_file(path,towrite):
 
 func set_h_s(new_value):
 	high_score = new_value;
-	return _write_file(high_score_path,str(high_score));
+	_write_file(high_score_path,str(high_score));
 	
 
 #func get_h_s():

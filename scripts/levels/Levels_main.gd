@@ -10,6 +10,9 @@ func _return_level(index):
 func _on_Boss_area_entered(_area):
 	
 	if boss.health<=0+Global.player_fire_damage:
+		
+		
+		
 		level_change.text = "congrats\n\nYou won!"
 		level_change.rect_position = Vector2(
 			(240*Global.x_ratio)-(level_change.rect_size.x/2)

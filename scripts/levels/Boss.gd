@@ -36,17 +36,7 @@ func _process(delta):
 		dir_x = 1;
 	else:
 		pass
-	if health <= 0:
-		dir_x=0;
-		fly_down_timer.stop();
-		boss_fire_cd.stop();
-		$sprite.hide();
-		$distroy.show();
-		$distroy.play("distroyed");
-		$colision.set_deferred("disabled",true);
-		
-		rotation += deg2rad(1);
-		
+	
 	
 	if fly_down_bool and not anim_done:
 		if position.y <=100*Global.y_ratio:
@@ -87,6 +77,19 @@ func _on_boss_fire_cd_timeout():
 	
 
 func _on_Boss_area_entered(area):
+	
+	if health <= 0:
+		dir_x=0;
+		fly_down_timer.stop();
+		boss_fire_cd.stop();
+		$sprite.hide();
+		$distroy.show();
+		$distroy.play("distroyed");
+		$colision.set_deferred("disabled",true);
+		
+		rotation += deg2rad(1);
+		
+	
 	if area.is_in_group("player"):
 		Global.enemy_damage = 15;
 	elif area.is_in_group("player_fire"):
@@ -96,6 +99,10 @@ func _on_Boss_area_entered(area):
 
 
 func _on_distroy_animation_finished():
+	
+	if Global.current_score >= int(Global.high_score):
+			Global.set_h_s(Global.current_score);
+	
 	Global.game_over=true;
 	
 	get_tree().change_scene("res://Scenes/UI.tscn");
