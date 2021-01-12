@@ -65,10 +65,10 @@ func _on_player_fire_timer_timeout():
 		elif (i==1):
 			fire[i].set_velocity(i*-25);
 		elif (i%2==0):
-			fire[i].set_velocity((i/2)*25);
+			fire[i].set_velocity(floor(i/2)*25);
 		elif (i%2==1):
-			fire[i].set_velocity((2*i/3)*-25);
-			
+			fire[i].set_velocity(floor(2*i/3)*-25);
+		
 		
 		add_child(fire[i]);
 	
