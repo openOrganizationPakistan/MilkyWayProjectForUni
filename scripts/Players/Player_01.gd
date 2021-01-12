@@ -3,7 +3,7 @@ extends "res://scripts/Players/player_controls.gd"
 var health = Global.player_health;
 
 func _ready():
-	scale = Vector2(0.4,0.4) * Global.x_ratio ;
+	scale = (Vector2(0.4,0.4) * Global.x_ratio);
 	
 
 func _on_Player_01_area_entered(area):
@@ -12,7 +12,7 @@ func _on_Player_01_area_entered(area):
 			Global.set_h_s(Global.current_score);
 		
 		Global.game_over = true;
-		get_tree().change_scene("res://Scenes/UI.tscn");
+		var _temp=get_tree().change_scene("res://Scenes/UI.tscn");
 		
 	
 	if area.is_in_group("enemy"):

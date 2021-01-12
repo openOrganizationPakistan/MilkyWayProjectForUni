@@ -7,6 +7,7 @@
 
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 1 )
+fire_matrix = 5
 
 [node name="player_fire_timer" type="Timer" parent="."]
 wait_time = 0.1

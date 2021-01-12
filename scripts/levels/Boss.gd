@@ -22,10 +22,10 @@ onready var boss_fire_cd = $boss_fire_cd;
 
 func _ready():
 	position = Vector2(90*Global.x_ratio,100*Global.y_ratio);
-	scale = Vector2(0.75,0.75) * Global.x_ratio;
+	scale = (Vector2(0.75,0.75) * Global.x_ratio).normalized();
 	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
-	Global.player_fire_damage=7
+	Global.player_fire_damage=1;
 	
 #	health =0;
 
@@ -102,10 +102,10 @@ func _on_distroy_animation_finished():
 	
 	if Global.current_score >= int(Global.high_score):
 			Global.set_h_s(Global.current_score);
-	
+		
 	Global.game_over=true;
 	
-	get_tree().change_scene("res://Scenes/UI.tscn");
+	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
 
 

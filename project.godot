@@ -33,6 +33,8 @@ settings/fps/force_fps=240
 
 window/size/width=480
 window/size/height=640
+window/size/test_width=466
+window/size/test_height=1066
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 

@@ -6,6 +6,8 @@ export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/player_f
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 onready var score_scn = $Control/Score;
 
+export var fire_matrix = 1;
+
 var player ;
 onready var p_health_indic  = $Control/phealth;
 onready var e_health_indic  = $Control/ehealth;
@@ -51,7 +53,27 @@ func _process(_delta):
 
 func _on_player_fire_timer_timeout():
 	
-	var fire = main_fires_scn.instance();
-	fire.global_position = player.position;
-	add_child(fire);
+#	var fire = [main_fires_scn.instance()];
+	var fire = [];
+	
+	for i in range (fire_matrix):
+		fire.append(main_fires_scn.instance())
+		fire[i].global_position = player.position + Vector2(0,-50);
+		if i%3==0 and !i==0:
+			fire[i].set_velocity((i/3)*25);
+#			fire[i].global_position = player.position + Vector2(i/3*25,-50);
+			
+		elif i==0:
+			fire[0].set_velocity(0);
+#			fire[i].global_position = player.position + Vector2(0,-50);
+		else:
+			if i==1:
+				fire[i].set_velocity(i*-25);
+#				fire[i].global_position = player.position + Vector2(i*-25,-50);
+			else:
+				fire[i].set_velocity(((i/2)+1)*-25);
+#				fire[i].global_position = player.position + Vector2((((i/2)+1)*-25),-50);
+			
+			
+		add_child(fire[i]);
 	
