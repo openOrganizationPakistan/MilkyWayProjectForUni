@@ -59,21 +59,16 @@ func _on_player_fire_timer_timeout():
 	for i in range (fire_matrix):
 		fire.append(main_fires_scn.instance())
 		fire[i].global_position = player.position + Vector2(0,-50);
-		if i%3==0 and !i==0:
-			fire[i].set_velocity((i/3)*25);
-#			fire[i].global_position = player.position + Vector2(i/3*25,-50);
+		
+		if (i==0):
+			fire[i].set_velocity(i);
+		elif (i==1):
+			fire[i].set_velocity(i*-25);
+		elif (i%2==0):
+			fire[i].set_velocity((i/2)*25);
+		elif (i%2==1):
+			fire[i].set_velocity((2*i/3)*-25);
 			
-		elif i==0:
-			fire[0].set_velocity(0);
-#			fire[i].global_position = player.position + Vector2(0,-50);
-		else:
-			if i==1:
-				fire[i].set_velocity(i*-25);
-#				fire[i].global_position = player.position + Vector2(i*-25,-50);
-			else:
-				fire[i].set_velocity(((i/2)+1)*-25);
-#				fire[i].global_position = player.position + Vector2((((i/2)+1)*-25),-50);
-			
-			
+		
 		add_child(fire[i]);
 	

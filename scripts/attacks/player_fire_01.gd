@@ -12,9 +12,6 @@ func _process(delta):
 #	position.normalized();
 
 
-func _on_Timer_timeout():
-	queue_free();
-
 
 func _on_player_fire_01_area_entered(area):
 	if (area.is_in_group("player") 
@@ -29,5 +26,9 @@ func _on_player_fire_01_area_entered(area):
 	
 
 func set_velocity(new_value):
-	velocity = new_value;
+	velocity = int(new_value);
+	
 
+func _on_Timer_timeout():
+	queue_free();
+	

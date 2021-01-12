@@ -86,7 +86,7 @@ func _on_Boss_area_entered(area):
 		$distroy.show();
 		$distroy.play("distroyed");
 		$colision.set_deferred("disabled",true);
-		
+		dir_y = 0;
 		rotation += deg2rad(1);
 		
 	

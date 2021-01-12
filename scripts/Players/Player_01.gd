@@ -18,4 +18,5 @@ func _on_Player_01_area_entered(area):
 	if area.is_in_group("enemy"):
 		health -= Global.enemy_damage;
 		
+		
 	
