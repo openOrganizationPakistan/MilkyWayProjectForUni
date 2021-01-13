@@ -15,8 +15,10 @@ func _on_Player_01_area_entered(area):
 		var _temp=get_tree().change_scene("res://Scenes/UI.tscn");
 		
 	
-	if area.is_in_group("enemy"):
+	elif area.is_in_group("enemy"):
+#		health -= 15;
 		health -= Global.enemy_damage;
 		
-		
 	
+	
+

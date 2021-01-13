@@ -4,16 +4,22 @@ export (PackedScene) var main_levels_scn = preload("res://Scenes/Levels/Levels_m
 export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Player_01.tscn");
 export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/player_fire_01.tscn");
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
-onready var score_scn = $Control/Score;
-
 export var fire_matrix = 1;
 
-var player ;
+onready var score_scn = $Control/Score;
 onready var p_health_indic  = $Control/phealth;
 onready var e_health_indic  = $Control/ehealth;
 onready var cpu  = $Control/cpu;
 #onready var mem  = $Control/mem;
 onready var fps  = $Control/fps;
+
+var player ;
+
+func _process(_delta):
+	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
+#	mem.text = "RAM: " + str(floor(Performance.get_monitor(3)/(1024*1024))) + "MB";
+	fps.text = "FPS: " + str(Performance.get_monitor(0));
+	
 
 func _ready():
 	var bg = bg_env_scn.instance();
@@ -29,37 +35,20 @@ func _ready():
 	level._return_level(0);
 	add_child(level);
 	
-
-func _process(_delta):
-	var score = Global.current_score;
-	score_scn._set_score("Score: ",score);
-	
-	p_health_indic.text = "Health: " + str(player.health);
-	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
-	
-	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
-#	mem.text = "RAM: " + str(floor(Performance.get_monitor(3)/(1024*1024))) + "MB";
-	fps.text = "FPS: " + str(Performance.get_monitor(0));
-	
-#	if Global.game_over:
-#		if Global.current_score >= int(Global.high_score):
-#			Global.set_h_s(score);
-#
-#
-#		var _ui_scn = get_tree().change_scene("res://Scenes/UI.tscn");
-#		queue_free();
+	match Global.fire_type:
+		0:
+			Global.player_fire_damage = 3;
 		
 	
 
 func _on_player_fire_timer_timeout():
-	
+	_show_hud();
 #	var fire = [main_fires_scn.instance()];
 	var fire = [];
 	
 	for i in range (fire_matrix):
 		fire.append(main_fires_scn.instance())
-		fire[i].global_position = player.position + Vector2(0,-50);
-		
+		fire[i].position = player.position + Vector2(0,-50);
 		if (i==0):
 			fire[i].set_velocity(i);
 		elif (i==1):
@@ -69,6 +58,17 @@ func _on_player_fire_timer_timeout():
 		elif (i%2==1):
 			fire[i].set_velocity(floor(2*i/3)*-25);
 		
-		
 		add_child(fire[i]);
 	
+
+func _show_hud():
+	var score = Global.current_score;
+	score_scn._set_score("Score: ",score);
+	
+	p_health_indic.text = "Health: " + str(player.health);
+	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
+	
+	if player.health <=0:
+		if Global.current_score > Global.high_score:
+			Global._set_h_s(Global.current_score);
+		var _temp = get_tree().change_scene("res://Scenes/UI.tscn");

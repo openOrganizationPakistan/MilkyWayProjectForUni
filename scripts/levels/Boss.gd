@@ -6,6 +6,8 @@ export (PackedScene) var boss_fire_scn = preload("res://Scenes/Attacks/Boss_Fire
 var dir_x = 1;
 var dir_y = 1;
 
+export var enemy_damage = int(15);
+
 var fly_down_spd = 0;
 
 var scr_touch = false;
@@ -22,10 +24,9 @@ onready var boss_fire_cd = $boss_fire_cd;
 
 func _ready():
 	position = Vector2(90*Global.x_ratio,100*Global.y_ratio);
-	scale = (Vector2(0.75,0.75) * Global.x_ratio).normalized();
+	scale = (Vector2(0.85,0.85) * Global.x_ratio);
 	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
-	Global.player_fire_damage=1;
 	
 #	health =0;
 
@@ -60,6 +61,7 @@ func _process(delta):
 func _on_fly_down_timeout():
 	
 	boss_fire_cd.stop();
+	Global.enemy_damage = enemy_damage;
 	fly_down_spd = 30 *Global.y_ratio;
 	fly_down_bool = true;
 	anim_done = false;
@@ -69,8 +71,9 @@ func _on_fly_down_timeout():
 
 func _on_boss_fire_cd_timeout():
 	boss_fire = boss_fire_scn.instance();
-	boss_fire.position = $laser_gun.position
-	boss_fire.rotate(deg2rad(165));
+	boss_fire.position = $laser_gun.position;
+#	boss_fire.rotate(deg2rad(165));
+	boss_fire.rotation = lerp_angle(deg2rad(155),deg2rad(270),get_process_delta_time()*5);
 	add_child(boss_fire);
 	boss_fire_cd.wait_time = (rand_range(1,2));
 	boss_fire_cd.start();
@@ -80,16 +83,15 @@ func _on_Boss_area_entered(area):
 	
 	if health <= 0:
 		dir_x=0;
+		dir_y = 0;
 		fly_down_timer.stop();
 		boss_fire_cd.stop();
 		$sprite.hide();
 		$distroy.show();
 		$distroy.play("distroyed");
 		$colision.set_deferred("disabled",true);
-		dir_y = 0;
 		rotation += deg2rad(1);
 		
-	
 	if area.is_in_group("player"):
 		Global.enemy_damage = 15;
 	elif area.is_in_group("player_fire"):

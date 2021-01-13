@@ -1,5 +1,7 @@
+#script: player_fire.gd
 extends Area2D
-#extends "res://scripts/Players/player_controls.gd"
+
+var fire_type;
 
 var velocity = 0 setget set_velocity;
 
@@ -17,6 +19,21 @@ func _fire(index):
 		0:
 			position -= Vector2(velocity ,Global.game_speed * 25 ) * get_physics_process_delta_time() * Global.y_ratio;
 			
+		1:
+			_stay_in_touch();
+			pass;
+	
+
+func _stay_in_touch():
+	
+	var event = InputEvent
+	
+	if ((event is InputEventScreenTouch) and event.is_pressed() ) or event is InputEventScreenDrag:
+		
+		position.x = lerp(position.x,event.position.x,Global.movement_speed) 
+		
+		
+	
 
 
 func _on_player_fire_01_area_entered(area):
