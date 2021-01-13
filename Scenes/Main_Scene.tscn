@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://theme/32.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
+[ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 1
+outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 5 )
 
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,7 +40,7 @@ margin_top = 4.0
 margin_right = 218.0
 margin_bottom = 38.0
 theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Health: "
 uppercase = true
 __meta__ = {
@@ -43,7 +52,6 @@ margin_top = 42.0
 margin_right = 218.0
 margin_bottom = 76.0
 theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 2 )
 text = "enemy health: "
 uppercase = true
 __meta__ = {
@@ -55,7 +63,6 @@ margin_top = 80.0
 margin_right = 218.0
 margin_bottom = 114.0
 theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 2 )
 text = "CPU:  "
 uppercase = true
 __meta__ = {
@@ -80,7 +87,6 @@ margin_top = 118.0
 margin_right = 218.0
 margin_bottom = 152.0
 theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 2 )
 text = "FPS: "
 uppercase = true
 __meta__ = {

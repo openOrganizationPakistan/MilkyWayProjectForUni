@@ -9,7 +9,7 @@ var boss_health = 1000;
 var enemy_damage = 0;
 var enemy_c_health = 0;
 var fire_type = 0;
-var movement_speed = 0.1;
+var movement_speed = 0.3;
 
 var game_over = false;
 

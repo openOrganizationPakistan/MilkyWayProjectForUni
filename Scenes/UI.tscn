@@ -45,7 +45,7 @@ selected = 0
 [node name="Button" type="Button" parent="VBoxContainer"]
 margin_top = 76.0
 margin_right = 300.0
-margin_bottom = 110.0
+margin_bottom = 135.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Play"

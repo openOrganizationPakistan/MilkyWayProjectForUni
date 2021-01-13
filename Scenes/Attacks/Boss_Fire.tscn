@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/attacks/Boss_Fire.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 128 )
+extents = Vector2( 12.4113, 128 )
 
 [node name="Boss_Fire" type="Area2D" groups=[
 "boss_fire",
@@ -28,7 +28,7 @@ wait_time = 0.3
 autostart = true
 
 [node name="rotate_laser" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 autostart = true
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]
 [connection signal="timeout" from="rotate_laser" to="." method="_on_rotate_laser_timeout"]

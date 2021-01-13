@@ -27,18 +27,21 @@ func _ready():
 	scale = (Vector2(0.85,0.85) * Global.x_ratio);
 	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
-	
+#	connect("area_entered",self,"_on_area_entered")
 #	health =0;
 
 func _process(delta):
+	
+
+	
 	if position.x >= 390*Global.x_ratio:
 		dir_x = -1;
 	elif position.x <= 90*Global.x_ratio:
 		dir_x = 1;
 	else:
 		pass
-	
-	
+
+
 	if fly_down_bool and not anim_done:
 		if position.y <=100*Global.y_ratio:
 			if position.y < 95*Global.y_ratio:
@@ -53,10 +56,10 @@ func _process(delta):
 			dir_y = -1;
 			anim_down_done = true
 		position.y += fly_down_spd * Global.game_speed * delta * dir_y;
-		
-	
+
+
 	position.x += h_movement_spd * Global.game_speed * delta * dir_x;
-	
+
 
 func _on_fly_down_timeout():
 	
@@ -72,15 +75,14 @@ func _on_fly_down_timeout():
 func _on_boss_fire_cd_timeout():
 	boss_fire = boss_fire_scn.instance();
 	boss_fire.position = $laser_gun.position;
-#	boss_fire.rotate(deg2rad(165));
-	boss_fire.rotation = lerp_angle(deg2rad(155),deg2rad(270),get_process_delta_time()*5);
+	boss_fire.rotation = deg2rad(155);
 	add_child(boss_fire);
-	boss_fire_cd.wait_time = (rand_range(1,2));
+	boss_fire_cd.wait_time = (rand_range(1,3));
 	boss_fire_cd.start();
 	
 
 func _on_Boss_area_entered(area):
-	
+
 	if health <= 0:
 		dir_x=0;
 		dir_y = 0;
@@ -89,15 +91,12 @@ func _on_Boss_area_entered(area):
 		$sprite.hide();
 		$distroy.show();
 		$distroy.play("distroyed");
-		$colision.set_deferred("disabled",true);
+		$shape.set_deferred("disabled",true);
 		rotation += deg2rad(1);
-		
-	if area.is_in_group("player"):
-		Global.enemy_damage = 15;
+
 	elif area.is_in_group("player_fire"):
 		health -= Global.player_fire_damage;
 		Global.enemy_c_health = health;
-	
 
 
 func _on_distroy_animation_finished():
@@ -109,17 +108,4 @@ func _on_distroy_animation_finished():
 	
 	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
 

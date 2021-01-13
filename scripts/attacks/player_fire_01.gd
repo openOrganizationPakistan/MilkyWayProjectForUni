@@ -4,3 +4,4 @@ extends "res://scripts/attacks/player_fire.gd"
 
 func _process(_delta):
 	_fire(0);
+	

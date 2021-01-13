@@ -7,7 +7,7 @@ var velocity = 0 setget set_velocity;
 
 func _ready():
 	scale = (Vector2(0.5,0.5) * Global.x_ratio).normalized();
-	
+	connect("area_entered",self,"_on_player_fire_01_area_entered")
 
 #func _process(delta):
 #	

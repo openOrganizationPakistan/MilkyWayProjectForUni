@@ -26,4 +26,3 @@ text = "you won"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="area_entered" from="Boss" to="." method="_on_Boss_area_entered"]
