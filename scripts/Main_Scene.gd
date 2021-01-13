@@ -16,6 +16,8 @@ onready var fps  = $Control/fps;
 var player ;
 
 func _process(_delta):
+	p_health_indic.text = "Health: " + str(Global.player_c_health);
+	
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
 #	mem.text = "RAM: " + str(floor(Performance.get_monitor(3)/(1024*1024))) + "MB";
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
@@ -65,7 +67,6 @@ func _show_hud():
 	var score = Global.current_score;
 	score_scn._set_score("Score: ",score);
 	
-	p_health_indic.text = "Health: " + str(player.health);
 	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
 	
 	if player.health <=0:

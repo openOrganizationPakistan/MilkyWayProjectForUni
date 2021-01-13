@@ -8,7 +8,6 @@ extents = Vector2( 12.4113, 128 )
 
 [node name="Boss_Fire" type="Area2D" groups=[
 "boss_fire",
-"enemy",
 ]]
 script = ExtResource( 2 )
 

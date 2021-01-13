@@ -5,6 +5,7 @@ var current_score=0;
 var high_score = 0;
 var player_health = 100;
 var player_fire_damage = 0; # change in fire Main_Scene.gd to change realtime with powerups
+var player_c_health = 0;
 var boss_health = 1000;
 var enemy_damage = 0;
 var enemy_c_health = 0;
