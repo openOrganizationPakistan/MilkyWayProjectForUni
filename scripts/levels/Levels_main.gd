@@ -8,7 +8,7 @@ func _return_level(index):
 	
 
 
-func _on_Boss_area_entered(area):
+func _on_Boss_area_entered(_area):
 	
 	if boss.health<=0+Global.player_fire_damage:
 
