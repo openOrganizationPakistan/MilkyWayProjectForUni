@@ -5,6 +5,7 @@ export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Player
 export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/player_fire_01.tscn");
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 export var fire_matrix = 1 ;
+export var spread_fire = 30 ;
 
 onready var score_scn = $Control/Score;
 onready var p_health_indic  = $Control/phealth;
@@ -50,15 +51,15 @@ func _on_player_fire_timer_timeout():
 	
 	for i in range (fire_matrix):
 		fire.append(main_fires_scn.instance())
-		fire[i].position = player.position + Vector2(0,-45 * Global.x_ratio) ;
+		fire[i].position = player.position + Vector2(0,-30 * Global.x_ratio) ;
 		if (i==0):
 			fire[i].set_velocity(i);
 		elif (i==1):
-			fire[i].set_velocity(i*- (40 * Global.x_ratio));
+			fire[i].set_velocity(i*- (spread_fire * Global.x_ratio));
 		elif (i%2==0):
-			fire[i].set_velocity(floor(i/2)* (40 * Global.x_ratio));
+			fire[i].set_velocity(floor(i/2)* (spread_fire * Global.x_ratio));
 		elif (i%2==1):
-			fire[i].set_velocity(floor(2*i/3)* -(40 * Global.x_ratio));
+			fire[i].set_velocity(floor(2*i/3)* -(spread_fire * Global.x_ratio));
 		
 		add_child(fire[i]);
 	

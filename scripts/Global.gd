@@ -2,7 +2,7 @@ extends Node
 
 var game_speed = 25;
 var current_score=0;
-var high_score = 0;
+var high_score = 0 setget _set_h_s;
 var player_health = 100;
 var player_fire_damage = 0; # change in fire Main_Scene.gd to change realtime with powerups
 var player_c_health = 0;

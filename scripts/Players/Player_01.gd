@@ -22,7 +22,7 @@ func _on_Player_01_area_entered(area):
 	
 	if health <= 0:
 		if Global.current_score >= int(Global.high_score):
-			Global.set_h_s(Global.current_score);
+			Global._set_h_s(Global.current_score);
 		
 		Global.game_over = true;
 		queue_free();

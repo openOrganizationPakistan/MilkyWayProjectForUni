@@ -102,7 +102,7 @@ func _on_Boss_area_entered(area):
 func _on_distroy_animation_finished():
 	
 	if Global.current_score >= int(Global.high_score):
-			Global.set_h_s(Global.current_score);
+			Global._set_h_s(Global.current_score);
 		
 	Global.game_over=true;
 	
