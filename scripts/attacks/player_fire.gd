@@ -3,7 +3,7 @@ extends Area2D
 
 var fire_type;
 
-var velocity = 0 setget set_velocity;
+var velocity = 0 setget _set_velocity;
 
 func _ready():
 	scale = (Vector2(0.5,0.5) * Global.x_ratio).normalized();
@@ -48,7 +48,7 @@ func _on_player_fire_01_area_entered(area):
 		
 	
 
-func set_velocity(new_value):
+func _set_velocity(new_value):
 	velocity = int(new_value);
 	
 

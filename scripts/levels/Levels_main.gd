@@ -4,6 +4,11 @@ onready var boss = $Boss;
 onready var level_change = $level_change;
 
 func _return_level(index):
+#	var j = get_child_count()
+#	for i in j:
+#		if i!=index:
+#			get_child(i).queue_free();
+	
 	return get_child(index).duplicate();
 	
 
@@ -19,5 +24,3 @@ func _on_Boss_area_entered(_area):
 			);
 		level_change.show();
 
-
-	pass # Replace with function body.

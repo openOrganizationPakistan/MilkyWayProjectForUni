@@ -1,5 +1,6 @@
 extends Node
 
+var player_index = 0;
 var game_speed = 25;
 var current_score=0;
 var high_score = 0 setget _set_h_s;

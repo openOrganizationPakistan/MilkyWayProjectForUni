@@ -20,7 +20,7 @@ fire_matrix = 5
 spread_fire = 25
 
 [node name="player_fire_timer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.1
 autostart = true
 
 [node name="Control" type="VBoxContainer" parent="."]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://kra_imported/Boss_fire.png" type="Texture" id=1]
+[ext_resource path="res://kra_imported/Boss_fire_lq.png" type="Texture" id=1]
 [ext_resource path="res://scripts/attacks/Boss_Fire.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12.4113, 128 )
+extents = Vector2( 11.0358, 128 )
 
 [node name="Boss_Fire" type="Area2D" groups=[
 "boss_fire",
