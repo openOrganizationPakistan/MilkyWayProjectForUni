@@ -38,14 +38,14 @@ func _ready():
 	
 	match Global.fire_type:
 		0:
-			Global.player_fire_damage = 10;
+			Global.player_fire_damage = 1;
 		
 	
 
 func _add_level():
 	var temp = main_levels_scn.instance();
 	var level = temp._return_level(0);
-#	temp.queue_free();
+	temp.queue_free();
 	add_child(level);
 	
 
@@ -66,9 +66,32 @@ func _on_player_fire_timer_timeout():
 	match Global.fire_type:
 		0:
 			_spread_fire(fire);
+#			_laser(fire)
+			
+		1:
+			_laser(fire);
 			
 		
 	
+
+func _laser(fire):
+	for i in range (fire_matrix):
+		fire.append(temp_fire._get_player_fire(Global.fire_type) );
+		var x_pos
+		if (i==0):
+			x_pos = (i);
+		elif (i==1):
+			x_pos = (i*- (spread_fire * Global.x_ratio));
+		elif (i%2==0):
+			x_pos = ((i/2.0)* (spread_fire * Global.x_ratio));
+		elif (i%2==1):
+			x_pos = ((2*i/3.0)* -(spread_fire * Global.x_ratio));
+		
+		fire[i].position = player.position + Vector2(x_pos,-50 * Global.x_ratio) ;
+		
+		add_child(fire[i]);
+	
+	pass;
 
 func _spread_fire(fire):
 	
