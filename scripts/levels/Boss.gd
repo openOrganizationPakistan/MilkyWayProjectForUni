@@ -106,6 +106,6 @@ func _on_distroy_animation_finished():
 		
 	Global.game_over=true;
 	
-	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
+#	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
 

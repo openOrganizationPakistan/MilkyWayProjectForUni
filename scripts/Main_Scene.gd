@@ -11,16 +11,18 @@ onready var score_scn = $Control/Score;
 onready var p_health_indic  = $Control/phealth;
 onready var e_health_indic  = $Control/ehealth;
 onready var cpu  = $Control/cpu;
-#onready var mem  = $Control/mem;
+onready var mem  = $Control/mem;
 onready var fps  = $Control/fps;
 
 var player ;
+var temp_fire = main_fires_scn.instance();
 
 func _process(_delta):
 	p_health_indic.text = "Health: " + str(Global.player_c_health);
 	
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
 #	mem.text = "RAM: " + str(floor(Performance.get_monitor(3)/(1024*1024))) + "MB";
+	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	
 
@@ -36,14 +38,14 @@ func _ready():
 	
 	match Global.fire_type:
 		0:
-			Global.player_fire_damage = 1;
+			Global.player_fire_damage = 10;
 		
 	
 
 func _add_level():
 	var temp = main_levels_scn.instance();
 	var level = temp._return_level(0);
-	temp.queue_free();
+#	temp.queue_free();
 	add_child(level);
 	
 
@@ -57,6 +59,7 @@ func _add_player():
 
 func _on_player_fire_timer_timeout():
 	_show_hud();
+	
 #	var fire = [main_fires_scn.instance()];
 	var fire = [];
 	
@@ -68,10 +71,10 @@ func _on_player_fire_timer_timeout():
 	
 
 func _spread_fire(fire):
-	var temp = main_fires_scn.instance()
+	
 	for i in range (fire_matrix):
-		fire.append(temp._get_player_fire(Global.fire_type) );
-		fire[i].position = player.position + Vector2(0,-30 * Global.x_ratio) ;
+		fire.append(temp_fire._get_player_fire(Global.fire_type) );
+		fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio) ;
 		if (i==0):
 			fire[i]._set_velocity(i);
 		elif (i==1):
@@ -82,7 +85,7 @@ func _spread_fire(fire):
 			fire[i]._set_velocity((2*i/3.0)* -(spread_fire * Global.x_ratio));
 		
 		add_child(fire[i]);
-	temp.queue_free();
+	
 	
 
 func _show_hud():
@@ -91,13 +94,13 @@ func _show_hud():
 	
 	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
 	
-	if player.health <=0:
-		if Global.current_score > Global.high_score:
-			Global._set_h_s(Global.current_score);
+	if Global.game_over:
+		temp_fire.queue_free();
+		queue_free();
 		var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
+		
 	
 
-func _player_colide(_area):
-	if Global.game_over:
-		queue_free();
-	pass
+
+
+

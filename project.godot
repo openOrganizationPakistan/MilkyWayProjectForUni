@@ -62,8 +62,13 @@ file_logging/enable_file_logging=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
-quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
+threads/thread_model=2
 vram_compression/import_etc=true
+vram_compression/import_etc2=false
+quality/shadows/filter_mode=2
+quality/shadows/filter_mode.mobile=2
 gles2/compatibility/disable_half_float=true
 gles2/compatibility/enable_high_float.Android=true
 environment/default_clear_color=Color( 0, 0, 0, 0 )

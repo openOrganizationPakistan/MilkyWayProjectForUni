@@ -8,7 +8,7 @@ var health = Global.player_health;
 func _ready():
 	scale = (Vector2(0.4,0.4) * Global.x_ratio);
 	Global.player_c_health = health;
-	var _temp = connect("area_entered",get_node("/root/Main_Scene"), "_player_colide" )
+	
 
 func _on_Player_01_area_entered(area):
 	
@@ -26,8 +26,8 @@ func _on_Player_01_area_entered(area):
 			Global._set_h_s(Global.current_score);
 		
 		Global.game_over = true;
-		queue_free();
-		var _temp=get_tree().change_scene("res://Scenes/UI.tscn");
+#		queue_free();
+#		var _temp=get_tree().change_scene("res://Scenes/UI.tscn");
 		
 	
 
