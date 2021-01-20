@@ -51,6 +51,10 @@ enabled=PoolStringArray(  )
 
 singletons=[ "res://git_api.gdnlib" ]
 
+[gui]
+
+theme/use_hidpi=true
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
@@ -58,6 +62,15 @@ pointing/emulate_touch_from_mouse=true
 [logging]
 
 file_logging/enable_file_logging=true
+
+[network]
+
+remote_fs/page_size=262144
+remote_fs/page_read_ahead=8
+
+[physics]
+
+2d/thread_model=2
 
 [rendering]
 
@@ -70,6 +83,5 @@ vram_compression/import_etc2=false
 quality/shadows/filter_mode=2
 quality/shadows/filter_mode.mobile=2
 gles2/compatibility/disable_half_float=true
-gles2/compatibility/enable_high_float.Android=true
 environment/default_clear_color=Color( 0, 0, 0, 0 )
 environment/default_environment="res://default_env.tres"

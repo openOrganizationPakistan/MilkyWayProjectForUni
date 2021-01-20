@@ -36,18 +36,21 @@ focus_neighbour_bottom = NodePath("../Button")
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
-text = "Clasic Mode"
+keep_pressed_outside = true
+text = "Story"
 icon = ExtResource( 5 )
 clip_text = true
-items = [ "Clasic Mode", ExtResource( 5 ), false, 0, null, "Story Mode", ExtResource( 6 ), false, 1, null ]
+items = [ "Classic", ExtResource( 5 ), false, 0, null, "Story", ExtResource( 6 ), false, 1, null ]
 selected = 0
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-margin_top = 76.0
+margin_top = 80.0
 margin_right = 300.0
-margin_bottom = 135.0
+margin_bottom = 139.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Play"
 expand_icon = true
+[connection signal="item_focused" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

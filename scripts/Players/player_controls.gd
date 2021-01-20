@@ -9,7 +9,7 @@ func _input(event):
 			lerp(position.x,event.position.x,Global.movement_speed)
 			,lerp(position.y,event.position.y,Global.movement_speed)
 		) ;
-		
+			
 		ongoing_drag = event.get_index();
 		
 	
