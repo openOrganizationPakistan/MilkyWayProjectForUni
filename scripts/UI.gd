@@ -27,16 +27,7 @@ func _ready():
 	
 
 func _on_Button_pressed():
-	Global.current_score= 45;
+	Global.current_score=0;
 	Global.game_over=false;
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 	
-
-
-func _on_MenuButton_item_selected(index):
-	match index:
-		0:
-			Global.story_mode = false;
-		1:
-			Global.story_mode = true;
-	pass # Replace with function body.

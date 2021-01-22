@@ -93,7 +93,6 @@ func _on_Boss_area_entered(area):
 		$distroy.play("distroyed");
 		$shape.set_deferred("disabled",true);
 		rotation += deg2rad(1);
-		Global.current_score += 1000;
 
 	elif area.is_in_group("player_fire"):
 		health -= Global.player_fire_damage;

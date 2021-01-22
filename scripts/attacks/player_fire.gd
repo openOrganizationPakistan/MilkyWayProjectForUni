@@ -53,7 +53,7 @@ func _on_player_fire_01_area_entered(area):
 	else:
 		match Global.fire_type:
 			0:
-#				Global.current_score += 1;
+				Global.current_score += 1;
 				queue_free();
 			1:
 				pass
@@ -62,4 +62,8 @@ func _on_player_fire_01_area_entered(area):
 
 func _set_velocity(new_value):
 	velocity = int(new_value);
+	
+
+func _on_Timer_timeout():
+	queue_free();
 	

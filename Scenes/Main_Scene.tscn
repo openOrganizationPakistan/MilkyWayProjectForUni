@@ -15,6 +15,7 @@ font_data = ExtResource( 5 )
 
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 1 )
+fire_matrix = 5
 spread_fire = 25
 
 [node name="player_fire_timer" type="Timer" parent="."]
@@ -35,9 +36,9 @@ anchor_bottom = 0.0
 margin_right = 218.0
 
 [node name="phealth" type="Label" parent="Control"]
-margin_top = 8.0
+margin_top = 4.0
 margin_right = 218.0
-margin_bottom = 42.0
+margin_bottom = 38.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 1 )
 text = "Health: "
@@ -47,9 +48,9 @@ __meta__ = {
 }
 
 [node name="ehealth" type="Label" parent="Control"]
-margin_top = 50.0
+margin_top = 42.0
 margin_right = 218.0
-margin_bottom = 84.0
+margin_bottom = 76.0
 theme = ExtResource( 4 )
 text = "enemy health: "
 uppercase = true
@@ -58,9 +59,9 @@ __meta__ = {
 }
 
 [node name="cpu" type="Label" parent="Control"]
-margin_top = 92.0
+margin_top = 80.0
 margin_right = 218.0
-margin_bottom = 126.0
+margin_bottom = 114.0
 theme = ExtResource( 4 )
 text = "CPU:  "
 uppercase = true
@@ -69,9 +70,9 @@ __meta__ = {
 }
 
 [node name="mem" type="Label" parent="Control"]
-margin_top = 134.0
+margin_top = 118.0
 margin_right = 218.0
-margin_bottom = 168.0
+margin_bottom = 152.0
 theme = ExtResource( 4 )
 text = "RAM: "
 uppercase = true
@@ -80,9 +81,9 @@ __meta__ = {
 }
 
 [node name="fps" type="Label" parent="Control"]
-margin_top = 176.0
+margin_top = 156.0
 margin_right = 218.0
-margin_bottom = 210.0
+margin_bottom = 190.0
 theme = ExtResource( 4 )
 text = "FPS: "
 uppercase = true
