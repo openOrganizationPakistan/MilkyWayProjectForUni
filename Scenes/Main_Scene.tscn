@@ -15,7 +15,6 @@ font_data = ExtResource( 5 )
 
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 1 )
-fire_matrix = 5
 spread_fire = 25
 
 [node name="player_fire_timer" type="Timer" parent="."]

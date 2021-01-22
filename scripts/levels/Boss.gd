@@ -6,8 +6,6 @@ export (PackedScene) var boss_fire_scn = preload("res://Scenes/Attacks/Boss_Fire
 var dir_x = 1;
 var dir_y = 1;
 
-export var enemy_damage = 0b1111;
-
 var fly_down_spd = 0;
 
 var scr_touch = false;
@@ -101,6 +99,5 @@ func _on_distroy_animation_finished():
 		
 	Global.byte_array[0] = 1; # game_over == 1
 	
-#	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
 

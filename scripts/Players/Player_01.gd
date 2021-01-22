@@ -13,6 +13,9 @@ func _on_Player_01_area_entered(area):
 		
 	if area.is_in_group("boss_fire"):
 		Global.byte_array[6] -= Global.byte_array[10];
+		
+	if area.is_in_group("virus"):
+		Global.byte_array[6] -= 50;
 	
 	if Global.byte_array[6] <= 50:
 		if Global.current_score >= int(Global.high_score):

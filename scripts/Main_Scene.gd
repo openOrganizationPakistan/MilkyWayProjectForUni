@@ -14,8 +14,6 @@ onready var cpu  = $Control/cpu;
 onready var mem  = $Control/mem;
 onready var fps  = $Control/fps;
 
-var level;
-
 var player ;
 var power_type = 0b0;
 var temp_fire = main_fires_scn.instance();
@@ -33,28 +31,6 @@ func _process(_delta):
 		queue_free();
 		var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 		
-	
-#	match Global.byte_array[1]:
-#		0b0:
-#			if Global.current_score >49:
-#				Global.byte_array[9] +=1; # Global.current_level += 1
-#				level.queue_free();
-#				_add_level()
-#
-#		0b1:
-#			if Global.current_score >149:
-#				Global.byte_array[9] +=1; # Global.current_level +=1
-#				level.queue_free();
-#		0b10:
-#			if Global.current_score >399:
-#				Global.byte_array[9] +=1; # Global.current_level +=1
-#				level.queue_free();
-#		0b11:
-#			if Global.current_score >749:
-#				Global.byte_array[9] +=1; # Global.current_level +=1 
-#				level.queue_free();
-	
-	
 	
 	
 	
@@ -82,9 +58,7 @@ func _ready():
 
 func _add_level():
 	var temp = main_levels_scn.instance();
-	level = temp._return_level(Global.byte_array[9]); # Global.byte_array [9] == Global.current_level
-	temp.queue_free();
-	add_child(level);
+	add_child(temp);
 	
 
 func _add_player():
@@ -136,15 +110,15 @@ func _spread_fire(fire):
 		1:
 			for i in range (fire_matrix):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
-				var x_pos
+				var x_pos = PoolByteArray();
 				if (i==0b0):
-					x_pos = (i);
+					x_pos[0] = (i);
 				elif (i==0b01):
-					x_pos = (i*- (spread_fire * Global.x_ratio));
+					x_pos[0] = (i*- (spread_fire * Global.x_ratio));
 				elif (i%0b10==0b0):
-					x_pos = ((i/2.0)* (spread_fire * Global.x_ratio));
+					x_pos[0] = ((i/2.0)* (spread_fire * Global.x_ratio));
 				elif (i%0b10==0b01):
-					x_pos = ((0b10*i/3.0)* -(spread_fire * Global.x_ratio));
+					x_pos[0] = ((0b10*i/3.0)* -(spread_fire * Global.x_ratio));
 				
 				fire[i].position = player.position + Vector2(x_pos,-50 * Global.x_ratio) ;
 				

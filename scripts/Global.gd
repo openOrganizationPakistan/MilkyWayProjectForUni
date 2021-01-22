@@ -90,5 +90,7 @@ func _set_h_s(new_value):
 	_write_file(high_score_path,str(high_score));
 	
 
-#func _get_h_s():
-#	return _read_file(high_score_path);
+
+
+
+

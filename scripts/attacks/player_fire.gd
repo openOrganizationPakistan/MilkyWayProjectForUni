@@ -36,7 +36,7 @@ func _fire(delta):
 
 func _set_laser_width(new_value):
 	laser_width = new_value;
-	pass;
+	
 
 func _on_player_fire_01_area_entered(area):
 	if (area.is_in_group("player") 
@@ -47,7 +47,7 @@ func _on_player_fire_01_area_entered(area):
 	else:
 		match Global.byte_array[2]:
 			0:
-				Global.current_score += 1;
+#				Global.current_score += 1;
 				queue_free();
 			1:
 				pass
@@ -55,5 +55,5 @@ func _on_player_fire_01_area_entered(area):
 	
 
 func _set_velocity(new_value):
-	velocity = int(new_value);
+	velocity = (new_value);
 	
