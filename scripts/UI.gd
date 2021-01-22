@@ -27,8 +27,10 @@ func _ready():
 	
 
 func _on_Button_pressed():
-	Global.current_score=0;
+	Global.current_score=47;
 	Global.byte_array[0] = 0; # game_over = false
+	Global.byte_array[13] = 1; # fire_matrix_reset
+	
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 	
 

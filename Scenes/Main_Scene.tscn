@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
@@ -13,9 +13,21 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
 
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 30.5299, -13.3881, 0, 0, 0, 0, 455.077, -14.5773 )
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 128
+outline_size = 1
+outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 5 )
+
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 1 )
-spread_fire = 25
 
 [node name="player_fire_timer" type="Timer" parent="."]
 wait_time = 0.15
@@ -89,4 +101,36 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 30.5299, -13.3881 )
+rotation = -0.00280102
+
+[node name="power_ups_timer" type="Timer" parent="."]
+wait_time = 60.0
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 3 )
+text = "Game
+Over!!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_changed" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="message_timer" type="Timer" parent="."]
+one_shot = true
 [connection signal="timeout" from="player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
+[connection signal="timeout" from="power_ups_timer" to="." method="_on_power_ups_timer_timeout"]
+[connection signal="timeout" from="level_changed" to="." method="_on_level_changed_timeout"]
+[connection signal="timeout" from="message_timer" to="." method="_on_message_timer_timeout"]

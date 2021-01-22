@@ -5,7 +5,9 @@ var x_direction;
 
 func _ready():
 	
-	health.append(60);
+	scale = Vector2(Global.x_ratio,Global.x_ratio);
+	
+	health.append(80);
 	x_direction = rand_range(-1,1)
 	
 
@@ -26,7 +28,7 @@ func _process(_delta):
 func _on_virus_area_entered(area):
 	
 	if area.is_in_group("player_fire"):
-		health[0] -= 1;
+		health[0] -= Global.byte_array[5];
 	if area.is_in_group("player"):
 		health[0] -= 50;
 		

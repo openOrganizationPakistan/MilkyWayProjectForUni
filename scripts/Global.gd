@@ -5,7 +5,7 @@ var byte_array = PoolByteArray();
 var movement_speed = 0.3;
 var current_score=0b0;
 var high_score = 0b0 setget _set_h_s;
-var boss_health = 0b110000000000;
+var boss_health = 3000;
 var enemy_c_health = 0b0;
 
 onready var x_ratio;
@@ -51,6 +51,10 @@ func _ready():
 	byte_array.append(5)	# 10-boss_fire_damage
 	byte_array.append(50)	# 11-virus_damage
 	byte_array.append(5)	# 12-enimy_ship_01_damage
+	byte_array.append(1)	# 13-fire_matrix
+	byte_array.append(25)	# 14-fire_spreading distance
+	byte_array.append(3)	# 15-max_power_up_index
+	byte_array.append(0)	# 16-current_power_type
 	
 	
 	

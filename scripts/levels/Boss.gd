@@ -15,6 +15,7 @@ var anim_down_done = false;
 
 var boss_fire;
 var h_movement_spd;
+var health;
 
 onready var fly_down_timer = $fly_down;
 onready var boss_fire_cd = $boss_fire_cd;
@@ -24,7 +25,7 @@ func _ready():
 	scale = (Vector2(0.85,0.85) * Global.x_ratio);
 	h_movement_spd = 0b101 * Global.x_ratio;
 	fly_down_timer.start();
-	Global.enemy_c_health = Global.boss_health;
+	health = Global.boss_health;
 #	connect("area_entered",self,"_on_area_entered")
 #	health =0;
 
@@ -76,7 +77,7 @@ func _on_boss_fire_cd_timeout():
 
 func _on_Boss_area_entered(area):
 
-	if Global.enemy_c_health <= 0:
+	if health <= 0:
 		dir_x=0;
 		dir_y = 0;
 		fly_down_timer.stop();
@@ -88,7 +89,10 @@ func _on_Boss_area_entered(area):
 		rotation += deg2rad(1);
 
 	elif area.is_in_group("player_fire"):
-		Global.enemy_c_health -= Global.byte_array[5] #Global.player_fire_damage
+		
+		print (Global.byte_array[5])
+		health -= int(Global.byte_array[5])	# Global.player_fire_damage
+		Global.enemy_c_health = health
 		
 
 

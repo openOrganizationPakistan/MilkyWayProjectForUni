@@ -42,6 +42,8 @@ func _on_player_fire_01_area_entered(area):
 	if (area.is_in_group("player") 
 	or
 	area.is_in_group("player_fire")
+	or 
+	area.is_in_group("power_up")
 	):
 		pass
 	else:
