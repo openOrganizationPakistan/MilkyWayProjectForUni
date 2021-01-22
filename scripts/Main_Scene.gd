@@ -172,7 +172,7 @@ func _show_hud():
 func _on_power_ups_timer_timeout():
 	$power_ups_timer.wait_time = rand_range(120,180);
 	var temp_instance = main_power_up_scn.instance();
-	var power_up = temp_instance._get_power_up( floor(rand_range(0,Global.byte_array[15]) ) );
+	var power_up = temp_instance._get_power_up( int(rand_range(0,Global.byte_array[15]) ) );
 	temp_instance.queue_free();
 	path_follow.offset = randi();
 	power_up.position = path_follow.position;
