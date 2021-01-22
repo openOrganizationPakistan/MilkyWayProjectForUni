@@ -28,6 +28,15 @@ func _ready():
 
 func _on_Button_pressed():
 	Global.current_score=0;
-	Global.game_over=false;
+	Global.byte_array[0] = 0; # game_over = false
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
+	
+
+func _on_MenuButton_item_selected(index):
+	match index:
+		0:
+			Global.byte_array[1] = 0
+		1:
+			Global.byte_array[1] = 1
+			
 	

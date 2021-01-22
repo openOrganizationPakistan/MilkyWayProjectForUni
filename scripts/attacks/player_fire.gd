@@ -7,18 +7,12 @@ var velocity = 0 setget _set_velocity;
 var laser_width = 0 setget _set_laser_width;
 
 func _ready():
-	scale = (Vector2(0.5,0.5) * Global.x_ratio).normalized();
+	scale = (Vector2(1,1) * Global.x_ratio).normalized();
 	var _temp = connect("area_entered",self,"_on_player_fire_01_area_entered")
-#	position.x = laser_width;
-
-
-#func _process(delta):
-#	
-#	position -= Vector2(velocity ,Global.game_speed * 25 ) * delta * Global.y_ratio;
-#	position.normalized();
+	
 
 func _input(event):
-	match Global.fire_type:
+	match Global.byte_array[2]:
 		0:
 			pass;
 		1:
@@ -28,13 +22,13 @@ func _input(event):
 			
 	
 
-func _fire(index,delta):
-	match index:
+func _fire(delta):
+	match Global.byte_array[2]:
 		0:
-			position -= Vector2(velocity ,Global.game_speed * 25 ) * delta * Global.y_ratio;
+			position -= Vector2(velocity ,Global.byte_array[8] * 25 ) * delta * Global.y_ratio;
 		1:
 			
-			position.y -= (Global.game_speed * 25 ) * delta * Global.y_ratio;
+			position.y -= (Global.byte_array[8] * 25 ) * delta * Global.y_ratio;
 			
 		
 		
@@ -51,7 +45,7 @@ func _on_player_fire_01_area_entered(area):
 	):
 		pass
 	else:
-		match Global.fire_type:
+		match Global.byte_array[2]:
 			0:
 				Global.current_score += 1;
 				queue_free();
@@ -62,8 +56,4 @@ func _on_player_fire_01_area_entered(area):
 
 func _set_velocity(new_value):
 	velocity = int(new_value);
-	
-
-func _on_Timer_timeout():
-	queue_free();
 	

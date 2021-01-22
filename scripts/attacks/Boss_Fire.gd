@@ -6,7 +6,7 @@ export var enemy_damage = int(10);
 
 func _process(delta):
 	
-	scale += Vector2(0.01*Global.x_ratio,Global.game_speed * delta * 1 * Global.y_ratio).normalized();
+	scale += Vector2(0.01*Global.x_ratio,Global.byte_array[8] * delta * 1 * Global.y_ratio).normalized();
 	
 
 func _on_laser_timer_timeout():

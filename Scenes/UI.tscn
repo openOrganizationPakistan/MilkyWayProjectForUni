@@ -50,4 +50,5 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Play"
 expand_icon = true
+[connection signal="item_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

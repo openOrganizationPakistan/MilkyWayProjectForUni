@@ -1,19 +1,12 @@
 extends Node
 
-var player_index = 0;
-var game_speed = 25;
-var current_score=0;
-var high_score = 0 setget _set_h_s;
-var player_health = 100;
-var player_fire_damage = 0; # change in fire Main_Scene.gd to change realtime with powerups
-var player_c_health = 0;
-var boss_health = 1000;
-var enemy_damage = 0;
-var enemy_c_health = 0;
-var fire_type = 0;
-var movement_speed = 0.3;
+var byte_array = PoolByteArray();
 
-var game_over = false;
+var movement_speed = 0.3;
+var current_score=0b0;
+var high_score = 0b0 setget _set_h_s;
+var boss_health = 0b110000000000;
+var enemy_c_health = 0b0;
 
 onready var x_ratio;
 onready var y_ratio;
@@ -24,11 +17,42 @@ var high_score_path = "user://HS.data"
 
 
 
+
+
+#var player_index = 0b0;
+#var game_speed = 0b11001;
+#var player_health = 0b1100100;
+#var player_fire_damage = 0b0; # change in fire Main_Scene.gd to change realtime with powerups
+#var player_c_health = 0b0;
+#var enemy_damage = 0b0;
+#var fire_type = 0b0;
+
+#var game_mode = 0b0;
+#var game_over = 0;
+
+
+
+
 func _ready():
 	
 #	if not h_s_file.file_exists(high_score_path):
 #		_write_file(high_score_path,str(high_score));
 #	_write_file(high_score_path,str(0));
+	byte_array.append(0) 	# 0-game_over
+	byte_array.append(0) 	# 1-game_mode
+	byte_array.append(0) 	# 2-fire_type
+	byte_array.append(15) 	# 3-boss_damage
+	byte_array.append(150) 	# 4-player_health
+	byte_array.append(0) 	# 5-player_fire_damage
+	byte_array.append(150) 	# 6-player_c_health
+	byte_array.append(0) 	# 7-player_index
+	byte_array.append(25) 	# 8-game_speed
+	byte_array.append(0)	# 9-current_level
+	byte_array.append(5)	# 10-boss_fire_damage
+	byte_array.append(50)	# 11-virus_damage
+	byte_array.append(5)	# 12-enimy_ship_01_damage
+	
+	
 	
 	high_score = int(_read_file(high_score_path));
 	

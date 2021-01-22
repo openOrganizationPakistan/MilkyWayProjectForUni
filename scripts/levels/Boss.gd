@@ -6,7 +6,7 @@ export (PackedScene) var boss_fire_scn = preload("res://Scenes/Attacks/Boss_Fire
 var dir_x = 1;
 var dir_y = 1;
 
-export var enemy_damage = int(15);
+export var enemy_damage = 0b1111;
 
 var fly_down_spd = 0;
 
@@ -17,7 +17,6 @@ var anim_down_done = false;
 
 var boss_fire;
 var h_movement_spd;
-var health = Global.boss_health;
 
 onready var fly_down_timer = $fly_down;
 onready var boss_fire_cd = $boss_fire_cd;
@@ -25,27 +24,24 @@ onready var boss_fire_cd = $boss_fire_cd;
 func _ready():
 	position = Vector2(90*Global.x_ratio,100*Global.y_ratio);
 	scale = (Vector2(0.85,0.85) * Global.x_ratio);
-	h_movement_spd = 5 * Global.x_ratio;
+	h_movement_spd = 0b101 * Global.x_ratio;
 	fly_down_timer.start();
+	Global.enemy_c_health = Global.boss_health;
 #	connect("area_entered",self,"_on_area_entered")
 #	health =0;
 
 func _process(delta):
 	
-
-	
 	if position.x >= 390*Global.x_ratio:
 		dir_x = -1;
 	elif position.x <= 90*Global.x_ratio:
 		dir_x = 1;
-	else:
-		pass
-
+	
 
 	if fly_down_bool and not anim_done:
-		if position.y <=100*Global.y_ratio:
-			if position.y < 95*Global.y_ratio:
-				position.y = 100*Global.y_ratio;
+		if position.y <=0b1100010*Global.y_ratio:
+			if position.y < 0b1100000*Global.y_ratio:
+				position.y = 0b1100010*Global.y_ratio;
 			dir_y = 1;
 			if anim_down_done:
 				boss_fire_cd.start();
@@ -55,17 +51,16 @@ func _process(delta):
 		if position.y >= 540*Global.y_ratio:
 			dir_y = -1;
 			anim_down_done = true
-		position.y += fly_down_spd * Global.game_speed * delta * dir_y;
+		position.y += fly_down_spd * Global.byte_array[8] * delta * dir_y;
 
 
-	position.x += h_movement_spd * Global.game_speed * delta * dir_x;
+	position.x += h_movement_spd * Global.byte_array[8] * delta * dir_x;
 
 
 func _on_fly_down_timeout():
 	
 	boss_fire_cd.stop();
-	Global.enemy_damage = enemy_damage;
-	fly_down_spd = 30 *Global.y_ratio;
+	fly_down_spd = 0b100000 *Global.y_ratio;
 	fly_down_bool = true;
 	anim_done = false;
 	anim_down_done = false;
@@ -83,7 +78,7 @@ func _on_boss_fire_cd_timeout():
 
 func _on_Boss_area_entered(area):
 
-	if health <= 0:
+	if Global.enemy_c_health <= 0:
 		dir_x=0;
 		dir_y = 0;
 		fly_down_timer.stop();
@@ -95,8 +90,8 @@ func _on_Boss_area_entered(area):
 		rotation += deg2rad(1);
 
 	elif area.is_in_group("player_fire"):
-		health -= Global.player_fire_damage;
-		Global.enemy_c_health = health;
+		Global.enemy_c_health -= Global.byte_array[5] #Global.player_fire_damage
+		
 
 
 func _on_distroy_animation_finished():
@@ -104,7 +99,7 @@ func _on_distroy_animation_finished():
 	if Global.current_score >= int(Global.high_score):
 			Global._set_h_s(Global.current_score);
 		
-	Global.game_over=true;
+	Global.byte_array[0] = 1; # game_over == 1
 	
 #	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	

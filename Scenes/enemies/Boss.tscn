@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Miscs/distroy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/levels/Boss.gd" type="Script" id=3]
+[ext_resource path="res://kra_imported/Boss_lq.png" type="Texture" id=4]
+
+[node name="Boss" type="Area2D" groups=[
+"boss",
+"enemy",
+]]
+position = Vector2( 0, -0.125 )
+rotation = 3.14159
+script = ExtResource( 3 )
+
+[node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="shape" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0.575817, 125.02, 33.8736, 122.642, 65.9822, 113.723, 92.1448, 99.4523, 107.01, 77.452, 112.956, 53.0733, 104.037, 20.3701, 70.739, -24.2252, 39.225, -58.7122, 51.4839, -89.3622, -1.41618, -126.66, -54.0876, -89.8079, -41.641, -59.9014, -85.6417, -9.95469, -110.615, 29.2891, -115.372, 60.2085, -104.669, 91.7225, -66.6144, 117.29 )
+
+[node name="fly_down" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="boss_fire_cd" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="laser_gun" type="Position2D" parent="."]
+position = Vector2( -1.59279, -126.526 )
+
+[node name="distroy" parent="." instance=ExtResource( 1 )]
+[connection signal="area_entered" from="." to="." method="_on_Boss_area_entered"]
+[connection signal="timeout" from="fly_down" to="." method="_on_fly_down_timeout"]
+[connection signal="timeout" from="boss_fire_cd" to="." method="_on_boss_fire_cd_timeout"]
+[connection signal="animation_finished" from="distroy" to="." method="_on_distroy_animation_finished"]
