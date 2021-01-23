@@ -91,7 +91,6 @@ func _on_Boss_area_entered(area):
 
 	elif area.is_in_group("player_fire"):
 		
-		print (Global.byte_array[5])
 		health -= int(Global.byte_array[5])	# Global.player_fire_damage
 		Global.enemy_c_health = health
 		

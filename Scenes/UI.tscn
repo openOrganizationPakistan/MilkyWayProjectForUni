@@ -36,6 +36,7 @@ focus_neighbour_bottom = NodePath("../Button")
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
+keep_pressed_outside = true
 text = "Clasic Mode"
 icon = ExtResource( 5 )
 clip_text = true

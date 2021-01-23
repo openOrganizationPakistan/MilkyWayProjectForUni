@@ -55,6 +55,8 @@ func _ready():
 	byte_array.append(25)	# 14-fire_spreading distance
 	byte_array.append(3)	# 15-max_power_up_index
 	byte_array.append(0)	# 16-current_power_type
+	byte_array.append(1)	# 17-screen_touch index
+	byte_array.append(1)	# 18-temp screen_touch index
 	
 	
 	
@@ -64,6 +66,10 @@ func _ready():
 	y_ratio = _get_viewport_rect().y/640;
 	
 	global_ratio = Vector2(x_ratio,y_ratio);
+	
+
+func _process(_delta):
+	byte_array[8] *= byte_array[17]
 	
 
 func _get_viewport_rect():
@@ -93,8 +99,4 @@ func _set_h_s(new_value):
 	high_score = int(new_value);
 	_write_file(high_score_path,str(high_score));
 	
-
-
-
-
 
