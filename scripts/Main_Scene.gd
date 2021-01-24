@@ -15,6 +15,7 @@ onready var mem  = $Control/mem;
 onready var fps  = $Control/fps;
 onready var path_follow = $Path2D/PathFollow2D;
 onready var label = $Label;
+onready var play_count = $Control/play_count;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
@@ -29,10 +30,10 @@ func _process(_delta):
 	
 
 func _ready():
+	play_count.text = "play count: " + str(Global.byte_array[19]);
 	label.rect_position = Vector2(240 * Global.x_ratio,
 			320 * Global.y_ratio
 		) - Vector2(label.rect_size.x/2, label.rect_size.y/2) ;
-	
 	
 	
 	$power_ups_timer.wait_time = 60;
@@ -47,14 +48,10 @@ func _ready():
 	
 	_add_level();
 	
-	var fire_damage;
-	
 	match Global.byte_array[2]:	#fire_type
 		0:
-			fire_damage = 5;
+			Global.byte_array[5] = 5;
 		
-	
-	Global.byte_array[5] = fire_damage;
 	
 
 func _add_level():

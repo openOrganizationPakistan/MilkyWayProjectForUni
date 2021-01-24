@@ -102,6 +102,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="play_count" type="Label" parent="Control"]
+margin_top = 194.0
+margin_right = 218.0
+margin_bottom = 228.0
+theme = ExtResource( 4 )
+text = "play count: "
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 2 )
 

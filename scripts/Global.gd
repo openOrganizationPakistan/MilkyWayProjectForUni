@@ -57,6 +57,7 @@ func _ready():
 	byte_array.append(0)	# 16-current_power_type
 	byte_array.append(1)	# 17-screen_touch index
 	byte_array.append(1)	# 18-temp screen_touch index
+	byte_array.append(0)	# 19-non-stop number of games
 	
 	
 	

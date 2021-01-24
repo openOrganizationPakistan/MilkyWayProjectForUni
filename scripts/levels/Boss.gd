@@ -102,6 +102,6 @@ func _on_distroy_animation_finished():
 			Global._set_h_s(Global.current_score);
 		
 	Global.byte_array[0] = 1; # game_over == 1
-	
+	queue_free();
 	
 

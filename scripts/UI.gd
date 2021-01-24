@@ -31,21 +31,12 @@ func _ready():
 
 func _on_Button_pressed():
 	#reset values to default
-	Global.current_score=45;
-	Global.byte_array[0] = 0; 
-	Global.byte_array[2] = 0; 
-	Global.byte_array[3] = 15; 
-	Global.byte_array[4] = 150; 
-	Global.byte_array[5] = 0; 
-	Global.byte_array[6] = 150; 
-#	Global.byte_array[8] = 25; 
-	Global.byte_array[10] = 5; 
-	Global.byte_array[11] = 50; 
-	Global.byte_array[12] = 5; 
-	Global.byte_array[13] = 1; 
-	Global.byte_array[14] = 25; 
-	Global.byte_array[15] = 3; 
+	Global.current_score=0;
+	Global.enemy_c_health=0;
+	Global.byte_array[0] = 0;
+	Global.byte_array[9] = 0;
 	Global.byte_array[16] = 0; 
+	Global.byte_array[19] += 1; 
 	
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 	
