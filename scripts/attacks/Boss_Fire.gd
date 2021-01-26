@@ -2,8 +2,6 @@ extends Area2D
 
 onready var laser_end_point = $laser_end_point_pos;
 
-export var enemy_damage = int(10);
-
 func _process(delta):
 	
 	scale += Vector2(0.01*Global.x_ratio,Global.byte_array[8] * delta * 1 * Global.y_ratio).normalized();

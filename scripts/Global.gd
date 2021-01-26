@@ -2,7 +2,7 @@ extends Node
 
 var byte_array = PoolByteArray();
 
-var movement_speed = 0.3;
+var movement_speed = 0.1;
 var current_score=0b0;
 var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
