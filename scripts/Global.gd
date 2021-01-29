@@ -37,6 +37,7 @@ var virus_scale = Vector2();
 
 func _ready():
 	
+	
 #	if not h_s_file.file_exists(high_score_path):
 #		_write_file(high_score_path,str(high_score));
 #	_write_file(high_score_path,str(0));

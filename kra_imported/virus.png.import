@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.s3tc.stex"
+path.etc2="res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc2.stex"
 path.etc="res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://kra_imported/virus.png"
-dest_files=[ "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.s3tc.stex", "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc.stex" ]
+dest_files=[ "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.s3tc.stex", "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc2.stex", "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc.stex" ]
 
 [params]
 
