@@ -17,12 +17,13 @@ func _on_Player_01_area_entered(area):
 		Global.byte_array[6] -= Global.byte_array[11]; 
 	
 	if Global.byte_array[6] <= 50 :
-		if Global.current_score >= int(Global.high_score):
-			Global._set_h_s(Global.current_score);
+		if ( Global.current_score  >= int(Global.high_score) ):
+			Global._set_h_s( (Global.current_score ) );
+		
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
 		$distroy.show();
-		$distroy.play();
+		$distroy.play("destroyed-ulq");
 		
 	
 

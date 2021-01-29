@@ -2,30 +2,32 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.stex"
+path.s3tc="res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.s3tc.stex"
+path.etc="res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://kra_imported/virus.png"
-dest_files=[ "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.stex" ]
+dest_files=[ "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.s3tc.stex", "res://.import/virus.png-7fc0e017dbe7890af39e8f4242820029.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=0
+compress/normal_map=2
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false

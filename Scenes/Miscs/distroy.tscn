@@ -1,21 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://kra_imported/explosion_anim/0004.png" type="Texture" id=2]
-[ext_resource path="res://kra_imported/explosion_anim/0001.png" type="Texture" id=3]
-[ext_resource path="res://kra_imported/explosion_anim/0003.png" type="Texture" id=9]
-[ext_resource path="res://kra_imported/explosion_anim/0006.png" type="Texture" id=10]
-[ext_resource path="res://kra_imported/explosion_anim/0002.png" type="Texture" id=11]
-[ext_resource path="res://kra_imported/explosion_anim/0005.png" type="Texture" id=12]
+[ext_resource path="res://kra_imported/explosion_anim_ulq/2.png" type="Texture" id=1]
+[ext_resource path="res://kra_imported/explosion_anim_ulq/0.png" type="Texture" id=4]
+[ext_resource path="res://kra_imported/explosion_anim_ulq/1.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 12 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "distroyed",
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "destroyed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "destroyed-ulq",
 "speed": 5.0
 } ]
 
 [node name="distroy" type="AnimatedSprite"]
 visible = false
 frames = SubResource( 1 )
-animation = "distroyed"
+animation = "destroyed"

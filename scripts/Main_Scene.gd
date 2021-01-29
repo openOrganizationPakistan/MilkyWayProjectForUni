@@ -27,7 +27,7 @@ func _process(_delta):
 	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	
-	
+
 
 func _ready():
 	play_count.text = "play count: " + str(Global.byte_array[19]);
@@ -127,7 +127,7 @@ func _spread_fire(fire):
 	
 
 func _show_hud():
-	var score = Global.current_score;
+	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
 	
 	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
@@ -150,20 +150,40 @@ func _show_hud():
 		
 	match Global.byte_array[1]:
 		0:
+			if Global.current_score == 50:
+				Global.byte_array[8] = 30;
+				Global.current_score += 1;
+			elif Global.current_score == 150:
+				Global.byte_array[8] = 35;
+				Global.current_score += 1;
+			elif Global.current_score == 450:
+				Global.byte_array[8] = 40;
+				Global.current_score += 1;
+			elif Global.current_score == 750:
+				Global.byte_array[8] = 45;
+				Global.current_score += 1;
 			pass;
 		1:
-			match Global.current_score:
-				0:
-					_display_message("Level 1");
-				50:
-					_display_message("Level 2");
-				150:
-					_display_message("Level 3");
-				450:
-					_display_message("Level 4");
-				750:
-					_display_message("Final\nBoss!!!");
-			
+			if Global.current_score == 0:
+				_display_message("Level 1");
+			elif Global.current_score == 50:
+				_display_message("Level 2");
+				Global.byte_array[8] = 30;
+			elif Global.current_score == 150:
+				_display_message("Level 3");
+				Global.byte_array[8] = 35;
+			elif Global.current_score == 450:
+				_display_message("Level 4");
+				Global.byte_array[8] = 40;
+			elif Global.current_score == 750:
+				_display_message("Final\nBoss!!!");
+				Global.byte_array[8] = 45;
+					
+				
+	
+
+
+
 
 
 func _on_power_ups_timer_timeout():

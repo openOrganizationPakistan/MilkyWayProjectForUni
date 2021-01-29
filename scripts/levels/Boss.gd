@@ -21,15 +21,15 @@ onready var fly_down_timer = $fly_down;
 onready var boss_fire_cd = $boss_fire_cd;
 
 func _ready():
-	position = Vector2(90*Global.x_ratio,100*Global.y_ratio);
 	scale = (Vector2(0.85,0.85) * Global.x_ratio);
-	h_movement_spd = 0b101 * Global.x_ratio;
+	position = Vector2(128*scale.x,128*scale.y);
+	h_movement_spd = 0.1 * Global.x_ratio;
 	fly_down_timer.start();
 	health = Global.boss_health;
 #	connect("area_entered",self,"_on_area_entered")
 #	health =0;
 
-func _process(delta):
+func _process(_delta):
 	
 	if position.x >= 390*Global.x_ratio:
 		dir_x = -1;
@@ -50,16 +50,16 @@ func _process(delta):
 		if position.y >= 540*Global.y_ratio:
 			dir_y = -1;
 			anim_down_done = true
-		position.y += fly_down_spd * Global.byte_array[8] * delta * dir_y;
+		position.y += fly_down_spd * Global.byte_array[8]  * dir_y;
 
 
-	position.x += h_movement_spd * Global.byte_array[8] * delta * dir_x;
+	position.x += h_movement_spd * Global.byte_array[8] * dir_x;
 
 
 func _on_fly_down_timeout():
 	
 	boss_fire_cd.stop();
-	fly_down_spd = 0b100000 *Global.y_ratio;
+	fly_down_spd = 0.5 *Global.y_ratio;
 	fly_down_bool = true;
 	anim_done = false;
 	anim_down_done = false;
@@ -84,7 +84,7 @@ func _on_Boss_area_entered(area):
 		boss_fire_cd.stop();
 		$sprite.hide();
 		$distroy.show();
-		$distroy.play("distroyed");
+		$distroy.play("destroyed");
 		$shape.set_deferred("disabled",true);
 		rotation += deg2rad(1);
 		Global.current_score += 1000;
@@ -98,8 +98,8 @@ func _on_Boss_area_entered(area):
 
 func _on_distroy_animation_finished():
 	
-	if Global.current_score >= int(Global.high_score):
-			Global._set_h_s(Global.current_score);
+	if ( (Global.current_score ) >= int(Global.high_score) ):
+			Global._set_h_s( (Global.current_score) );
 		
 	Global.byte_array[0] = 1; # game_over == 1
 	queue_free();

@@ -2,7 +2,7 @@ extends Node
 
 var byte_array = PoolByteArray();
 
-var movement_speed = 0.1;
+var movement_speed = 0.3;
 var current_score=0b0;
 var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
@@ -15,6 +15,8 @@ onready var global_ratio;
 var h_s_file = File.new()
 var high_score_path = "user://HS.data" 
 
+var fire_scale = Vector2();
+var virus_scale = Vector2();
 
 
 
@@ -68,10 +70,10 @@ func _ready():
 	
 	global_ratio = Vector2(x_ratio,y_ratio);
 	
-
-func _process(_delta):
-	byte_array[8] *= byte_array[17]
+	fire_scale = Vector2(x_ratio,x_ratio);
+	virus_scale = Vector2(x_ratio,x_ratio);
 	
+
 
 func _get_viewport_rect():
 	return get_viewport().get_visible_rect().size

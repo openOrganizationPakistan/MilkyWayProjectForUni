@@ -32,7 +32,10 @@ Global="*res://scripts/Global.gd"
 
 [debug]
 
+settings/profiler/max_functions=128
 settings/fps/force_fps=240
+settings/stdout/print_fps=true
+settings/stdout/verbose_stdout=true
 
 [display]
 

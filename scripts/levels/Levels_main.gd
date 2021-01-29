@@ -45,10 +45,6 @@ func _process(_delta):
 	
 
 func _on_virus_timeout():
-	if Global.current_score > 49:
-		Global.byte_array[9] +=1;
-		virus_timer.stop();
-		$boss_commings.start();
 	
 	if Global.byte_array[0] == 1:
 		queue_free();

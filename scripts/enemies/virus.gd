@@ -1,13 +1,12 @@
 extends Area2D
 
-var health = PoolByteArray();
+var health = PoolByteArray([80]);
 var x_direction;
 
 func _ready():
 	
-	scale = Vector2(Global.x_ratio,Global.x_ratio);
+	scale = Global.virus_scale;
 	
-	health.append(80);
 	x_direction = rand_range(-1,1)
 	
 
@@ -38,8 +37,10 @@ func _on_virus_area_entered(area):
 		Global.current_score +=1;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
-		$distroy.play("distroyed");
+		$distroy.play("destroyed-ulq");
 		$distroy.show();
+		
+		
 	
 
 func _on_distroy_animation_finished():
