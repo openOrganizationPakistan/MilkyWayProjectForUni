@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player_fire_01.png-188871b2fa620587920177799428ee6f.stex"
+path="res://.import/Boss_fire_4x4.jpg-bb3e1328e5d47edf345dac02c46221b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kra_imported/Player_fire_01.png"
-dest_files=[ "res://.import/Player_fire_01.png-188871b2fa620587920177799428ee6f.stex" ]
+source_file="res://kra_imported/Boss_fire_4x4.jpg"
+dest_files=[ "res://.import/Boss_fire_4x4.jpg-bb3e1328e5d47edf345dac02c46221b2.stex" ]
 
 [params]
 
