@@ -18,12 +18,15 @@ position = Vector2( 29.7798, -48.5307 )
 rotation = -0.00656977
 
 [node name="virus" type="Timer" parent="."]
+one_shot = true
 autostart = true
 
-[node name="ship" type="Timer" parent="."]
+[node name="todda" type="Timer" parent="."]
+one_shot = true
 
 [node name="boss_commings" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 [connection signal="timeout" from="virus" to="." method="_on_virus_timeout"]
+[connection signal="timeout" from="todda" to="." method="_on_todda_timeout"]
 [connection signal="timeout" from="boss_commings" to="." method="_on_boss_commings_timeout"]

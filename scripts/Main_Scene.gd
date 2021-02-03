@@ -16,13 +16,14 @@ onready var fps  = $Control/fps;
 onready var path_follow = $Path2D/PathFollow2D;
 onready var label = $Label;
 onready var play_count = $Control/play_count;
+onready var p_health_bar = $Control/pHealthBar;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
 
 func _process(_delta):
-	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health
-	
+#	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health
+	p_health_bar.value = Global.byte_array[6] - 50
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
 	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
@@ -35,6 +36,7 @@ func _ready():
 			320 * Global.y_ratio
 		) - Vector2(label.rect_size.x/2, label.rect_size.y/2) ;
 	
+	p_health_bar.anchor_right = 0.5;
 	
 	$power_ups_timer.wait_time = 60;
 	$power_ups_timer.start();
@@ -130,7 +132,7 @@ func _show_hud():
 	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
 	
-	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
+#	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
 	
 	if Global.byte_array[0] == 1:
 	
@@ -153,15 +155,19 @@ func _show_hud():
 			if Global.current_score == 50:
 				Global.byte_array[8] = 30;
 				Global.current_score += 1;
+				Global._update_todda_speed();
 			elif Global.current_score == 150:
 				Global.byte_array[8] = 35;
 				Global.current_score += 1;
+				Global._update_todda_speed();
 			elif Global.current_score == 450:
 				Global.byte_array[8] = 40;
 				Global.current_score += 1;
+				Global._update_todda_speed();
 			elif Global.current_score == 750:
 				Global.byte_array[8] = 45;
 				Global.current_score += 1;
+				Global._update_todda_speed();
 			pass;
 		1:
 			if Global.current_score == 0:

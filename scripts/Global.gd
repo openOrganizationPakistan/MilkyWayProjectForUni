@@ -2,7 +2,7 @@ extends Node
 
 var byte_array = PoolByteArray();
 
-var movement_speed = 0.3;
+var movement_speed = 0.1;
 var current_score=0b0;
 var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
@@ -15,8 +15,7 @@ onready var global_ratio;
 var h_s_file = File.new()
 var high_score_path = "user://HS.data" 
 
-var fire_scale = Vector2();
-var virus_scale = Vector2();
+var universal_scale = Vector2();
 
 
 
@@ -61,8 +60,12 @@ func _ready():
 	byte_array.append(1)	# 17-screen_touch index
 	byte_array.append(1)	# 18-temp screen_touch index
 	byte_array.append(0)	# 19-non-stop number of games
+	byte_array.append(1)	# 20-todda ship speed
+	byte_array.append(50)	# 21-todda ship damage to player
 	
 	
+	
+	byte_array[20] = byte_array[8]/2 ;
 	
 	high_score = int(_read_file(high_score_path));
 	
@@ -71,8 +74,8 @@ func _ready():
 	
 	global_ratio = Vector2(x_ratio,y_ratio);
 	
-	fire_scale = Vector2(x_ratio,x_ratio);
-	virus_scale = Vector2(x_ratio,x_ratio);
+#	fire_scale = Vector2(x_ratio,x_ratio);
+	universal_scale = Vector2(x_ratio,x_ratio);
 	
 
 
@@ -85,6 +88,7 @@ func _read_file(path):
 	if not file.file_exists(high_score_path) : 
 		_write_file(high_score_path,str(high_score));
 		
+	
 	
 	file.open(path, File.READ);
 	var data = file.get_as_text();
@@ -104,3 +108,5 @@ func _set_h_s(new_value):
 	_write_file(high_score_path,str(high_score));
 	
 
+func _update_todda_speed():
+	byte_array[20] = byte_array[8]/2;

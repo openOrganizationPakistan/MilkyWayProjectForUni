@@ -5,7 +5,7 @@ var x_direction;
 
 func _ready():
 	
-	scale = Global.virus_scale;
+	scale = Global.universal_scale;
 	
 	x_direction = rand_range(-1,1)
 	

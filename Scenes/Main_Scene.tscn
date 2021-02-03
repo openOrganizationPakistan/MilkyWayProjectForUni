@@ -1,9 +1,32 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -35,21 +58,33 @@ autostart = true
 
 [node name="Control" type="VBoxContainer" parent="."]
 anchor_right = 1.0
-margin_right = 210.105
-margin_bottom = 150.0
+margin_right = 480.0
+margin_bottom = 207.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Score" parent="Control" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 218.0
+[node name="pHealthBar" type="ProgressBar" parent="Control"]
+anchor_top = 0.038
+anchor_bottom = 0.038
+margin_right = 480.0
+margin_bottom = 31.0
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0.858824, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.831373, 0.0117647, 1, 1 )
+max_value = 200.0
+step = 1.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="phealth" type="Label" parent="Control"]
-margin_top = 4.0
+visible = false
+margin_top = 47.0
 margin_right = 218.0
-margin_bottom = 38.0
+margin_bottom = 81.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 1 )
 text = "Health: "
@@ -59,9 +94,10 @@ __meta__ = {
 }
 
 [node name="ehealth" type="Label" parent="Control"]
-margin_top = 42.0
+visible = false
+margin_top = 47.0
 margin_right = 218.0
-margin_bottom = 76.0
+margin_bottom = 81.0
 theme = ExtResource( 4 )
 text = "enemy health: "
 uppercase = true
@@ -69,10 +105,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Score" parent="Control" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 39.0
+margin_right = 480.0
+margin_bottom = 39.0
+
 [node name="cpu" type="Label" parent="Control"]
-margin_top = 80.0
-margin_right = 218.0
-margin_bottom = 114.0
+margin_top = 47.0
+margin_right = 480.0
+margin_bottom = 81.0
 theme = ExtResource( 4 )
 text = "CPU:  "
 uppercase = true
@@ -81,9 +124,9 @@ __meta__ = {
 }
 
 [node name="mem" type="Label" parent="Control"]
-margin_top = 118.0
-margin_right = 218.0
-margin_bottom = 152.0
+margin_top = 89.0
+margin_right = 480.0
+margin_bottom = 123.0
 theme = ExtResource( 4 )
 text = "RAM: "
 uppercase = true
@@ -92,9 +135,9 @@ __meta__ = {
 }
 
 [node name="fps" type="Label" parent="Control"]
-margin_top = 156.0
-margin_right = 218.0
-margin_bottom = 190.0
+margin_top = 131.0
+margin_right = 480.0
+margin_bottom = 165.0
 theme = ExtResource( 4 )
 text = "FPS: "
 uppercase = true
@@ -103,9 +146,9 @@ __meta__ = {
 }
 
 [node name="play_count" type="Label" parent="Control"]
-margin_top = 194.0
-margin_right = 218.0
-margin_bottom = 228.0
+margin_top = 173.0
+margin_right = 480.0
+margin_bottom = 207.0
 theme = ExtResource( 4 )
 text = "play count: "
 uppercase = true
