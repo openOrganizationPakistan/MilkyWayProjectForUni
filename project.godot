@@ -40,6 +40,8 @@ settings/stdout/verbose_stdout=true
 
 window/size/width=480
 window/size/height=640
+window/size/test_width=450
+window/size/test_height=800
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"

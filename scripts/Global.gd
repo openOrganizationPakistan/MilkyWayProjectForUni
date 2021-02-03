@@ -61,7 +61,7 @@ func _ready():
 	byte_array.append(1)	# 18-temp screen_touch index
 	byte_array.append(0)	# 19-non-stop number of games
 	byte_array.append(1)	# 20-todda ship speed
-	byte_array.append(50)	# 21-todda ship damage to player
+	byte_array.append(15)	# 21-todda ship damage to player
 	
 	
 	

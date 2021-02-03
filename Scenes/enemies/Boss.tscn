@@ -1,8 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Miscs/distroy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://kra_imported/Boss_slq.png" type="Texture" id=2]
 [ext_resource path="res://scripts/levels/Boss.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Boss" type="Area2D" groups=[
 "boss",
@@ -34,6 +58,22 @@ position = Vector2( -1.59279, -126.526 )
 
 [node name="distroy" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 15, 15 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 146.877
+margin_top = 156.416
+margin_right = 446.877
+margin_bottom = 181.416
+rect_scale = Vector2( -1, -1 )
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 3000.0
+step = 0.1
+value = 1000.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="." to="." method="_on_Boss_area_entered"]
 [connection signal="timeout" from="fly_down" to="." method="_on_fly_down_timeout"]
 [connection signal="timeout" from="boss_fire_cd" to="." method="_on_boss_fire_cd_timeout"]

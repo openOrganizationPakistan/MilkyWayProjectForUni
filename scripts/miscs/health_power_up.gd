@@ -10,10 +10,13 @@ func _ready():
 
 func _on_health_power_up_area_entered(area):
 	if area.is_in_group("player"):
-		if Global.byte_array[6] >199:
+		if Global.byte_array[6] >149:
 			pass;
 		else:
 			Global.byte_array[6] += 100;
+		
+		if Global.byte_array[6] > 150:
+			Global.byte_array[6] = 150;
 		
 		queue_free();
 		

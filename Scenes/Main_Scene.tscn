@@ -78,9 +78,10 @@ custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0.858824, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.831373, 0.0117647, 1, 1 )
-max_value = 200.0
+max_value = 99.0
 step = 1.0
 value = 100.0
+allow_greater = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

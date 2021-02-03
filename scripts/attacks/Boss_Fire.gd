@@ -1,5 +1,8 @@
 extends Area2D
 
+func _ready():
+	pass
+
 func _process(delta):
 	
 	scale += Vector2(0.01*Global.x_ratio,Global.byte_array[8] * delta * 1 * Global.y_ratio).normalized();

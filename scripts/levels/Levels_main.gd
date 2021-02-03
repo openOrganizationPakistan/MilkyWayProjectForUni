@@ -82,6 +82,7 @@ func _on_boss_commings_timeout():
 
 
 func _on_todda_timeout():
+	todda_timer.wait_time = int(5 + (randi()%5))
 	var todda = todda_scn.instance();
 	path_follow_2d.offset = randi();
 	todda.position = path_follow_2d.position;
