@@ -46,7 +46,7 @@ func _ready():
 	byte_array.append(15) 	# 3-boss_damage
 	byte_array.append(150) 	# 4-player_health
 	byte_array.append(0) 	# 5-player_fire_damage
-	byte_array.append(150) 	# 6-player_c_health
+	byte_array.append(250) 	# 6-player_c_health
 	byte_array.append(0) 	# 7-player_index
 	byte_array.append(25) 	# 8-game_speed
 	byte_array.append(0)	# 9-current_level

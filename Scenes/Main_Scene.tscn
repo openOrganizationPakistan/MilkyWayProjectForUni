@@ -5,7 +5,7 @@
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
 border_width_left = 3
 border_width_top = 3
@@ -17,7 +17,7 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 3
 border_width_top = 3
@@ -28,7 +28,7 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 outline_size = 1
 outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
@@ -36,18 +36,18 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="Curve2D" id=2]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 30.5299, -13.3881, 0, 0, 0, 0, 455.077, -14.5773 )
-}
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 128
 outline_size = 1
 outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
+
+[sub_resource type="Curve2D" id=6]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 18.8062, -15.9145, 0, 0, 0, 0, 463.892, -15.2887 )
+}
 
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 1 )
@@ -64,13 +64,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pHealthBar" type="ProgressBar" parent="Control"]
-anchor_top = 0.038
-anchor_bottom = 0.038
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 margin_right = 480.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="pHealthBar" type="ProgressBar" parent="Control/HBoxContainer"]
+margin_right = 236.0
 margin_bottom = 31.0
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0.858824, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.831373, 0.0117647, 1, 1 )
 max_value = 200.0
@@ -80,13 +85,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Score" parent="Control/HBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 244.0
+margin_right = 480.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+
 [node name="phealth" type="Label" parent="Control"]
 visible = false
 margin_top = 47.0
 margin_right = 218.0
 margin_bottom = 81.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Health: "
 uppercase = true
 __meta__ = {
@@ -104,13 +117,6 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Score" parent="Control" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 39.0
-margin_right = 480.0
-margin_bottom = 39.0
 
 [node name="cpu" type="Label" parent="Control"]
 margin_top = 47.0
@@ -156,13 +162,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource( 2 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 30.5299, -13.3881 )
-rotation = -0.00280102
-
 [node name="power_ups_timer" type="Timer" parent="."]
 wait_time = 60.0
 
@@ -171,7 +170,7 @@ visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "Game
 Over!!!"
 __meta__ = {
@@ -184,6 +183,14 @@ one_shot = true
 
 [node name="message_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 0, -0.8909 )
+curve = SubResource( 6 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 18.8062, -15.9145 )
+rotation = 0.00140567
 [connection signal="timeout" from="player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
 [connection signal="timeout" from="power_ups_timer" to="." method="_on_power_ups_timer_timeout"]
 [connection signal="timeout" from="level_changed" to="." method="_on_level_changed_timeout"]

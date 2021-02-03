@@ -7,7 +7,7 @@ export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tsc
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
 
 
-onready var score_scn = $Control/Score;
+onready var score_scn = $Control/HBoxContainer/Score;
 onready var p_health_indic  = $Control/phealth;
 onready var e_health_indic  = $Control/ehealth;
 onready var cpu  = $Control/cpu;
@@ -16,7 +16,8 @@ onready var fps  = $Control/fps;
 onready var path_follow = $Path2D/PathFollow2D;
 onready var label = $Label;
 onready var play_count = $Control/play_count;
-onready var p_health_bar = $Control/pHealthBar;
+onready var p_health_bar = $Control/HBoxContainer/pHealthBar;
+onready var path = $Path2D;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
@@ -31,6 +32,9 @@ func _process(_delta):
 
 
 func _ready():
+	
+	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
+	print(path.curve.get_point_position(1));
 	play_count.text = "play count: " + str(Global.byte_array[19]);
 	label.rect_position = Vector2(240 * Global.x_ratio,
 			320 * Global.y_ratio
@@ -65,7 +69,7 @@ func _add_player():
 	var temp = main_players_scn.instance();
 	player = temp._get_player(Global.byte_array[7]);
 	temp.queue_free();
-	player.position = Vector2(240,320) * Vector2(Global.x_ratio,Global.y_ratio);
+	player.position = Vector2(240,320) * Global.universal_scale;
 	add_child(player);
 	
 
@@ -186,11 +190,9 @@ func _show_hud():
 				Global.byte_array[8] = 45;
 					
 				
+			
+		
 	
-
-
-
-
 
 func _on_power_ups_timer_timeout():
 	$power_ups_timer.wait_time = rand_range(120,180);

@@ -40,11 +40,9 @@ settings/stdout/verbose_stdout=true
 
 window/size/width=480
 window/size/height=640
-window/size/test_width=466
-window/size/test_height=1066
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 

@@ -11,6 +11,9 @@ onready var todda_timer = $todda;
 onready var path_follow_2d = $Path2D/PathFollow2D;
 
 func _ready():
+	$Path2D.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
+	print($Path2D.curve.get_point_position(1))
+	
 	virus_timer.start();
 	match Global.byte_array[1]:
 		0:
