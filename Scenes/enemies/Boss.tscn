@@ -59,7 +59,7 @@ position = Vector2( -1.59279, -126.526 )
 [node name="distroy" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 15, 15 )
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="e_health_bar" type="ProgressBar" parent="."]
 margin_left = 146.877
 margin_top = 156.416
 margin_right = 446.877

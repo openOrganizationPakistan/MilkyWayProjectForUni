@@ -3,6 +3,8 @@ extends Area2D
 
 export (PackedScene) var boss_fire_scn = preload("res://Scenes/Attacks/Boss_Fire.tscn");
 
+onready var e_health_bar = $e_health_bar;
+
 var dir_x = 1;
 var dir_y = 1;
 
@@ -76,7 +78,14 @@ func _on_boss_fire_cd_timeout():
 	
 
 func _on_Boss_area_entered(area):
-
+	
+	if area.is_in_group("player_fire"):
+		
+		e_health_bar.value = health;
+		
+		health -= int(Global.byte_array[5])	# Global.player_fire_damage
+		Global.enemy_c_health = health
+		
 	if health <= 0:
 		dir_x=0;
 		dir_y = 0;
@@ -89,11 +98,6 @@ func _on_Boss_area_entered(area):
 		rotation += deg2rad(1);
 		Global.current_score += 1000;
 
-	elif area.is_in_group("player_fire"):
-		
-		health -= int(Global.byte_array[5])	# Global.player_fire_damage
-		Global.enemy_c_health = health
-		
 
 
 func _on_distroy_animation_finished():
