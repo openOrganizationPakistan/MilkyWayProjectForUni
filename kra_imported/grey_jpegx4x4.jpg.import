@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/v_fire_spread.png-7da89fb72652b0f7b1300b986a51dfbf.stex"
+path="res://.import/grey_jpegx4x4.jpg-3809cc5c6f715bec9a96c942dc4f6d0e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kra_imported/v_fire_spread.png"
-dest_files=[ "res://.import/v_fire_spread.png-7da89fb72652b0f7b1300b986a51dfbf.stex" ]
+source_file="res://kra_imported/grey_jpegx4x4.jpg"
+dest_files=[ "res://.import/grey_jpegx4x4.jpg-3809cc5c6f715bec9a96c942dc4f6d0e.stex" ]
 
 [params]
 

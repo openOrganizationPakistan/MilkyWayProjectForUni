@@ -54,11 +54,6 @@ func _ready():
 	
 	_add_level();
 	
-	match Global.byte_array[2]:	#fire_type
-		0:
-			Global.byte_array[5] = 5;
-		
-	
 
 func _add_level():
 	var temp = main_levels_scn.instance();

@@ -15,7 +15,7 @@ func _on_h_fire_spread_area_entered(area):
 			_:
 				Global.byte_array[13] = (Global.byte_array[13] + 2) % 6;
 				Global.byte_array[16] = 1;
-		
+		Global.byte_array[5] = 5;
 		Global.byte_array[14]=25;
 		queue_free();
 		
