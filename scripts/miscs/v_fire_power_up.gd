@@ -17,7 +17,7 @@ func _on_v_fire_power_up_area_entered(area):
 				Global.byte_array[16] = 0;
 		Global.byte_array[5] = 5;
 		Global.byte_array[14] = 35;
-		Global.bullets += 500;
+		Global.bullets += 1000;
 		queue_free();
 		
 	

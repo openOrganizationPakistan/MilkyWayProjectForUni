@@ -17,7 +17,7 @@ func _on_h_fire_spread_area_entered(area):
 				Global.byte_array[16] = 1;
 		Global.byte_array[5] = 5;
 		Global.byte_array[14]=25;
-		Global.bullets += 500;
+		Global.bullets += 1000;
 		queue_free();
 		
 	

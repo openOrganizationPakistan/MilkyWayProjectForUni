@@ -37,7 +37,6 @@ func _process(_delta):
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	
 
-
 func _ready():
 	
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
@@ -48,13 +47,11 @@ func _ready():
 		) - Vector2(label.rect_size.x/2, label.rect_size.y/2) ;
 	
 	p_health_bar.anchor_right = 0.5;
-	
 	power_ups_timer.wait_time = 60;
 	power_ups_timer.start();
 	
 	var bg = bg_env_scn.instance();
 	add_child(bg);
-	
 	
 	_add_player();
 	
@@ -68,7 +65,7 @@ func _add_level():
 
 func _add_player():
 	var temp = main_players_scn.instance();
-	player = temp._get_player(Global.byte_array[7]);
+	player = temp._get_player(Global.byte_array[7]); # get player index
 	temp.queue_free();
 	player.position = Vector2(240,320) * Global.universal_scale;
 	add_child(player);
@@ -77,8 +74,6 @@ func _add_player():
 func _on_player_fire_timer_timeout():
 	_show_hud();
 	
-	
-#	var fire = [main_fires_scn.instance()];
 	var fire = [];
 	
 	if (Global.bullets > 0 
@@ -101,8 +96,6 @@ func _spread_fire(fire):
 	
 	match Global.byte_array[16]:
 		0:
-			
-			
 			for i in range (Global.byte_array[13]):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
 				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
@@ -112,17 +105,17 @@ func _spread_fire(fire):
 					
 				elif (i==1):
 					fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
-					fire[i].rotation = deg2rad(2);
+					fire[i].rotation = deg2rad(1.4*Global.x_ratio);
 					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 					
 				elif (i%2==0):
 					fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-					fire[i].rotation = deg2rad(-2*i);
+					fire[i].rotation = deg2rad(-1.4*Global.x_ratio*i);
 					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 					
 				elif (i%2==1):
 					fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-					fire[i].rotation = deg2rad(2*i);
+					fire[i].rotation = deg2rad(1.4*Global.x_ratio*i);
 					print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
 					
 				
@@ -175,19 +168,23 @@ func _show_hud():
 	match Global.byte_array[1]:
 		0:
 			if Global.current_score == 50:
-				Global.byte_array[8] = 30;
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 150:
-				Global.byte_array[8] = 35;
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 450:
-				Global.byte_array[8] = 40;
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 750:
-				Global.byte_array[8] = 45;
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			pass;
