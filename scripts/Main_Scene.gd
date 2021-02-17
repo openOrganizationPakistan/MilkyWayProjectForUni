@@ -107,25 +107,21 @@ func _spread_fire(fire):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
 				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
 				if (i==0):
-#					fire[i]._set_velocity(i);
 					fire[i].rotation = deg2rad(i);
 					fire[i]._set_velocity(i);
 					
 				elif (i==1):
 					fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
-#					fire[i].rotation = -deg2rad(i*- (Global.byte_array[14] * Global.x_ratio));
 					fire[i].rotation = deg2rad(2);
 					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 					
 				elif (i%2==0):
 					fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-#					fire[i].rotation = -deg2rad((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 					fire[i].rotation = deg2rad(-2*i);
 					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 					
 				elif (i%2==1):
 					fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-#					fire[i].rotation = -deg2rad((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
 					fire[i].rotation = deg2rad(2*i);
 					print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
 					
