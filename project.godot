@@ -32,9 +32,10 @@ Global="*res://scripts/Global.gd"
 
 [debug]
 
-settings/fps/force_fps=59
+settings/fps/force_fps=60
 settings/stdout/print_fps=true
 settings/stdout/verbose_stdout=true
+settings/gdscript/max_call_stack=2048
 
 [display]
 

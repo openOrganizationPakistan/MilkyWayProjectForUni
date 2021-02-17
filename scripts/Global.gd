@@ -8,6 +8,8 @@ var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
 var enemy_c_health = 0b0;
 
+var bullets = 250;
+
 onready var x_ratio;
 onready var y_ratio;
 onready var global_ratio;
@@ -17,29 +19,29 @@ var high_score_path = "user://HS.data"
 
 var universal_scale = Vector2();
 
-
-
-
-#var player_index = 0b0;
-#var game_speed = 0b11001;
-#var player_health = 0b1100100;
-#var player_fire_damage = 0b0; # change in fire Main_Scene.gd to change realtime with powerups
-#var player_c_health = 0b0;
-#var enemy_damage = 0b0;
-#var fire_type = 0b0;
-
-#var game_mode = 0b0;
-#var game_over = 0;
-
-
-
-
 func _ready():
 	
 	
 #	if not h_s_file.file_exists(high_score_path):
 #		_write_file(high_score_path,str(high_score));
 #	_write_file(high_score_path,str(0));
+
+
+# Using byte array for all the taks that requires numbers 
+# between 0 and 255 since var uses 8 bytes which results in 
+# perfomance loss and hence an array of bytes may be difficult
+# to work with but its very friendly to computers and actual 
+# size is more than the array size since it also has location
+# and protocole standards of allocating memmory etc so
+# declaring many of bytes individually is not a great choice
+# its still better than var but I used array which is much
+# much faster coz accesstime is prettymuch direct, no
+# recursive accesses and no perfomance loss and this the
+# sceret souce to the game working with more than 50 FPS on
+# 256MB RAM and dual core processor mobile phones as well
+# (These test result numbers are from my personal tests and can varry
+# according to your equipments). 
+
 	byte_array.append(0) 	# 0-game_over
 	byte_array.append(0) 	# 1-game_mode
 	byte_array.append(0) 	# 2-fire_type

@@ -81,9 +81,11 @@ func _on_player_fire_timer_timeout():
 #	var fire = [main_fires_scn.instance()];
 	var fire = [];
 	
-	if Global.byte_array[6] > 51 and Global.byte_array[22] != 0:	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100
+	if (Global.bullets > 0 
+		and Global.byte_array[6] > 51	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100 to overcome issue of health accidiental regeneration but remember to keep all damages less than 51 at any cost if damage exceed 51 it may cause the same glitch or error or but or whatever.
+		and Global.byte_array[22] != 0):
 		
-		match Global.byte_array[2]: # Global.fire_type
+		match Global.byte_array[2]: # works as Global.fire_type Read Global script to know y its done.
 			0:
 				_spread_fire(fire);
 #				_laser(fire)
@@ -99,17 +101,34 @@ func _spread_fire(fire):
 	
 	match Global.byte_array[16]:
 		0:
+			
+			
 			for i in range (Global.byte_array[13]):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
-				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio) ;
+				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
 				if (i==0):
+#					fire[i]._set_velocity(i);
+					fire[i].rotation = deg2rad(i);
 					fire[i]._set_velocity(i);
+					
 				elif (i==1):
 					fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
+#					fire[i].rotation = -deg2rad(i*- (Global.byte_array[14] * Global.x_ratio));
+					fire[i].rotation = deg2rad(2);
+					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+					
 				elif (i%2==0):
 					fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+#					fire[i].rotation = -deg2rad((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+					fire[i].rotation = deg2rad(-2*i);
+					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+					
 				elif (i%2==1):
 					fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+#					fire[i].rotation = -deg2rad((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+					fire[i].rotation = deg2rad(2*i);
+					print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+					
 				
 				add_child(fire[i]);
 			
@@ -133,6 +152,7 @@ func _spread_fire(fire):
 			
 		
 	
+
 
 func _show_hud():
 	var score = Global.current_score ;
