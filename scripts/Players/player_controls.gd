@@ -4,6 +4,7 @@ var pos = Vector2(240*Global.x_ratio,320*Global.y_ratio);
 
 func _input(event):
 	if ((event is InputEventScreenTouch) and event.is_pressed() ) or event is InputEventScreenDrag:
+		
 		if Global.byte_array[6] > 50 and event.get_index() == 0 : # health ranges from 50 to 150 instead of 0 to 100
 			pos = event.position;
 			
@@ -14,6 +15,8 @@ func _input(event):
 			
 			
 		
+		
+	
 	
 
 func _process(_delta):

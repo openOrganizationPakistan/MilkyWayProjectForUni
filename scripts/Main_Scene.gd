@@ -1,4 +1,6 @@
-extends Node2D
+#extends Node2D
+extends Container
+
 
 export (PackedScene) var main_levels_scn = preload("res://Scenes/Levels/Levels_main.tscn");
 export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Players_Main.tscn");
@@ -7,17 +9,22 @@ export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tsc
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
 
 
-onready var score_scn = $Control/HBoxContainer/Score;
-onready var p_health_indic  = $Control/phealth;
-onready var e_health_indic  = $Control/ehealth;
-onready var cpu  = $Control/cpu;
-onready var mem  = $Control/mem;
-onready var fps  = $Control/fps;
-onready var path_follow = $Path2D/PathFollow2D;
-onready var label = $Label;
-onready var play_count = $Control/play_count;
-onready var p_health_bar = $Control/HBoxContainer/pHealthBar;
-onready var path = $Path2D;
+onready var score_scn = $VBoxContainer/HBoxContainer/Score;
+onready var p_health_indic  = $VBoxContainer/VBoxContainer/phealth;
+onready var e_health_indic  = $VBoxContainer/VBoxContainer/ehealth;
+onready var cpu  = $VBoxContainer/VBoxContainer/cpu;
+onready var mem  = $VBoxContainer/VBoxContainer/mem;
+onready var fps  = $VBoxContainer/VBoxContainer/fps;
+onready var path_follow = $Node2D/Path2D/PathFollow2D;
+onready var label = $Node2D/Label;
+onready var play_count = $VBoxContainer/VBoxContainer/play_count;
+onready var p_health_bar = $VBoxContainer/HBoxContainer/pHealthBar;
+onready var path = $Node2D/Path2D;
+onready var power_ups_timer = $Node2D/power_ups_timer;
+onready var level_changed_timer = $Node2D/level_changed;
+onready var node2d = $Node2D;
+onready var player_fire_timer = $Node2D/player_fire_timer;
+onready var message_timer = $Node2D/message_timer;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
@@ -42,13 +49,12 @@ func _ready():
 	
 	p_health_bar.anchor_right = 0.5;
 	
-	$power_ups_timer.wait_time = 60;
-	$power_ups_timer.start();
+	power_ups_timer.wait_time = 60;
+	power_ups_timer.start();
 	
 	var bg = bg_env_scn.instance();
 	add_child(bg);
 	
-	$Control.rect_size.x = 480*Global.x_ratio;
 	
 	_add_player();
 	
@@ -71,10 +77,11 @@ func _add_player():
 func _on_player_fire_timer_timeout():
 	_show_hud();
 	
+	
 #	var fire = [main_fires_scn.instance()];
 	var fire = [];
 	
-	if Global.byte_array[6] > 51:	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100
+	if Global.byte_array[6] > 51 and Global.byte_array[22] != 0:	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100
 		
 		match Global.byte_array[2]: # Global.fire_type
 			0:
@@ -135,7 +142,7 @@ func _show_hud():
 	
 	if Global.byte_array[0] == 1:
 	
-		$player_fire_timer.stop();
+		player_fire_timer.stop();
 		
 		var text = "You\nWin!!!";
 		
@@ -144,10 +151,10 @@ func _show_hud():
 		
 		label.text = text;
 		label.show();
-		$message_timer.start();
+		message_timer.start();
 	
 	if Global.byte_array[6] < 1:
-		$player_fire_timer.stop();
+		player_fire_timer.stop();
 		
 	match Global.byte_array[1]:
 		0:
@@ -190,7 +197,7 @@ func _show_hud():
 	
 
 func _on_power_ups_timer_timeout():
-	$power_ups_timer.wait_time = rand_range(120,180);
+	power_ups_timer.wait_time = rand_range(120,180);
 	var temp_instance = main_power_up_scn.instance();
 	var power_up = temp_instance._get_power_up( int(rand_range(0,Global.byte_array[15]) ) );
 	temp_instance.queue_free();
@@ -213,4 +220,5 @@ func _display_message(message):
 	Global.current_score +=1 ;
 	label.text= str(message);
 	label.show();
-	$level_changed.start();
+	level_changed_timer.start();
+

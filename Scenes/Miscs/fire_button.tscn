@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/miscs/touch_screen_fire_button.gd" type="Script" id=1]
+[ext_resource path="res://kra_imported/FIRE_BUTTON.png" type="Texture" id=2]
+[ext_resource path="res://kra_imported/FIRE_BUTTON_PRESSED.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 64.0
+
+[node name="Control" type="Container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 236.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_right = 236.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 216.0
+margin_right = 236.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+normal = ExtResource( 2 )
+pressed = ExtResource( 3 )
+shape = SubResource( 1 )
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 432.0
+margin_right = 236.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 244.0
+margin_right = 480.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer3/TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]
+[connection signal="released" from="HBoxContainer/VBoxContainer/HBoxContainer3/TouchScreenButton" to="." method="_on_TouchScreenButton_released"]

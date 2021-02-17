@@ -40,8 +40,8 @@ settings/stdout/verbose_stdout=true
 
 window/size/width=480
 window/size/height=640
-window/size/test_width=450
-window/size/test_height=800
+window/size/test_width=700
+window/size/test_height=1066
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"
@@ -64,6 +64,10 @@ ui_touch={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
+}
+fire={
+"deadzone": 0.5,
+"events": [  ]
 }
 
 [input_devices]
