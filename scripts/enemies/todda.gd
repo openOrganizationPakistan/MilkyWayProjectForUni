@@ -1,3 +1,4 @@
+#script for todda enemy
 extends Area2D
 
 var health = PoolByteArray([80]);
@@ -8,7 +9,7 @@ func _ready():
 	
 
 func _process(_delta):
-	position.y += Global.byte_array[20];
+	position.y += Global.byte_array[20] ;
 	
 
 

@@ -1,3 +1,4 @@
+#script: Global.
 extends Node
 
 var byte_array = PoolByteArray();
@@ -42,29 +43,32 @@ func _ready():
 # (These test result numbers are from my personal tests and can varry
 # according to your equipments). 
 
-	byte_array.append(0) 	# 0-game_over
-	byte_array.append(0) 	# 1-game_mode
-	byte_array.append(0) 	# 2-fire_type
-	byte_array.append(15) 	# 3-boss_damage
-	byte_array.append(150) 	# 4-player_health
-	byte_array.append(5) 	# 5-player_fire_damage
-	byte_array.append(150) 	# 6-player_c_health
-	byte_array.append(0) 	# 7-player_index
-	byte_array.append(25) 	# 8-game_speed
-	byte_array.append(0)	# 9-current_level
-	byte_array.append(5)	# 10-boss_fire_damage
-	byte_array.append(50)	# 11-virus_damage
-	byte_array.append(5)	# 12-enimy_ship_01_damage
-	byte_array.append(1)	# 13-fire_matrix
-	byte_array.append(25)	# 14-fire_spreading distance
-	byte_array.append(3)	# 15-max_power_up_index
-	byte_array.append(0)	# 16-current_power_type
-	byte_array.append(1)	# 17-screen_touch index
-	byte_array.append(1)	# 18-temp screen_touch index
-	byte_array.append(0)	# 19-non-stop number of games
-	byte_array.append(1)	# 20-todda ship speed
-	byte_array.append(15)	# 21-todda ship damage to player
-	byte_array.append(0)	# 22-fire button
+	byte_array.append(0) 				# 0-game_over
+	byte_array.append(0) 				# 1-game_mode
+	byte_array.append(0) 				# 2-fire_type
+	byte_array.append(15) 				# 3-boss_damage
+	byte_array.append(150) 				# 4-player_health
+	byte_array.append(5) 				# 5-player_fire_damage
+	byte_array.append(150) 				# 6-player_c_health
+	byte_array.append(0) 				# 7-player_index
+	byte_array.append(25) 				# 8-game_speed
+	byte_array.append(0)				# 9-current_level
+	byte_array.append(5)				# 10-boss_fire_damage
+	byte_array.append(50)				# 11-virus_damage
+	byte_array.append(5)				# 12-enimy_ship_01_damage
+	byte_array.append(1)				# 13-fire_matrix
+	byte_array.append(25)				# 14-fire_spreading distance
+	byte_array.append(3)				# 15-max_power_up_index
+	byte_array.append(0)				# 16-current_power_type
+	byte_array.append(1)				# 17-screen_touch index
+	byte_array.append(1)				# 18-temp screen_touch index
+	byte_array.append(0)				# 19-non-stop number of games
+	byte_array.append(1)				# 20-todda ship speed
+	byte_array.append(15)				# 21-todda ship damage to player
+	byte_array.append(0)				# 22-fire button
+	byte_array.append(1)				# 23-Global Speed Factor
+	byte_array.append(byte_array[8])	# 24-Global Speed Constant
+	byte_array.append(1)				# 25-timers allowation
 	
 	
 	
@@ -76,11 +80,9 @@ func _ready():
 	y_ratio = _get_viewport_rect().y/640;
 	
 	global_ratio = Vector2(x_ratio,y_ratio);
-	
 #	fire_scale = Vector2(x_ratio,x_ratio);
 	universal_scale = Vector2(x_ratio,x_ratio);
 	
-
 
 func _get_viewport_rect():
 	return get_viewport().get_visible_rect().size

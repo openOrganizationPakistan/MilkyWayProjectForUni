@@ -1,3 +1,4 @@
+#player_fires_main
 extends Node2D
 
 func _get_player_fire(index):

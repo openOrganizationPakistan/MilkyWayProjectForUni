@@ -1,3 +1,4 @@
+#script:virus
 extends Area2D
 
 var health = PoolByteArray([80]);

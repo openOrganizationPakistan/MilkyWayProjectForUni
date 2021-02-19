@@ -1,3 +1,4 @@
+#script:Boss
 extends Area2D
 #extends "res://scripts/Players/player_controls.gd" #its for testing during development process.
 

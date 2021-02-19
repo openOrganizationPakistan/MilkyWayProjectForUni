@@ -1,3 +1,4 @@
+#script:Boss_fire
 extends Area2D
 
 func _ready():

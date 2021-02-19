@@ -1,3 +1,4 @@
+#script: player_01
 extends "res://scripts/Players/player_controls.gd"
 
 func _ready():

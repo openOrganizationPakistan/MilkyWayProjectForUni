@@ -1,3 +1,4 @@
+#script:ui
 extends Container
 
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
@@ -38,7 +39,7 @@ func _on_Button_pressed():
 	Global.byte_array[16] = 0; 
 	Global.byte_array[19] += 1; 
 	Global.byte_array[13] = 1;
-	Global.bullets = 500; 
+	Global.bullets = 0; 
 	
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 #	Global.byte_array[1] = index;

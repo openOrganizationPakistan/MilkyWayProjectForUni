@@ -1,3 +1,4 @@
+#script:BG_particles
 extends Node2D
 
 func _ready():

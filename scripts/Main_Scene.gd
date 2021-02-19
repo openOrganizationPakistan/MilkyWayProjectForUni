@@ -1,3 +1,4 @@
+#scripts:main_scene
 #extends Node2D
 extends Container
 
@@ -39,6 +40,7 @@ func _process(_delta):
 
 func _ready():
 	
+	$VBoxContainer/Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
 	print(path.curve.get_point_position(1));
 	play_count.text = "play count: " + str(Global.byte_array[19]);
@@ -76,8 +78,11 @@ func _on_player_fire_timer_timeout():
 	
 	var fire = [];
 	
-	if (Global.bullets > 0 
-		and Global.byte_array[6] > 51	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100 to overcome issue of health accidiental regeneration but remember to keep all damages less than 51 at any cost if damage exceed 51 it may cause the same glitch or error or but or whatever.
+	if (
+		Global.byte_array[25] == 1
+#		Global.bullets > 0 
+		and 
+		Global.byte_array[6] > 51	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100 to overcome issue of health accidiental regeneration but remember to keep all damages less than 51 at any cost if damage exceed 51 it may cause the same glitch or error or but or whatever.
 		and Global.byte_array[22] != 0):
 		
 		match Global.byte_array[2]: # works as Global.fire_type Read Global script to know y its done.
@@ -93,7 +98,6 @@ func _on_player_fire_timer_timeout():
 	
 
 func _spread_fire(fire):
-	
 	match Global.byte_array[16]:
 		0:
 			for i in range (Global.byte_array[13]):
@@ -103,21 +107,22 @@ func _spread_fire(fire):
 					fire[i].rotation = deg2rad(i);
 					fire[i]._set_velocity(i);
 					
-				elif (i==1):
-					fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
-					fire[i].rotation = deg2rad(1.4*Global.x_ratio);
-					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-					
-				elif (i%2==0):
-					fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-					fire[i].rotation = deg2rad(-1.4*Global.x_ratio*i);
-					print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-					
-				elif (i%2==1):
-					fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-					fire[i].rotation = deg2rad(1.4*Global.x_ratio*i);
-					print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-					
+				elif i>0 and Global.bullets>0:
+					if (i==1):
+						fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
+						fire[i].rotation = deg2rad(1.4*Global.x_ratio);
+						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+						
+					elif (i%2==0):
+						fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+						fire[i].rotation = deg2rad(-1.4*Global.x_ratio*i);
+						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+						
+					elif (i%2==1):
+						fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+						fire[i].rotation = deg2rad(1.4*Global.x_ratio*i);
+						print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+						
 				
 				add_child(fire[i]);
 			
@@ -142,8 +147,13 @@ func _spread_fire(fire):
 		
 	
 
-
 func _show_hud():
+	if Global.byte_array[25] == 0:
+		label.text="PAUSED!";
+		label.show();
+	else:
+		label.hide();
+	
 	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
 	
@@ -169,22 +179,26 @@ func _show_hud():
 		0:
 			if Global.current_score == 50:
 				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 150:
 				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 450:
 				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 750:
 				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			pass;
@@ -193,16 +207,28 @@ func _show_hud():
 				_display_message("Level 1");
 			elif Global.current_score == 50:
 				_display_message("Level 2");
-				Global.byte_array[8] = 30;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
 			elif Global.current_score == 150:
 				_display_message("Level 3");
-				Global.byte_array[8] = 35;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
 			elif Global.current_score == 450:
 				_display_message("Level 4");
-				Global.byte_array[8] = 40;
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
 			elif Global.current_score == 750:
 				_display_message("Final\nBoss!!!");
-				Global.byte_array[8] = 45;
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
 					
 				
 			

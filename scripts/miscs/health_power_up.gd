@@ -1,3 +1,4 @@
+#script:health_power_up
 extends Area2D
 
 func _process(_delta):

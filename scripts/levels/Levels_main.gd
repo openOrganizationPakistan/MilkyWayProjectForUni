@@ -1,3 +1,4 @@
+#scripts:levels_main
 extends Node2D
 
 export (PackedScene) var virus_scn = preload("res://Scenes/enemies/virus.tscn");
@@ -58,14 +59,14 @@ func _on_virus_timeout():
 	
 	if Global.byte_array[0] == 1:
 		queue_free();
-	
-	if not Global.byte_array[9] == 4:
-		
+	if not Global.byte_array[9] == 4 :
+		print("virus running");
 		virus_timer.wait_time = 2 + rand_range(0,5);
-		path_follow_2d.offset = randi();
-		var virus_instance = virus_scn.instance();
-		virus_instance.position = path_follow_2d.position;
-		add_child(virus_instance);
+		if Global.byte_array[25] == 1 :
+			path_follow_2d.offset = randi();
+			var virus_instance = virus_scn.instance();
+			virus_instance.position = path_follow_2d.position;
+			add_child(virus_instance);
 		virus_timer.start();
 		
 	
@@ -80,14 +81,15 @@ func _load_boss():
 func _on_boss_commings_timeout():
 	_load_boss();
 
-
 func _on_todda_timeout():
+	print("todda comming")
 	todda_timer.wait_time = int(5 + (randi()%5))
-	var todda = todda_scn.instance();
-	path_follow_2d.offset = randi();
-	todda.position = path_follow_2d.position;
-	add_child(todda);
-#	todda_timer.wait_time( int(rand_range(randi()%(50/Global.byte_array[8]),randi()%(150/Global.byte_array[8])) ));
+	if Global.byte_array[25] == 1:
+		var todda = todda_scn.instance();
+		path_follow_2d.offset = randi();
+		todda.position = path_follow_2d.position;
+		add_child(todda);
+#		todda_timer.wait_time( int(rand_range(randi()%(50/Global.byte_array[8]),randi()%(150/Global.byte_array[8])) ));
 	todda_timer.start();
-	
+		
 	

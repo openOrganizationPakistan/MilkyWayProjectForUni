@@ -1,3 +1,4 @@
+#script:player_controls
 extends Area2D
 
 var pos = Vector2(240*Global.x_ratio,320*Global.y_ratio);
