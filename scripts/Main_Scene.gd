@@ -261,3 +261,17 @@ func _display_message(message):
 	label.show();
 	level_changed_timer.start();
 
+
+
+func _on_Button_toggled(button_pressed):
+	if button_pressed:
+		Global.byte_array[25] = 0;
+		Global.byte_array[8] *= Global.byte_array[23]
+		Global._update_todda_speed();
+		
+	else:
+		Global.byte_array[25] = 1;
+		Global.byte_array[8] = Global.byte_array[24]
+		Global._update_todda_speed();
+
+

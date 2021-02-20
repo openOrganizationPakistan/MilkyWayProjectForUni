@@ -18,18 +18,18 @@ func _ready():
 func _on_TouchScreenButton_pressed():
 	Global.byte_array[22] = 1;
 	Global.byte_array[23] = 1;
-	Global.byte_array[25] = 1;
-	Global.byte_array[8] = Global.byte_array[24]
-	Global._update_todda_speed();
+#	Global.byte_array[25] = 1;
+#	Global.byte_array[8] = Global.byte_array[24]
+#	Global._update_todda_speed();
 	print(Global.byte_array[8]);
 	
 
 func _on_TouchScreenButton_released():
 	Global.byte_array[22] = 0;
 	Global.byte_array[23] = 0.2;
-	Global.byte_array[25] = 0;
-	Global.byte_array[8] *= Global.byte_array[23]
-	Global._update_todda_speed();
+#	Global.byte_array[25] = 0;
+#	Global.byte_array[8] *= Global.byte_array[23]
+#	Global._update_todda_speed();
 	print(Global.byte_array[8]);
 	
 

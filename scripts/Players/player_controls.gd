@@ -25,4 +25,5 @@ func _process(_delta):
 		lerp(position.x,pos.x,Global.movement_speed )
 		, lerp(position.y,pos.y,Global.movement_speed )
 	)
+	
 
