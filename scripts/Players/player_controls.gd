@@ -8,8 +8,8 @@ func _input(event):
 		
 		if Global.byte_array[6] > 50 and event.get_index() == 0 : # health ranges from 50 to 150 instead of 0 to 100
 			if event.position.y>250*Global.y_ratio:
-				pos = event.position;
-				print(250*Global.y_ratio)
+				if Global.byte_array[25] == 1:
+					pos = event.position;
 			
 #			position = Vector2(
 #				lerp(position.x,event.position.x,Global.movement_speed)

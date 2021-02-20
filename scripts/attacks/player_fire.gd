@@ -27,7 +27,7 @@ func _input(event):
 func _fire(delta):
 	match Global.byte_array[2]:
 		0:
-			position -= Vector2(velocity ,Global.byte_array[8] * 25 ) * delta ;
+			position -= Vector2(velocity * Global.byte_array[23] ,Global.byte_array[8] * 25 ) * delta ;
 		1:
 			
 			position.y -= (Global.byte_array[8] * 25 ) * delta ;

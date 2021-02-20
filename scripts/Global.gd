@@ -28,19 +28,21 @@ func _ready():
 #	_write_file(high_score_path,str(0));
 
 
-# Using byte array for all the taks that requires numbers 
-# between 0 and 255 since var uses 8 bytes which results in 
-# perfomance loss and hence an array of bytes may be difficult
-# to work with but its very friendly to computers and actual 
-# size is more than the array size since it also has location
+# Using byte array for all the tasks that requires
+# numbers between 0 and 255 since var uses 8 bytes
+# which results in perfomance loss and hence an 
+# array of bytes may be difficult to work with but
+# its very friendly to computer and actual size is
+# more than the array size since it also has location
 # and protocole standards of allocating memmory etc so
-# declaring many of bytes individually is not a great choice
-# its still better than var but I used array which is much
-# much faster coz accesstime is prettymuch direct, no
-# recursive accesses and no perfomance loss and this the
-# sceret souce to the game working with more than 50 FPS on
-# 256MB RAM and dual core processor mobile phones as well
-# (These test result numbers are from my personal tests and can varry
+# declaring many of bytes individually is not a great
+# choice its still better than var but I used array
+# which is much much faster coz access time is pretty
+# much direct, no recursive accesses and no perfomance
+# loss and this the sceret souce to the game working
+# with more than 50 FPS on 256MB RAM and dual core
+# processor mobile phones as well (These test result 
+# numbers are from my personal tests and can varry
 # according to your equipments). 
 
 	byte_array.append(0) 				# 0-game_over

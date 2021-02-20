@@ -18,6 +18,7 @@ onready var mem  = $VBoxContainer/VBoxContainer/mem;
 onready var fps  = $VBoxContainer/VBoxContainer/fps;
 onready var path_follow = $Node2D/Path2D/PathFollow2D;
 onready var label = $Node2D/Label;
+onready var label_2 = $Node2D/Label2;
 onready var play_count = $VBoxContainer/VBoxContainer/play_count;
 onready var p_health_bar = $VBoxContainer/HBoxContainer/pHealthBar;
 onready var path = $Node2D/Path2D;
@@ -47,6 +48,10 @@ func _ready():
 	label.rect_position = Vector2(240 * Global.x_ratio,
 			320 * Global.y_ratio
 		) - Vector2(label.rect_size.x/2, label.rect_size.y/2) ;
+	label_2.text = "Paused"
+	label_2.rect_position = Vector2(240 * Global.x_ratio,
+			320 * Global.y_ratio
+		) - Vector2(label_2.rect_size.x/2, label_2.rect_size.y/2) ;
 	
 	p_health_bar.anchor_right = 0.5;
 	power_ups_timer.wait_time = 60;
@@ -149,10 +154,10 @@ func _spread_fire(fire):
 
 func _show_hud():
 	if Global.byte_array[25] == 0:
-		label.text="PAUSED!";
-		label.show();
+		label_2.text="PAUSED!";
+		label_2.show();
 	else:
-		label.hide();
+		label_2.hide();
 	
 	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
@@ -266,11 +271,13 @@ func _display_message(message):
 func _on_Button_toggled(button_pressed):
 	if button_pressed:
 		Global.byte_array[25] = 0;
+		Global.byte_array[23] = 0;
 		Global.byte_array[8] *= Global.byte_array[23]
 		Global._update_todda_speed();
 		
 	else:
 		Global.byte_array[25] = 1;
+		Global.byte_array[23] = 1;
 		Global.byte_array[8] = Global.byte_array[24]
 		Global._update_todda_speed();
 

@@ -221,6 +221,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label2" type="Label" parent="Node2D"]
+visible = false
+margin_right = 390.0
+margin_bottom = 211.0
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 4 )
+text = "Game
+Over!!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Path2D" type="Path2D" parent="Node2D"]
 position = Vector2( 0, -0.8909 )
 curve = SubResource( 5 )
