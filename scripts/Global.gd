@@ -9,7 +9,7 @@ var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
 var enemy_c_health = 0b0;
 
-var bullets = 250;
+var bullets = 0;
 
 onready var x_ratio;
 onready var y_ratio;
@@ -71,7 +71,7 @@ func _ready():
 	byte_array.append(1)				# 23-Global Speed Factor
 	byte_array.append(byte_array[8])	# 24-Global Speed Constant
 	byte_array.append(1)				# 25-timers allowation
-	
+	byte_array.append(7)				# 26-lifes counts form 5 to above to overcome overflow or underflow
 	
 	
 	byte_array[20] = byte_array[8]/2 ;

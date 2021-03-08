@@ -39,6 +39,7 @@ func _on_Button_pressed():
 	Global.byte_array[16] = 0; 
 	Global.byte_array[19] += 1; 
 	Global.byte_array[13] = 1;
+	Global.byte_array[26] = 7;
 	Global.bullets = 0; 
 	
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");

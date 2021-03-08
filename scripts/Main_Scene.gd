@@ -27,6 +27,8 @@ onready var level_changed_timer = $Node2D/level_changed;
 onready var node2d = $Node2D;
 onready var player_fire_timer = $Node2D/player_fire_timer;
 onready var message_timer = $Node2D/message_timer;
+onready var bullet_count_label_inf = $VBoxContainer/VBoxContainer/HBoxContainer2/bullet_count;
+onready var bullet_count_label_num = $VBoxContainer/VBoxContainer/HBoxContainer2/bullet_count2;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
@@ -38,8 +40,27 @@ func _process(_delta):
 	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	
+	if Global.byte_array[26] == 7:
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=true;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=true;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=true;
+	elif Global.byte_array[26] ==6:
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=false;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=true;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=true;
+	elif Global.byte_array[26] == 5:
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=false;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=false;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=true;
+	elif Global.byte_array[26] < 5:
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=false;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=false;
+		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=false;
+	
 
 func _ready():
+	
+	$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.rect_scale = Vector2(Global.y_ratio,Global.y_ratio);
 	
 	$VBoxContainer/Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
@@ -105,7 +126,7 @@ func _on_player_fire_timer_timeout():
 func _spread_fire(fire):
 	match Global.byte_array[16]:
 		0:
-			for i in range (Global.byte_array[13]):
+			for i in (Global.byte_array[13]):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
 				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
 				if (i==0):
@@ -116,34 +137,35 @@ func _spread_fire(fire):
 					if (i==1):
 						fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(1.4*Global.x_ratio);
-						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+#						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 						
 					elif (i%2==0):
 						fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(-1.4*Global.x_ratio*i);
-						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+#						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 						
 					elif (i%2==1):
 						fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(1.4*Global.x_ratio*i);
-						print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+#						print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
 						
 				
 				add_child(fire[i]);
 			
 		1:
-			for i in range (Global.byte_array[13]):
+			for i in (Global.byte_array[13]):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
-				var x_pos
+				var x_pos = 0
 				if (i==0b0):
-					x_pos = (i);
-				elif (i==0b01):
-					x_pos = (i*- (Global.byte_array[14] * Global.x_ratio));
-				elif (i%0b10==0b0):
-					x_pos = ((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-				elif (i%0b10==0b01):
-					x_pos = ((0b10*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-				
+					x_pos = i;
+				elif i>0 and Global.bullets>0:
+					if (i==0b01):
+						x_pos = (i*- (Global.byte_array[14] * Global.x_ratio));
+					elif (i%0b10==0b0):
+						x_pos = ((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+					elif (i%0b10==0b01):
+						x_pos = ((0b10*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+					
 				fire[i].position = player.position + Vector2(x_pos,-50 * Global.x_ratio) ;
 				
 				add_child(fire[i]);
@@ -153,6 +175,14 @@ func _spread_fire(fire):
 	
 
 func _show_hud():
+	if Global.bullets == 0:
+		bullet_count_label_inf.show();
+		bullet_count_label_num.hide();
+	else:
+		bullet_count_label_inf.hide();
+		bullet_count_label_num.show();
+		bullet_count_label_num.text = str(Global.bullets)
+	
 	if Global.byte_array[25] == 0:
 		label_2.text="PAUSED!";
 		label_2.show();
@@ -170,7 +200,7 @@ func _show_hud():
 		
 		var text = "You\nWin!!!";
 		
-		if Global.byte_array[6] <51 :
+		if Global.byte_array[26] <5 :
 			text = "You\nLose!!!";
 		
 		label.text = text;

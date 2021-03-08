@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/fire_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://kra_imported/heart.png" type="Texture" id=6]
+[ext_resource path="res://kra_imported/FIRE_BUTTON.png" type="Texture" id=7]
+[ext_resource path="res://theme/OpenMoji-Color.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
@@ -28,6 +31,10 @@ corner_radius_top_left = 7
 corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
+
+[sub_resource type="DynamicFont" id=6]
+size = 64
+font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
@@ -76,8 +83,9 @@ size_flags_horizontal = 3
 
 [node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
 margin_right = 184.0
-margin_bottom = 31.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0.858824, 1, 1 )
@@ -86,11 +94,13 @@ max_value = 99.0
 step = 1.0
 value = 99.0
 allow_greater = true
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+light_mask = 1048575
 margin_left = 192.0
 margin_right = 288.0
 margin_bottom = 34.0
@@ -110,8 +120,61 @@ size_flags_horizontal = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 42.0
 margin_right = 480.0
-margin_bottom = 202.0
+margin_bottom = 210.0
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 40.0
+margin_right = 72.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 80.0
+margin_right = 112.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 480.0
+margin_bottom = 168.0
+
+[node name="bullet" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 128.0
+margin_bottom = 128.0
+texture = ExtResource( 7 )
+
+[node name="bullet_count" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 136.0
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 100.0
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 6 )
+text = "♾"
+
+[node name="bullet_count2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 216.0
+margin_top = 47.0
+margin_right = 224.0
+margin_bottom = 81.0
+theme = ExtResource( 4 )
+text = "♾"
 
 [node name="phealth" type="Label" parent="VBoxContainer/VBoxContainer"]
 visible = false
@@ -141,8 +204,10 @@ __meta__ = {
 }
 
 [node name="mem" type="Label" parent="VBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 70.0
 margin_right = 480.0
-margin_bottom = 34.0
+margin_bottom = 104.0
 theme = ExtResource( 4 )
 text = "RAM: "
 uppercase = true
@@ -151,9 +216,10 @@ __meta__ = {
 }
 
 [node name="cpu" type="Label" parent="VBoxContainer/VBoxContainer"]
-margin_top = 42.0
+visible = false
+margin_top = 70.0
 margin_right = 480.0
-margin_bottom = 76.0
+margin_bottom = 104.0
 theme = ExtResource( 4 )
 text = "CPU:  "
 uppercase = true
@@ -162,9 +228,10 @@ __meta__ = {
 }
 
 [node name="fps" type="Label" parent="VBoxContainer/VBoxContainer"]
-margin_top = 84.0
+visible = false
+margin_top = 70.0
 margin_right = 480.0
-margin_bottom = 118.0
+margin_bottom = 104.0
 theme = ExtResource( 4 )
 text = "FPS: "
 uppercase = true
@@ -173,9 +240,10 @@ __meta__ = {
 }
 
 [node name="play_count" type="Label" parent="VBoxContainer/VBoxContainer"]
-margin_top = 126.0
+visible = false
+margin_top = 70.0
 margin_right = 480.0
-margin_bottom = 160.0
+margin_bottom = 104.0
 theme = ExtResource( 4 )
 text = "play count: "
 uppercase = true
@@ -186,7 +254,7 @@ __meta__ = {
 [node name="Control2" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 210.0
+margin_top = 218.0
 margin_right = 480.0
 margin_bottom = 640.0
 size_flags_horizontal = 3
