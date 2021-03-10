@@ -8,7 +8,6 @@ onready var v_box_container = $VBoxContainer;
 var score;
 
 func _ready():
-	
 	v_box_container.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)
 	var v_b_c_scale = v_box_container.rect_scale;
 	v_box_container.rect_global_position = (

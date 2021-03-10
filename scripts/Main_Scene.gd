@@ -33,8 +33,6 @@ onready var bullet_count_label_num = $VBoxContainer/VBoxContainer/HBoxContainer2
 var player ;
 var temp_fire = main_fires_scn.instance();
 
-
-
 func _ready():
 	$Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );

@@ -43,7 +43,7 @@ window/size/width=480
 window/size/height=640
 window/size/test_width=440
 window/size/test_height=1009
-window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"
 
