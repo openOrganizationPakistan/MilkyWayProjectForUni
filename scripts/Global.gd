@@ -49,7 +49,7 @@ func _ready():
 	byte_array.append(0) 				# 1-game_mode
 	byte_array.append(0) 				# 2-fire_type
 	byte_array.append(15) 				# 3-boss_damage
-	byte_array.append(150) 				# 4-player_health
+	byte_array.append(150) 				# 4-player_max_health much like const but is variable
 	byte_array.append(5) 				# 5-player_fire_damage
 	byte_array.append(150) 				# 6-player_c_health
 	byte_array.append(0) 				# 7-player_index

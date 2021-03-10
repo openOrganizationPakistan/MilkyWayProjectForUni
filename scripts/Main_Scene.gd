@@ -10,7 +10,7 @@ export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tsc
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
 
 
-onready var score_scn = $VBoxContainer/HBoxContainer/Score;
+onready var score_scn = $VBoxContainer/statusContainer/Score;
 onready var p_health_indic  = $VBoxContainer/VBoxContainer/phealth;
 onready var e_health_indic  = $VBoxContainer/VBoxContainer/ehealth;
 onready var cpu  = $VBoxContainer/VBoxContainer/cpu;
@@ -20,7 +20,7 @@ onready var path_follow = $Node2D/Path2D/PathFollow2D;
 onready var label = $Node2D/Label;
 onready var label_2 = $Node2D/Label2;
 onready var play_count = $VBoxContainer/VBoxContainer/play_count;
-onready var p_health_bar = $VBoxContainer/HBoxContainer/pHealthBar;
+onready var p_health_bar = $VBoxContainer/statusContainer/pHealthBar;
 onready var path = $Node2D/Path2D;
 onready var power_ups_timer = $Node2D/power_ups_timer;
 onready var level_changed_timer = $Node2D/level_changed;
@@ -33,36 +33,10 @@ onready var bullet_count_label_num = $VBoxContainer/VBoxContainer/HBoxContainer2
 var player ;
 var temp_fire = main_fires_scn.instance();
 
-func _process(_delta):
-#	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health
-	p_health_bar.value = Global.byte_array[6] - 50
-	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
-	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
-	fps.text = "FPS: " + str(Performance.get_monitor(0));
-	
-	if Global.byte_array[26] == 7:
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=true;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=true;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=true;
-	elif Global.byte_array[26] ==6:
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=false;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=true;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=true;
-	elif Global.byte_array[26] == 5:
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=false;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=false;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=true;
-	elif Global.byte_array[26] < 5:
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.visible=false;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect2.visible=false;
-		$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect3.visible=false;
-	
+
 
 func _ready():
-	
-	$VBoxContainer/VBoxContainer/HBoxContainer/TextureRect.rect_scale = Vector2(Global.y_ratio,Global.y_ratio);
-	
-	$VBoxContainer/Control2.rect_scale=Global.universal_scale;
+	$Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
 	print(path.curve.get_point_position(1));
 	play_count.text = "play count: " + str(Global.byte_array[19]);
@@ -80,17 +54,37 @@ func _ready():
 	
 	var bg = bg_env_scn.instance();
 	add_child(bg);
-	
 	_add_player();
-	
 	_add_level();
 	
-
+func _process(_delta):
+#	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health
+	p_health_bar.value = Global.byte_array[6] - 50
+	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
+	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
+	fps.text = "FPS: " + str(Performance.get_monitor(0));
+	
+	if Global.byte_array[26] == 7:
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=true;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=true;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=true;
+	elif Global.byte_array[26] ==6:
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=false;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=true;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=true;
+	elif Global.byte_array[26] == 5:
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=false;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=false;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=true;
+	elif Global.byte_array[26] < 5:
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=false;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=false;
+		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=false;
+	
 func _add_level():
 	var temp = main_levels_scn.instance();
 	add_child(temp);
 	
-
 func _add_player():
 	var temp = main_players_scn.instance();
 	player = temp._get_player(Global.byte_array[7]); # get player index
@@ -98,7 +92,6 @@ func _add_player():
 	player.position = Vector2(240,320) * Global.universal_scale;
 	add_child(player);
 	
-
 func _on_player_fire_timer_timeout():
 	_show_hud();
 	
@@ -118,10 +111,6 @@ func _on_player_fire_timer_timeout():
 				
 			1:
 				pass;
-				
-			
-		
-	
 
 func _spread_fire(fire):
 	match Global.byte_array[16]:
@@ -169,10 +158,6 @@ func _spread_fire(fire):
 				fire[i].position = player.position + Vector2(x_pos,-50 * Global.x_ratio) ;
 				
 				add_child(fire[i]);
-				
-			
-		
-	
 
 func _show_hud():
 	if Global.bullets == 0:
@@ -264,11 +249,6 @@ func _show_hud():
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
-					
-				
-			
-		
-	
 
 func _on_power_ups_timer_timeout():
 	power_ups_timer.wait_time = rand_range(120,180);
@@ -279,24 +259,19 @@ func _on_power_ups_timer_timeout():
 	power_up.position = path_follow.position;
 	add_child(power_up);
 	print("test");
-	
 
 func _on_message_timer_timeout():
 	temp_fire.queue_free();
 	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
-	
 
 func _on_level_changed_timeout():
 	label.hide();
-	
 
 func _display_message(message):
 	Global.current_score +=1 ;
 	label.text= str(message);
 	label.show();
 	level_changed_timer.start();
-
-
 
 func _on_Button_toggled(button_pressed):
 	if button_pressed:
@@ -310,5 +285,3 @@ func _on_Button_toggled(button_pressed):
 		Global.byte_array[23] = 1;
 		Global.byte_array[8] = Global.byte_array[24]
 		Global._update_todda_speed();
-
-

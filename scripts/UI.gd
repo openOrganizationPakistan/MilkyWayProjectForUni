@@ -10,26 +10,18 @@ var score;
 func _ready():
 	
 	v_box_container.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)
-	
 	var v_b_c_scale = v_box_container.rect_scale;
-	
 	v_box_container.rect_global_position = (
 		((Vector2(240,480)
 		* Global.global_ratio)) 
 		- (v_box_container.rect_size/2 * v_b_c_scale)
 	);
-	
 	score_scn._set_score("High Score: " , Global.high_score);
-	
 	var bg = bg_env_scn.instance();
 	add_child(bg);
-	
 #	ensures that variable value is idicated by GUI;
 	$VBoxContainer/MenuButton.select(Global.byte_array[1]);
 	
-	
-	
-
 func _on_Button_pressed():
 	#reset values to default
 	Global.current_score=0;
@@ -41,8 +33,8 @@ func _on_Button_pressed():
 	Global.byte_array[13] = 1;
 	Global.byte_array[26] = 7;
 	Global.bullets = 0; 
-	
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 #	Global.byte_array[1] = index;
 
-	
+func _on_MenuButton_item_selected(index):
+	Global.byte_array[1] = index;

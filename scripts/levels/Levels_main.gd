@@ -20,7 +20,6 @@ func _ready():
 		0:
 			todda_timer.start();
 	
-
 func _process(_delta):
 	match Global.byte_array[1]:
 		1:
@@ -54,9 +53,7 @@ func _process(_delta):
 		0:
 			pass;
 	
-
 func _on_virus_timeout():
-	
 	if Global.byte_array[0] == 1:
 		queue_free();
 	if not Global.byte_array[9] == 4 :
@@ -68,16 +65,13 @@ func _on_virus_timeout():
 			virus_instance.position = path_follow_2d.position;
 			add_child(virus_instance);
 		virus_timer.start();
-		
 	
-
 func _load_boss():
 	var boss = boss_scn.instance();
 	path_follow_2d.offset = randi();
 	boss.position = path_follow_2d.position;
 	add_child(boss);
 	
-
 func _on_boss_commings_timeout():
 	_load_boss();
 

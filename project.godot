@@ -41,8 +41,8 @@ settings/gdscript/max_call_stack=2048
 
 window/size/width=480
 window/size/height=640
-window/size/test_width=700
-window/size/test_height=1066
+window/size/test_width=440
+window/size/test_height=1009
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"

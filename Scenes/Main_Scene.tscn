@@ -6,7 +6,7 @@
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://kra_imported/heart.png" type="Texture" id=6]
-[ext_resource path="res://kra_imported/FIRE_BUTTON.png" type="Texture" id=7]
+[ext_resource path="res://kra_imported/FIRE_BUTTON_PRESSED.png" type="Texture" id=7]
 [ext_resource path="res://theme/OpenMoji-Color.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -32,11 +32,11 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=3]
 size = 64
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 outline_size = 1
 outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
@@ -44,7 +44,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 128
 outline_size = 1
 outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
@@ -52,7 +52,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=6]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 18.8062, -15.9145, 0, 0, 0, 0, 463.892, -15.2887 )
 }
@@ -67,6 +67,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control2" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.1
+anchor_right = 0.0
+anchor_bottom = 0.132
+margin_right = 480.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,12 +85,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="statusContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 480.0
 margin_bottom = 34.0
 size_flags_horizontal = 3
 
-[node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+[node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/statusContainer"]
 margin_right = 184.0
 margin_bottom = 34.0
 size_flags_horizontal = 3
@@ -99,7 +108,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/statusContainer"]
 light_mask = 1048575
 margin_left = 192.0
 margin_right = 288.0
@@ -109,7 +118,7 @@ toggle_mode = true
 action_mode = 0
 text = "PAUSE"
 
-[node name="Score" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+[node name="Score" parent="VBoxContainer/statusContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 296.0
@@ -120,70 +129,71 @@ size_flags_horizontal = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 42.0
 margin_right = 480.0
-margin_bottom = 210.0
+margin_bottom = 123.0
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="heartsContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 margin_right = 480.0
-margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/heartsContainer"]
+visible = false
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 6 )
 stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 40.0
-margin_right = 72.0
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/VBoxContainer/heartsContainer"]
+visible = false
+margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 6 )
 stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 80.0
-margin_right = 112.0
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/VBoxContainer/heartsContainer"]
+visible = false
+margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 6 )
 stretch_mode = 5
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
-margin_top = 40.0
+margin_top = 8.0
 margin_right = 480.0
-margin_bottom = 168.0
+margin_bottom = 81.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="bullet" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 128.0
-margin_bottom = 128.0
+margin_right = 32.0
+margin_bottom = 73.0
 texture = ExtResource( 7 )
+stretch_mode = 4
 
 [node name="bullet_count" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 136.0
-margin_top = 27.0
-margin_right = 208.0
-margin_bottom = 100.0
+margin_left = 40.0
+margin_right = 112.0
+margin_bottom = 73.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "♾"
 
 [node name="bullet_count2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 216.0
-margin_top = 47.0
-margin_right = 224.0
-margin_bottom = 81.0
+margin_left = 120.0
+margin_top = 19.0
+margin_right = 128.0
+margin_bottom = 53.0
 theme = ExtResource( 4 )
 text = "♾"
 
 [node name="phealth" type="Label" parent="VBoxContainer/VBoxContainer"]
 visible = false
-margin_left = -480.0
-margin_top = 47.0
-margin_right = -262.0
-margin_bottom = 81.0
+margin_top = 121.0
+margin_right = 480.0
+margin_bottom = 155.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Health: "
 uppercase = true
 __meta__ = {
@@ -192,10 +202,9 @@ __meta__ = {
 
 [node name="ehealth" type="Label" parent="VBoxContainer/VBoxContainer"]
 visible = false
-margin_left = -480.0
-margin_top = 47.0
-margin_right = -262.0
-margin_bottom = 81.0
+margin_top = 121.0
+margin_right = 480.0
+margin_bottom = 155.0
 theme = ExtResource( 4 )
 text = "enemy health: "
 uppercase = true
@@ -205,9 +214,9 @@ __meta__ = {
 
 [node name="mem" type="Label" parent="VBoxContainer/VBoxContainer"]
 visible = false
-margin_top = 70.0
+margin_top = 121.0
 margin_right = 480.0
-margin_bottom = 104.0
+margin_bottom = 155.0
 theme = ExtResource( 4 )
 text = "RAM: "
 uppercase = true
@@ -217,9 +226,9 @@ __meta__ = {
 
 [node name="cpu" type="Label" parent="VBoxContainer/VBoxContainer"]
 visible = false
-margin_top = 70.0
+margin_top = 121.0
 margin_right = 480.0
-margin_bottom = 104.0
+margin_bottom = 155.0
 theme = ExtResource( 4 )
 text = "CPU:  "
 uppercase = true
@@ -251,15 +260,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control2" parent="VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 218.0
-margin_right = 480.0
-margin_bottom = 640.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="player_fire_timer" type="Timer" parent="Node2D"]
@@ -282,7 +282,7 @@ visible = false
 margin_right = 390.0
 margin_bottom = 211.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Game
 Over!!!"
 __meta__ = {
@@ -294,7 +294,7 @@ visible = false
 margin_right = 390.0
 margin_bottom = 211.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Game
 Over!!!"
 __meta__ = {
@@ -303,12 +303,12 @@ __meta__ = {
 
 [node name="Path2D" type="Path2D" parent="Node2D"]
 position = Vector2( 0, -0.8909 )
-curve = SubResource( 5 )
+curve = SubResource( 6 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
 position = Vector2( 18.8062, -15.9145 )
 rotation = 0.00140567
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_toggled"]
+[connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
 [connection signal="timeout" from="Node2D/power_ups_timer" to="." method="_on_power_ups_timer_timeout"]
 [connection signal="timeout" from="Node2D/level_changed" to="." method="_on_level_changed_timeout"]
