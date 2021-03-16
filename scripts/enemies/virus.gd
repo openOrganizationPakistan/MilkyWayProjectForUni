@@ -5,6 +5,8 @@ var health = PoolByteArray([80]);
 var x_direction;
 
 func _ready():
+	$effect.play("default",false);
+	$effect2.play("delfault",true);
 	$sprite.play("default",false);
 	scale = Global.universal_scale;
 	x_direction = rand_range(-1,1)
@@ -33,6 +35,8 @@ func _on_virus_area_entered(area):
 		Global.current_score +=1;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
+		$effect.hide();
+		$effect2.hide();
 		$distroy.play("destroyed-ulq");
 		$distroy.show();
 	

@@ -1,15 +1,27 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://kra_imported/0004.png" type="Texture" id=1]
+[ext_resource path="res://kra_imported/virus/0004.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Miscs/distroy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/enemies/virus.gd" type="Script" id=3]
-[ext_resource path="res://kra_imported/0006.png" type="Texture" id=4]
-[ext_resource path="res://kra_imported/0001.png" type="Texture" id=5]
-[ext_resource path="res://kra_imported/0005.png" type="Texture" id=6]
-[ext_resource path="res://kra_imported/0003.png" type="Texture" id=7]
-[ext_resource path="res://kra_imported/0002.png" type="Texture" id=8]
+[ext_resource path="res://kra_imported/virus/0006.png" type="Texture" id=4]
+[ext_resource path="res://kra_imported/virus/0001.png" type="Texture" id=5]
+[ext_resource path="res://kra_imported/virus/0005.png" type="Texture" id=6]
+[ext_resource path="res://kra_imported/virus/0003.png" type="Texture" id=7]
+[ext_resource path="res://kra_imported/virus/0002.png" type="Texture" id=8]
+[ext_resource path="res://kra_imported/virus/effects/0003.png" type="Texture" id=9]
+[ext_resource path="res://kra_imported/virus/effects/0001.png" type="Texture" id=10]
+[ext_resource path="res://kra_imported/virus/effects/0002.png" type="Texture" id=11]
+[ext_resource path="res://kra_imported/virus/effects/0004.png" type="Texture" id=12]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": true,
@@ -17,8 +29,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 63.0
+[sub_resource type="CircleShape2D" id=2]
+radius = 60.7822
 
 [node name="virus" type="Area2D" groups=[
 "virus",
@@ -26,15 +38,27 @@ radius = 63.0
 z_index = -1
 script = ExtResource( 3 )
 
+[node name="effect2" type="AnimatedSprite" parent="."]
+rotation = 1.72089
+scale = Vector2( 4, 4 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
 [node name="sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
-frames = SubResource( 2 )
-frame = 2
+frames = SubResource( 1 )
+playing = true
+
+[node name="effect" type="AnimatedSprite" parent="."]
+scale = Vector2( 4, 4 )
+frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="shape" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="distroy" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 5, 5 )
