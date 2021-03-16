@@ -58,7 +58,7 @@ func _on_virus_timeout():
 		queue_free();
 	if not Global.byte_array[9] == 4 :
 #		print("virus running");
-		virus_timer.wait_time = 2 + rand_range(0,5);
+		virus_timer.wait_time = 1 + rand_range(0,5);
 		if Global.byte_array[25] == 1 :
 			path_follow_2d.offset = randi();
 			var virus_instance = virus_scn.instance();
@@ -77,7 +77,7 @@ func _on_boss_commings_timeout():
 
 func _on_todda_timeout():
 #	print("todda comming")
-	todda_timer.wait_time = int(5 + (randi()%5))
+	todda_timer.wait_time = rand_range(5,10);
 	if Global.byte_array[25] == 1:
 		var todda = todda_scn.instance();
 		path_follow_2d.offset = randi();

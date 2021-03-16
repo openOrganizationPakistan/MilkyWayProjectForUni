@@ -4,6 +4,7 @@
 [ext_resource path="res://scripts/Players/Players_Main.gd" type="Script" id=2]
 
 [node name="Players_Main" type="Node2D"]
+z_index = -1
 script = ExtResource( 2 )
 
 [node name="Player_01" parent="." instance=ExtResource( 1 )]

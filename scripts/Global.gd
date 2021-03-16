@@ -3,7 +3,7 @@ extends Node
 
 var byte_array = PoolByteArray();
 
-var movement_speed = 0.2;
+var movement_speed = 0.07;
 var current_score=0b0;
 var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
@@ -14,14 +14,15 @@ var bullets = 0;
 onready var x_ratio;
 onready var y_ratio;
 onready var global_ratio;
-
+#onready var fire_timer = get_tree().get_root().find_node("player_fire_timer",true,true);
+onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,false);
+	
 var h_s_file = File.new()
 var high_score_path = "user://HS.data" 
 
 var universal_scale = Vector2();
 
 func _ready():
-	
 	
 #	if not h_s_file.file_exists(high_score_path):
 #		_write_file(high_score_path,str(high_score));
@@ -72,6 +73,7 @@ func _ready():
 	byte_array.append(byte_array[8])	# 24-Global Speed Constant
 	byte_array.append(1)				# 25-timers allowation
 	byte_array.append(7)				# 26-lifes counts form 5 to above to overcome overflow or underflow
+	byte_array.append(6)				# 27-player distroy animation finished on 5 and unfinished otherwise.
 	
 	byte_array[20] = byte_array[8]/2 ;
 	high_score = int(_read_file(high_score_path));

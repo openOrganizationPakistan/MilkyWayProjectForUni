@@ -8,18 +8,12 @@ export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Player
 export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_Fires_Main.tscn");
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
-
+export (PackedScene) var heart_tex_scn = preload("res://Scenes/Miscs/heart_tex.tscn");
 
 onready var score_scn = $VBoxContainer/statusContainer/Score;
-onready var p_health_indic  = $VBoxContainer/VBoxContainer/phealth;
-onready var e_health_indic  = $VBoxContainer/VBoxContainer/ehealth;
-onready var cpu  = $VBoxContainer/VBoxContainer/cpu;
-onready var mem  = $VBoxContainer/VBoxContainer/mem;
-onready var fps  = $VBoxContainer/VBoxContainer/fps;
 onready var path_follow = $Node2D/Path2D/PathFollow2D;
 onready var label = $Node2D/Label;
 onready var label_2 = $Node2D/Label2;
-onready var play_count = $VBoxContainer/VBoxContainer/play_count;
 onready var p_health_bar = $VBoxContainer/statusContainer/pHealthBar;
 onready var path = $Node2D/Path2D;
 onready var power_ups_timer = $Node2D/power_ups_timer;
@@ -27,13 +21,20 @@ onready var level_changed_timer = $Node2D/level_changed;
 onready var node2d = $Node2D;
 onready var player_fire_timer = $Node2D/player_fire_timer;
 onready var message_timer = $Node2D/message_timer;
-onready var bullet_count_label_inf = $VBoxContainer/VBoxContainer/HBoxContainer2/bullet_count;
-onready var bullet_count_label_num = $VBoxContainer/VBoxContainer/HBoxContainer2/bullet_count2;
+onready var bullet_count_label_inf = $VBoxContainer/status_hud/HBoxContainer2/bullet_count;
+onready var bullet_count_label_num = $VBoxContainer/status_hud/HBoxContainer2/bullet_count2;
+onready var heart_placer = $VBoxContainer/status_hud/heartsContainer;
+onready var status_hud = $VBoxContainer/status_hud/status_hud2;
+onready var mem = $VBoxContainer/status_hud/status_hud2/mem;
+onready var cpu = $VBoxContainer/status_hud/status_hud2/cpu;
+onready var fps = $VBoxContainer/status_hud/status_hud2/fps;
+onready var play_count = $VBoxContainer/status_hud/status_hud2/play_count;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
 
 func _ready():
+	randomize();
 	$Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
 	print(path.curve.get_point_position(1));
@@ -62,23 +63,6 @@ func _process(_delta):
 	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	
-	if Global.byte_array[26] == 7:
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=true;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=true;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=true;
-	elif Global.byte_array[26] ==6:
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=false;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=true;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=true;
-	elif Global.byte_array[26] == 5:
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=false;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=false;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=true;
-	elif Global.byte_array[26] < 5:
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect.visible=false;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect2.visible=false;
-		$VBoxContainer/VBoxContainer/heartsContainer/TextureRect3.visible=false;
-	
 func _add_level():
 	var temp = main_levels_scn.instance();
 	add_child(temp);
@@ -92,24 +76,21 @@ func _add_player():
 	
 func _on_player_fire_timer_timeout():
 	_show_hud();
-	
 	var fire = [];
-	
 	if (
 		Global.byte_array[25] == 1
 #		Global.bullets > 0 
 		and 
 		Global.byte_array[6] > 51	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100 to overcome issue of health accidiental regeneration but remember to keep all damages less than 51 at any cost if damage exceed 51 it may cause the same glitch or error or but or whatever.
-		and Global.byte_array[22] != 0):
-		
+		and Global.byte_array[22] != 0
+		):
 		match Global.byte_array[2]: # works as Global.fire_type Read Global script to know y its done.
 			0:
 				_spread_fire(fire);
 #				_laser(fire)
-				
 			1:
 				pass;
-
+	
 func _spread_fire(fire):
 	match Global.byte_array[16]:
 		0:

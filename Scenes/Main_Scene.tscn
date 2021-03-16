@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://kra_imported/heart.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Miscs/health_power_up.tscn" type="PackedScene" id=6]
 [ext_resource path="res://kra_imported/FIRE_BUTTON_PRESSED.png" type="Texture" id=7]
 [ext_resource path="res://theme/OpenMoji-Color.ttf" type="DynamicFontData" id=8]
 
@@ -87,12 +87,12 @@ __meta__ = {
 
 [node name="statusContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 480.0
-margin_bottom = 34.0
+margin_bottom = 33.0
 size_flags_horizontal = 3
 
 [node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/statusContainer"]
-margin_right = 184.0
-margin_bottom = 34.0
+margin_right = 193.0
+margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/fg = SubResource( 1 )
@@ -110,68 +110,50 @@ __meta__ = {
 
 [node name="Button" type="Button" parent="VBoxContainer/statusContainer"]
 light_mask = 1048575
-margin_left = 192.0
-margin_right = 288.0
-margin_bottom = 34.0
+margin_left = 201.0
+margin_right = 278.0
+margin_bottom = 33.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
 theme = ExtResource( 4 )
 toggle_mode = true
 action_mode = 0
-text = "PAUSE"
+text = "Pause"
 
 [node name="Score" parent="VBoxContainer/statusContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 296.0
+margin_left = 286.0
 margin_right = 480.0
-margin_bottom = 34.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="status_hud" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 41.0
+margin_right = 480.0
+margin_bottom = 221.0
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 42.0
-margin_right = 480.0
-margin_bottom = 123.0
-size_flags_horizontal = 3
-
-[node name="heartsContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="heartsContainer" type="HBoxContainer" parent="VBoxContainer/status_hud"]
 margin_right = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/heartsContainer"]
-visible = false
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 6 )
-stretch_mode = 5
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/VBoxContainer/heartsContainer"]
-visible = false
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 6 )
-stretch_mode = 5
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/VBoxContainer/heartsContainer"]
-visible = false
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 6 )
-stretch_mode = 5
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/status_hud"]
 margin_top = 8.0
 margin_right = 480.0
 margin_bottom = 81.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="bullet" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="bullet" type="TextureRect" parent="VBoxContainer/status_hud/HBoxContainer2"]
 margin_right = 32.0
 margin_bottom = 73.0
 texture = ExtResource( 7 )
 stretch_mode = 4
 
-[node name="bullet_count" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="bullet_count" type="Label" parent="VBoxContainer/status_hud/HBoxContainer2"]
 margin_left = 40.0
 margin_right = 112.0
 margin_bottom = 73.0
@@ -179,19 +161,25 @@ theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 3 )
 text = "♾"
 
-[node name="bullet_count2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="bullet_count2" type="Label" parent="VBoxContainer/status_hud/HBoxContainer2"]
 margin_left = 120.0
-margin_top = 19.0
+margin_top = 20.0
 margin_right = 128.0
 margin_bottom = 53.0
 theme = ExtResource( 4 )
 text = "♾"
 
-[node name="phealth" type="Label" parent="VBoxContainer/VBoxContainer"]
-visible = false
-margin_top = 121.0
+[node name="status_hud2" type="VBoxContainer" parent="VBoxContainer/status_hud"]
+margin_top = 89.0
 margin_right = 480.0
-margin_bottom = 155.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+
+[node name="phealth" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
+visible = false
+margin_top = 89.0
+margin_right = 480.0
+margin_bottom = 123.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 4 )
 text = "Health: "
@@ -200,11 +188,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ehealth" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="ehealth" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
 visible = false
-margin_top = 121.0
+margin_top = 89.0
 margin_right = 480.0
-margin_bottom = 155.0
+margin_bottom = 123.0
 theme = ExtResource( 4 )
 text = "enemy health: "
 uppercase = true
@@ -212,48 +200,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="mem" type="Label" parent="VBoxContainer/VBoxContainer"]
-visible = false
-margin_top = 121.0
+[node name="mem" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
 margin_right = 480.0
-margin_bottom = 155.0
-theme = ExtResource( 4 )
+margin_bottom = 25.0
 text = "RAM: "
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cpu" type="Label" parent="VBoxContainer/VBoxContainer"]
-visible = false
-margin_top = 121.0
+[node name="cpu" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
+margin_top = 33.0
 margin_right = 480.0
-margin_bottom = 155.0
-theme = ExtResource( 4 )
+margin_bottom = 58.0
 text = "CPU:  "
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="fps" type="Label" parent="VBoxContainer/VBoxContainer"]
-visible = false
-margin_top = 70.0
+[node name="fps" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
+margin_top = 66.0
 margin_right = 480.0
-margin_bottom = 104.0
-theme = ExtResource( 4 )
+margin_bottom = 91.0
 text = "FPS: "
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="play_count" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="play_count" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
 visible = false
-margin_top = 70.0
+margin_top = 188.0
 margin_right = 480.0
-margin_bottom = 104.0
-theme = ExtResource( 4 )
+margin_bottom = 213.0
 text = "play count: "
 uppercase = true
 __meta__ = {
@@ -308,6 +288,27 @@ curve = SubResource( 6 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
 position = Vector2( 18.8062, -15.9145 )
 rotation = 0.00140567
+
+[node name="health_power_up" parent="." instance=ExtResource( 6 )]
+position = Vector2( 41.2524, 69.8925 )
+
+[node name="health_power_up2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 144.035, 63.2183 )
+
+[node name="health_power_up3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 248.82, 52.5396 )
+
+[node name="health_power_up4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 359.612, 55.2092 )
+
+[node name="health_power_up5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 325.573, 140.639 )
+
+[node name="health_power_up6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 200.098, 151.318 )
+
+[node name="health_power_up7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 95.3134, 159.327 )
 [connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
 [connection signal="timeout" from="Node2D/power_ups_timer" to="." method="_on_power_ups_timer_timeout"]

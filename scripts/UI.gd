@@ -27,6 +27,7 @@ func _on_Button_pressed():
 	Global.enemy_c_health=0;
 	Global.byte_array[0] = 0;
 	Global.byte_array[9] = 0;
+	Global.byte_array[8] = 25;
 	Global.byte_array[16] = 0; 
 	Global.byte_array[19] += 1; 
 	Global.byte_array[13] = 1;

@@ -15,17 +15,13 @@ func _input(event):
 #				lerp(position.x,event.position.x,Global.movement_speed)
 #				,lerp(position.y,event.position.y,Global.movement_speed)
 #			) ;
-			
-			
-		
-		
 	
-	
-
 func _process(_delta):
+	if Global.byte_array[27] == 5:
+		Global.byte_array[27] = 6;
+		pos = Vector2(Global._get_viewport_rect().x/2,Global._get_viewport_rect().y/1.2);
 	position = Vector2(
 		lerp(position.x,pos.x,Global.movement_speed )
 		, lerp(position.y,pos.y,Global.movement_speed )
-	)
+	);
 	
-

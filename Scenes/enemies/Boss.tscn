@@ -34,6 +34,7 @@ corner_radius_bottom_left = 5
 ]]
 position = Vector2( 0, -0.125 )
 rotation = 3.14159
+z_index = -1
 script = ExtResource( 3 )
 
 [node name="sprite" type="Sprite" parent="."]

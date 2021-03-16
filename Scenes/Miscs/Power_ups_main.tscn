@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Miscs/health_power_up.tscn" type="PackedScene" id=4]
 
 [node name="Power_ups_main" type="Node2D"]
+z_index = -1
 script = ExtResource( 1 )
 
 [node name="v_fire_power_up" parent="." instance=ExtResource( 2 )]
