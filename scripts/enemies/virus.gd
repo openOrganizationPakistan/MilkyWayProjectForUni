@@ -6,7 +6,7 @@ var x_direction;
 
 func _ready():
 	$effect.play("default",false);
-	$effect2.play("delfault",true);
+	$effect2.play("default",true);
 	$sprite.play("default",false);
 	scale = Global.universal_scale;
 	x_direction = rand_range(-1,1)
