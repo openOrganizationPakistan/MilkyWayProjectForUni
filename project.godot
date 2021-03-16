@@ -82,8 +82,10 @@ file_logging/enable_file_logging=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+quality/2d/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=1
 quality/intended_usage/framebuffer_allocation.mobile=1
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 quality/shadows/filter_mode=0
 quality/reflections/texture_array_reflections=false

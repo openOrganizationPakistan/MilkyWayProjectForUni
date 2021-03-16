@@ -5,9 +5,8 @@ var health = PoolByteArray([80]);
 var x_direction;
 
 func _ready():
-	
+	$sprite.play("default",false);
 	scale = Global.universal_scale;
-	
 	x_direction = rand_range(-1,1)
 	
 func _process(_delta):
