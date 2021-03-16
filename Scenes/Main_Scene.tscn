@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/fire_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Scenes/Miscs/health_power_up.tscn" type="PackedScene" id=6]
 [ext_resource path="res://kra_imported/FIRE_BUTTON_PRESSED.png" type="Texture" id=7]
 [ext_resource path="res://theme/OpenMoji-Color.ttf" type="DynamicFontData" id=8]
 
@@ -288,27 +287,6 @@ curve = SubResource( 6 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
 position = Vector2( 18.8062, -15.9145 )
 rotation = 0.00140567
-
-[node name="health_power_up" parent="." instance=ExtResource( 6 )]
-position = Vector2( 41.2524, 69.8925 )
-
-[node name="health_power_up2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 144.035, 63.2183 )
-
-[node name="health_power_up3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 248.82, 52.5396 )
-
-[node name="health_power_up4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 359.612, 55.2092 )
-
-[node name="health_power_up5" parent="." instance=ExtResource( 6 )]
-position = Vector2( 325.573, 140.639 )
-
-[node name="health_power_up6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 200.098, 151.318 )
-
-[node name="health_power_up7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 95.3134, 159.327 )
 [connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
 [connection signal="timeout" from="Node2D/power_ups_timer" to="." method="_on_power_ups_timer_timeout"]
