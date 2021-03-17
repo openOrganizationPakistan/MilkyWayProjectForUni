@@ -1,10 +1,10 @@
 #script:virus
 extends Area2D
 
-var health = PoolByteArray([80]);
 var x_direction;
 
 func _ready():
+	Global.byte_array[30] = 80;
 	$effect.play("default",false);
 	$effect2.play("default",true);
 	$sprite.play("default",false);
@@ -25,13 +25,11 @@ func _process(_delta):
 func _on_virus_area_entered(area):
 	
 	if area.is_in_group("player_fire"):
-		health[0] -= Global.byte_array[5];
+		Global.byte_array[30] -= Global.byte_array[5];
 	if area.is_in_group("player"):
-		health[0] -= 50;
-		
-	Global.enemy_c_health = (50 - health[0])
-	
-	if health[0] < 51:
+		Global.byte_array[30] -= 50;
+	Global.enemy_c_health = (50 - Global.byte_array[30])
+	if Global.byte_array[30] < 51:
 		Global.current_score +=1;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();

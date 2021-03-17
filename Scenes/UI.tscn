@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://kra_imported/game_controller.svg" type="Texture" id=5]
 [ext_resource path="res://kra_imported/story.svg" type="Texture" id=6]
+[ext_resource path="res://kra_imported/Player_02_slq.png" type="Texture" id=7]
+[ext_resource path="res://kra_imported/Player_01_slq.png" type="Texture" id=8]
 
 [node name="Container" type="Container"]
 anchor_right = 1.0
@@ -45,13 +47,29 @@ clip_text = true
 items = [ "Clasic Mode", ExtResource( 5 ), false, 0, null, "Story Mode", ExtResource( 6 ), false, 1, null ]
 selected = 0
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="MenuButton2" type="OptionButton" parent="VBoxContainer"]
 margin_top = 128.0
 margin_right = 300.0
-margin_bottom = 187.0
+margin_bottom = 200.0
+focus_neighbour_bottom = NodePath("../Button")
+size_flags_horizontal = 3
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+keep_pressed_outside = true
+text = "Player 0"
+icon = ExtResource( 8 )
+clip_text = true
+items = [ "Player 0", ExtResource( 8 ), false, 0, null, "Player 1", ExtResource( 7 ), false, 1, null ]
+selected = 0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 208.0
+margin_right = 300.0
+margin_bottom = 267.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Play"
 expand_icon = true
 [connection signal="item_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/MenuButton2" to="." method="_on_MenuButton2_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

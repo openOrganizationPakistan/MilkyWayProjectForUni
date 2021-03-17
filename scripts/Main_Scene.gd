@@ -62,6 +62,67 @@ func _process(_delta):
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
 	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
+	match Global.byte_array[1]:
+		0:
+			if Global.current_score == 50:
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+				player_fire_timer.wait_time =  0.15
+			elif Global.current_score == 150:
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+				player_fire_timer.wait_time =  0.13
+			elif Global.current_score == 450:
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+				player_fire_timer.wait_time =  0.1
+			elif Global.current_score == 750:
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+				player_fire_timer.wait_time =  0.075
+		1:
+			if Global.current_score == 0:
+				_display_message("Level 1");
+				player_fire_timer.wait_time =  0.15
+			elif Global.current_score == 50:
+				_display_message("Level 2");
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+				player_fire_timer.wait_time =  0.13
+			elif Global.current_score == 150:
+				_display_message("Level 3");
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+			elif Global.current_score == 450:
+				_display_message("Level 4");
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				Global._update_todda_speed();
+				player_fire_timer.wait_time =  0.1
+			elif Global.current_score == 750:
+				_display_message("Final\nBoss!!!");
+				_display_message("Game\nSpeed\n\t+10")
+				Global.byte_array[8] += 10 ;
+				Global.byte_array[24] += 10 ;
+				Global.current_score += 1;
+				player_fire_timer.wait_time =  0.075
 	
 func _add_level():
 	var temp = main_levels_scn.instance();
@@ -118,17 +179,30 @@ func _spread_fire(fire):
 		1:
 			for i in (Global.byte_array[13]):
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
-				var x_pos = 0
-				if (i==0b0):
-					x_pos = i;
-				elif i>0 and Global.bullets>0:
-					if (i==0b01):
-						x_pos = (i*- (Global.byte_array[14] * Global.x_ratio));
-					elif (i%0b10==0b0):
-						x_pos = ((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-					elif (i%0b10==0b01):
-						x_pos = ((0b10*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-				fire[i].position = player.position + Vector2(x_pos,-50 * Global.x_ratio) ;
+				var x_pos = Vector2(0,-50 * Global.x_ratio);
+				match Global.byte_array[7]:
+					0:
+						if (i==0b0):
+							x_pos.x = i;
+						elif i>0 and Global.bullets>0:
+							if (i==0b01):
+								x_pos.x = (i*- (Global.byte_array[14] * Global.x_ratio));
+							elif (i%0b10==0b0):
+								x_pos.x = ((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+							elif (i%0b10==0b01):
+								x_pos.x = ((0b10*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+					1:
+						if (i==0b0):
+							x_pos.x = i;
+						elif i>0 and Global.bullets>0:
+							x_pos.y = -10 * Global.x_ratio;
+							if (i==0b01):
+								x_pos.x = (i*- (Global.byte_array[14] * Global.x_ratio));
+							elif (i%0b10==0b0):
+								x_pos.x = ((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
+							elif (i%0b10==0b01):
+								x_pos.x = ((0b10*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
+				fire[i].position = player.position + x_pos ;
 				add_child(fire[i]);
 	
 func _show_hud():
@@ -158,59 +232,6 @@ func _show_hud():
 		message_timer.start();
 	if Global.byte_array[6] < 1:
 		player_fire_timer.stop();
-	match Global.byte_array[1]:
-		0:
-			if Global.current_score == 50:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 150:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 450:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 750:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-		1:
-			if Global.current_score == 0:
-				_display_message("Level 1");
-			elif Global.current_score == 50:
-				_display_message("Level 2");
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 150:
-				_display_message("Level 3");
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 450:
-				_display_message("Level 4");
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 750:
-				_display_message("Final\nBoss!!!");
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
 	
 func _on_power_ups_timer_timeout():
 	power_ups_timer.wait_time = rand_range(power_ups_min_timer,power_ups_max_timer);

@@ -49,14 +49,14 @@ func _ready():
 	byte_array.append(0) 				# 0-game_over
 	byte_array.append(0) 				# 1-game_mode
 	byte_array.append(0) 				# 2-fire_type
-	byte_array.append(15) 				# 3-boss_damage
+	byte_array.append(25) 				# 3-boss_damage
 	byte_array.append(150) 				# 4-player_max_health much like const but is variable
 	byte_array.append(5) 				# 5-player_fire_damage
 	byte_array.append(150) 				# 6-player_c_health
 	byte_array.append(0) 				# 7-player_index
 	byte_array.append(25) 				# 8-game_speed
 	byte_array.append(0)				# 9-current_level
-	byte_array.append(5)				# 10-boss_fire_damage
+	byte_array.append(10)				# 10-boss_fire_damage
 	byte_array.append(50)				# 11-virus_damage
 	byte_array.append(5)				# 12-enimy_ship_01_damage
 	byte_array.append(1)				# 13-fire_matrix
@@ -74,6 +74,11 @@ func _ready():
 	byte_array.append(1)				# 25-timers allowation
 	byte_array.append(7)				# 26-lifes counts form 5 to above to overcome overflow or underflow
 	byte_array.append(6)				# 27-player distroy animation finished on 5 and unfinished otherwise.
+	byte_array.append(15)				# 28-fighter damage
+	byte_array.append(10)				# 29-enemy bullet.
+	byte_array.append(80)				# 30-virus_current_health 80 is for personal rememberance and not going to other file just to see default value event though it will change dynamically but every new spawner should have 80 health
+	byte_array.append(80)				# 31-todda_current_health same psychology for this 80
+	byte_array.append(120)				# 32-fighter_current_health same psycho for 120 as for 80
 	
 	byte_array[20] = byte_array[8]/2 ;
 	high_score = int(_read_file(high_score_path));

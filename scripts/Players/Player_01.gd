@@ -24,6 +24,10 @@ func _on_Player_01_area_entered(area):
 		Global.byte_array[6] -= Global.byte_array[11]; 
 	if area.is_in_group("todda"):
 		Global.byte_array[6] -= Global.byte_array[21];
+	if area.is_in_group("fighter"):
+		Global.byte_array[6] -= Global.byte_array[28];
+	if area.is_in_group("enemy_fire"):
+		Global.byte_array[6] -= Global.byte_array[29];
 	if Global.byte_array[6] <= 50 :
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();

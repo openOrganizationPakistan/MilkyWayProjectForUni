@@ -13,7 +13,7 @@
 [ext_resource path="res://kra_imported/virus/effects/0002.png" type="Texture" id=11]
 [ext_resource path="res://kra_imported/virus/effects/0004.png" type="Texture" id=12]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 12 ) ],
 "loop": true,
@@ -21,7 +21,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": true,
@@ -29,7 +29,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 60.7822
 
 [node name="virus" type="Area2D" groups=[
@@ -41,24 +41,24 @@ script = ExtResource( 3 )
 [node name="effect2" type="AnimatedSprite" parent="."]
 rotation = 1.72089
 scale = Vector2( 4, 4 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 frame = 2
 playing = true
 
 [node name="sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 playing = true
 
 [node name="effect" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 frame = 2
 playing = true
 
 [node name="shape" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="distroy" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 5, 5 )

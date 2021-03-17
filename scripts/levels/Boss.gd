@@ -51,7 +51,7 @@ func _process(delta):
 	
 func _on_fly_down_timeout():
 	boss_fire_cd.stop();
-	fly_down_spd = pow ((Global.movement_speed * Global.y_ratio),2.3);
+	fly_down_spd = pow ((Global.movement_speed * Global.y_ratio),2);
 	print(fly_down_spd)
 	fly_down_bool = true;
 	anim_done = false;
