@@ -65,8 +65,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-power_ups_min_timer = 1.0
-power_ups_max_timer = 5.0
 
 [node name="Control2" parent="." instance=ExtResource( 2 )]
 anchor_top = 0.1

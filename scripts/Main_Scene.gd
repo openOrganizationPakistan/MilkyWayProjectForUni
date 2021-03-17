@@ -2,15 +2,14 @@
 #extends Node2D
 extends Container
 
-
 export (PackedScene) var main_levels_scn = preload("res://Scenes/Levels/Levels_main.tscn");
 export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Players_Main.tscn");
 export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_Fires_Main.tscn");
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
 export (PackedScene) var heart_tex_scn = preload("res://Scenes/Miscs/heart_tex.tscn");
-export (float,1,60) var power_ups_min_timer;
-export (float,5,240) var power_ups_max_timer;
+export (float,1,60) var power_ups_min_timer = 60;
+export (float,5,240) var power_ups_max_timer = 240;
 
 onready var score_scn = $VBoxContainer/statusContainer/Score;
 onready var path_follow = $Node2D/Path2D/PathFollow2D;
@@ -52,7 +51,6 @@ func _ready():
 	p_health_bar.anchor_right = 0.5;
 	power_ups_timer.wait_time = power_ups_min_timer;
 	power_ups_timer.start();
-	
 	var bg = bg_env_scn.instance();
 	add_child(bg);
 	_add_player();
@@ -102,24 +100,19 @@ func _spread_fire(fire):
 				if (i==0):
 					fire[i].rotation = deg2rad(i);
 					fire[i]._set_velocity(i);
-					
 				elif i>0 and Global.bullets>0:
 					if (i==1):
 						fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(1.4*Global.x_ratio);
 #						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-						
 					elif (i%2==0):
 						fire[i]._set_velocity((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(-1.4*Global.x_ratio*i);
 #						print((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
-						
 					elif (i%2==1):
 						fire[i]._set_velocity((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(1.4*Global.x_ratio*i);
 #						print((2*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-						
-				
 				add_child(fire[i]);
 			
 		1:
@@ -135,11 +128,9 @@ func _spread_fire(fire):
 						x_pos = ((i/2.0)* (Global.byte_array[14] * Global.x_ratio));
 					elif (i%0b10==0b01):
 						x_pos = ((0b10*i/3.0)* -(Global.byte_array[14] * Global.x_ratio));
-					
 				fire[i].position = player.position + Vector2(x_pos,-50 * Global.x_ratio) ;
-				
 				add_child(fire[i]);
-
+	
 func _show_hud():
 	if Global.bullets == 0:
 		bullet_count_label_inf.show();
@@ -154,28 +145,19 @@ func _show_hud():
 		label_2.show();
 	else:
 		label_2.hide();
-	
 	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
-	
 #	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
-	
 	if Global.byte_array[0] == 1:
-	
 		player_fire_timer.stop();
-		
 		var text = "You\nWin!!!";
-		
 		if Global.byte_array[26] <5 :
 			text = "You\nLose!!!";
-		
 		label.text = text;
 		label.show();
 		message_timer.start();
-	
 	if Global.byte_array[6] < 1:
 		player_fire_timer.stop();
-		
 	match Global.byte_array[1]:
 		0:
 			if Global.current_score == 50:
@@ -202,7 +184,6 @@ func _show_hud():
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-			pass;
 		1:
 			if Global.current_score == 0:
 				_display_message("Level 1");
@@ -230,7 +211,7 @@ func _show_hud():
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
-
+	
 func _on_power_ups_timer_timeout():
 	power_ups_timer.wait_time = rand_range(power_ups_min_timer,power_ups_max_timer);
 	var temp_instance = main_power_up_scn.instance();
@@ -240,27 +221,26 @@ func _on_power_ups_timer_timeout():
 	power_up.position = path_follow.position;
 	add_child(power_up);
 	print("test");
-
+	
 func _on_message_timer_timeout():
 	temp_fire.queue_free();
 	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
-
+	
 func _on_level_changed_timeout():
 	label.hide();
-
+	
 func _display_message(message):
 	Global.current_score +=1 ;
 	label.text= str(message);
 	label.show();
 	level_changed_timer.start();
-
+	
 func _on_Button_toggled(button_pressed):
 	if button_pressed:
 		Global.byte_array[25] = 0;
 		Global.byte_array[23] = 0;
 		Global.byte_array[8] *= Global.byte_array[23]
 		Global._update_todda_speed();
-		
 	else:
 		Global.byte_array[25] = 1;
 		Global.byte_array[23] = 1;
