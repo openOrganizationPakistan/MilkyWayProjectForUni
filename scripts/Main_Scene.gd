@@ -9,6 +9,8 @@ export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_F
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
 export (PackedScene) var heart_tex_scn = preload("res://Scenes/Miscs/heart_tex.tscn");
+export (float,1,60) var power_ups_min_timer;
+export (float,5,240) var power_ups_max_timer;
 
 onready var score_scn = $VBoxContainer/statusContainer/Score;
 onready var path_follow = $Node2D/Path2D/PathFollow2D;
@@ -48,7 +50,7 @@ func _ready():
 		) - Vector2(label_2.rect_size.x/2, label_2.rect_size.y/2) ;
 	
 	p_health_bar.anchor_right = 0.5;
-	power_ups_timer.wait_time = 60;
+	power_ups_timer.wait_time = power_ups_min_timer;
 	power_ups_timer.start();
 	
 	var bg = bg_env_scn.instance();
@@ -230,7 +232,7 @@ func _show_hud():
 				Global.current_score += 1;
 
 func _on_power_ups_timer_timeout():
-	power_ups_timer.wait_time = rand_range(120,180);
+	power_ups_timer.wait_time = rand_range(power_ups_min_timer,power_ups_max_timer);
 	var temp_instance = main_power_up_scn.instance();
 	var power_up = temp_instance._get_power_up( int(rand_range(0,Global.byte_array[15]) ) );
 	temp_instance.queue_free();

@@ -22,13 +22,13 @@ onready var e_health_bar = $e_health_bar;
 func _ready():
 	scale = (Vector2(0.85,0.85) * Global.x_ratio);
 	position = Vector2(128*scale.x,128*scale.y);
-	h_movement_spd = 0.1 * Global.x_ratio;
+	h_movement_spd = 5 * Global.x_ratio;
 	fly_down_timer.start();
 	health = Global.boss_health;
 #	connect("area_entered",self,"_on_area_entered")
 #	health =0;
 
-func _process(_delta):
+func _process(delta):
 	if position.x >= 390*Global.x_ratio:
 		dir_x = -1;
 	elif position.x <= 90*Global.x_ratio:
@@ -46,12 +46,13 @@ func _process(_delta):
 		if position.y >= 540*Global.y_ratio:
 			dir_y = -1;
 			anim_down_done = true
-		position.y += fly_down_spd * Global.byte_array[8]  * dir_y;
-	position.x += h_movement_spd * Global.byte_array[8] * dir_x;
+		position.y += fly_down_spd * Global.byte_array[8]  * dir_y * delta;
+	position.x += h_movement_spd * Global.byte_array[8] * dir_x * delta;
 	
 func _on_fly_down_timeout():
 	boss_fire_cd.stop();
-	fly_down_spd = 0.5 *Global.y_ratio;
+	fly_down_spd = pow ((Global.movement_speed * Global.y_ratio),2.3);
+	print(fly_down_spd)
 	fly_down_bool = true;
 	anim_done = false;
 	anim_down_done = false;

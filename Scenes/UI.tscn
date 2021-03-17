@@ -4,8 +4,8 @@
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=2]
 [ext_resource path="res://theme/32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
-[ext_resource path="res://kra_imported/classic-64x64.png" type="Texture" id=5]
-[ext_resource path="res://kra_imported/script_story_mode-64x64.png" type="Texture" id=6]
+[ext_resource path="res://kra_imported/game_controller.svg" type="Texture" id=5]
+[ext_resource path="res://kra_imported/story.svg" type="Texture" id=6]
 
 [node name="Container" type="Container"]
 anchor_right = 1.0
@@ -33,7 +33,7 @@ __meta__ = {
 
 [node name="MenuButton" type="OptionButton" parent="VBoxContainer"]
 margin_right = 300.0
-margin_bottom = 72.0
+margin_bottom = 120.0
 focus_neighbour_bottom = NodePath("../Button")
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
@@ -46,9 +46,9 @@ items = [ "Clasic Mode", ExtResource( 5 ), false, 0, null, "Story Mode", ExtReso
 selected = 0
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-margin_top = 80.0
+margin_top = 128.0
 margin_right = 300.0
-margin_bottom = 139.0
+margin_bottom = 187.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Play"

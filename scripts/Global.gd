@@ -3,7 +3,7 @@ extends Node
 
 var byte_array = PoolByteArray();
 
-var movement_speed = 0.07;
+var movement_speed = 5;
 var current_score=0b0;
 var high_score = 0b0 setget _set_h_s;
 var boss_health = 3000;
@@ -15,7 +15,7 @@ onready var x_ratio;
 onready var y_ratio;
 onready var global_ratio;
 #onready var fire_timer = get_tree().get_root().find_node("player_fire_timer",true,true);
-onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,false);
+#onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,false);
 	
 var h_s_file = File.new()
 var high_score_path = "user://HS.data" 
