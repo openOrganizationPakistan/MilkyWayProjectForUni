@@ -76,9 +76,12 @@ func _ready():
 	byte_array.append(6)				# 27-player distroy animation finished on 5 and unfinished otherwise.
 	byte_array.append(15)				# 28-fighter damage
 	byte_array.append(10)				# 29-enemy bullet.
-	byte_array.append(80)				# 30-virus_current_health 80 is for personal rememberance and not going to other file just to see default value event though it will change dynamically but every new spawner should have 80 health
-	byte_array.append(80)				# 31-todda_current_health same psychology for this 80
-	byte_array.append(120)				# 32-fighter_current_health same psycho for 120 as for 80
+	byte_array.append(80)				# 30-virus_max_health 
+	byte_array.append(80)				# 31-todda_max_health 
+	byte_array.append(100)				# 32-fighter_max_health
+	byte_array.append(60)				# 33-powerups spawn timer minimum time
+	byte_array.append(180)				# 34-powerups spawn timer maximum time
+	byte_array.append(1)				# 34-Game difficulty
 	
 	byte_array[20] = byte_array[8]/2 ;
 	high_score = int(_read_file(high_score_path));
@@ -95,7 +98,6 @@ func _read_file(path):
 	var file = File.new();
 	if not file.file_exists(high_score_path) : 
 		_write_file(high_score_path,str(high_score));
-		
 	file.open(path, File.READ);
 	var data = file.get_as_text();
 	file.close();
@@ -113,4 +115,3 @@ func _set_h_s(new_value):
 	
 func _update_todda_speed():
 	byte_array[20] = byte_array[8]/2;
-	

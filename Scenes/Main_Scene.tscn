@@ -86,12 +86,12 @@ __meta__ = {
 
 [node name="statusContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 480.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 
 [node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/statusContainer"]
-margin_right = 193.0
-margin_bottom = 33.0
+margin_right = 183.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/fg = SubResource( 1 )
@@ -108,10 +108,11 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="VBoxContainer/statusContainer"]
+pause_mode = 2
 light_mask = 1048575
-margin_left = 201.0
-margin_right = 278.0
-margin_bottom = 33.0
+margin_left = 191.0
+margin_right = 288.0
+margin_bottom = 34.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 theme = ExtResource( 4 )
@@ -122,16 +123,16 @@ text = "Pause"
 [node name="Score" parent="VBoxContainer/statusContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 286.0
+margin_left = 296.0
 margin_right = 480.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="status_hud" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 41.0
+margin_top = 42.0
 margin_right = 480.0
-margin_bottom = 221.0
+margin_bottom = 123.0
 size_flags_horizontal = 3
 
 [node name="heartsContainer" type="HBoxContainer" parent="VBoxContainer/status_hud"]
@@ -162,13 +163,14 @@ text = "♾"
 
 [node name="bullet_count2" type="Label" parent="VBoxContainer/status_hud/HBoxContainer2"]
 margin_left = 120.0
-margin_top = 20.0
+margin_top = 19.0
 margin_right = 128.0
 margin_bottom = 53.0
 theme = ExtResource( 4 )
 text = "♾"
 
 [node name="status_hud2" type="VBoxContainer" parent="VBoxContainer/status_hud"]
+visible = false
 margin_top = 89.0
 margin_right = 480.0
 margin_bottom = 180.0

@@ -10,11 +10,16 @@ onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,
 func _ready():
 	scale = (Vector2(0.4,0.4) * Global.x_ratio);
 	Global.byte_array[6] = Global.byte_array[4]; # player current health's global status
+	_spawned();
 	for i in (Global.byte_array[26] - 5 ):
 		var test = hearts_tex_scn.instance();
 		hearts_loc.add_child(test);
 		i+=1;
-	
+
+func _spawned():
+	$shape.set_deferred("disabled",true);
+	$Timer.start();
+
 func _on_Player_01_area_entered(area):
 	if area.is_in_group("boss"):
 		Global.byte_array[6] -= Global.byte_array[3];
@@ -44,9 +49,13 @@ func _on_distroy_animation_finished():
 		Global.byte_array[0] = 1;
 	else:
 		Global.byte_array[6] = Global.byte_array[4];
-		$shape.set_deferred("disabled",false);
 		$sprite.show();
 		$distroy.hide();
 		$distroy.stop();
 		global_position = Vector2(Global._get_viewport_rect().x/2,Global._get_viewport_rect().y);
 		Global.byte_array[27] = 5;
+		_spawned();
+	
+func _on_Timer_timeout():
+	$shape.set_deferred("disabled",false);
+	pass # Replace with function body.

@@ -7,8 +7,6 @@ var velocity = 0 setget _set_velocity;
 var laser_width = 0 setget _set_laser_width;
 
 func _ready():
-	if Global.bullets > 0:
-		Global.bullets -=1;
 	scale = Global.universal_scale;
 	var _temp = connect("area_entered",self,"_on_player_fire_01_area_entered")
 	

@@ -24,26 +24,30 @@ func _ready():
 			fighter_timer.start();
 	
 func _process(_delta):
-	match Global.byte_array[9]:
+	match Global.byte_array[1]:
 		0:
-			if Global.current_score > 49:
-				Global.byte_array[9] += 1;
-				todda_timer.start();
+			pass;
 		1:
-			if Global.current_score > 149:
-				Global.byte_array[9] += 1;
-				fighter_timer.start();
-#					$boss_commings.start();
-		2:
-			if Global.current_score > 349:
-				Global.byte_array[9] += 1;
-		3:
-			if Global.current_score > 749:
-				virus_timer.stop();
-				todda_timer.stop();
-				fighter_timer.stop();
-				Global.byte_array[9] += 1;
-				$boss_commings.start();
+			match Global.byte_array[9]:
+				0:
+					if Global.current_score > 49:
+						Global.byte_array[9] += 1;
+						todda_timer.start();
+				1:
+					if Global.current_score > 149:
+						Global.byte_array[9] += 1;
+						fighter_timer.start();
+		#					$boss_commings.start();
+				2:
+					if Global.current_score > 349:
+						Global.byte_array[9] += 1;
+				3:
+					if Global.current_score > 749:
+						virus_timer.stop();
+						todda_timer.stop();
+						fighter_timer.stop();
+						Global.byte_array[9] += 1;
+						$boss_commings.start();
 	
 func _on_virus_timeout():
 	if Global.byte_array[0] == 1:

@@ -8,8 +8,8 @@ export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_F
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
 export (PackedScene) var heart_tex_scn = preload("res://Scenes/Miscs/heart_tex.tscn");
-export (float,1,60) var power_ups_min_timer = 60;
-export (float,5,240) var power_ups_max_timer = 240;
+export (float,1,60) var power_ups_min_timer ;
+export (float,5,240) var power_ups_max_timer ;
 
 onready var score_scn = $VBoxContainer/statusContainer/Score;
 onready var path_follow = $Node2D/Path2D/PathFollow2D;
@@ -35,6 +35,8 @@ var player ;
 var temp_fire = main_fires_scn.instance();
 
 func _ready():
+	power_ups_min_timer = Global.byte_array[33];
+	power_ups_max_timer = Global.byte_array[34];
 	randomize();
 	$Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
@@ -47,7 +49,6 @@ func _ready():
 	label_2.rect_position = Vector2(240 * Global.x_ratio,
 			320 * Global.y_ratio
 		) - Vector2(label_2.rect_size.x/2, label_2.rect_size.y/2) ;
-	
 	p_health_bar.anchor_right = 0.5;
 	power_ups_timer.wait_time = power_ups_min_timer;
 	power_ups_timer.start();
@@ -57,6 +58,7 @@ func _ready():
 	_add_level();
 	
 func _process(_delta):
+#	print(power_ups_timer.time_left);
 #	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health
 	p_health_bar.value = Global.byte_array[6] - 50
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
@@ -214,10 +216,6 @@ func _show_hud():
 		bullet_count_label_num.show();
 		bullet_count_label_num.text = str(Global.bullets)
 	
-	if Global.byte_array[25] == 0:
-		label_2.text="PAUSED!";
-		label_2.show();
-	else:
 		label_2.hide();
 	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
@@ -258,12 +256,9 @@ func _display_message(message):
 	
 func _on_Button_toggled(button_pressed):
 	if button_pressed:
-		Global.byte_array[25] = 0;
-		Global.byte_array[23] = 0;
-		Global.byte_array[8] *= Global.byte_array[23]
-		Global._update_todda_speed();
+		label_2.text="PAUSED!";
+		label_2.show();
+		get_tree().paused = true;
 	else:
-		Global.byte_array[25] = 1;
-		Global.byte_array[23] = 1;
-		Global.byte_array[8] = Global.byte_array[24]
-		Global._update_todda_speed();
+		label_2.hide();
+		get_tree().paused = false;

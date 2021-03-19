@@ -4,6 +4,10 @@ extends Container
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 onready var score_scn = $Score;
 onready var v_box_container = $VBoxContainer;
+onready var mode_button = $VBoxContainer/ModeButton;
+onready var player_button = $VBoxContainer/PlayerButton;
+onready var difficulty_button = $VBoxContainer/DifficultyButton;
+onready var play_button = $VBoxContainer/PlayButton;
 
 var score;
 
@@ -11,7 +15,7 @@ func _ready():
 	v_box_container.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)
 	var v_b_c_scale = v_box_container.rect_scale;
 	v_box_container.rect_global_position = (
-		((Vector2(240,480)
+		((Vector2(240,320)
 		* Global.global_ratio)) 
 		- (v_box_container.rect_size/2 * v_b_c_scale)
 	);
@@ -19,12 +23,14 @@ func _ready():
 	var bg = bg_env_scn.instance();
 	add_child(bg);
 #	ensures that variable value is idicated by GUI;
-	$VBoxContainer/MenuButton.select(Global.byte_array[1]);
+	mode_button.select(Global.byte_array[1]);
+	player_button.select(Global.byte_array[7]);
+	difficulty_button.select(Global.byte_array[35]);
 	
 func _on_Button_pressed():
 	#reset values to default
-	Global.current_score=0;
-	Global.enemy_c_health=0;
+	Global.current_score= 0;
+	Global.enemy_c_health= 0;
 	Global.byte_array[0] = 0;
 	Global.byte_array[9] = 0;
 	Global.byte_array[8] = 25;
@@ -38,6 +44,13 @@ func _on_Button_pressed():
 	
 func _on_MenuButton_item_selected(index):
 	Global.byte_array[1] = index;
+	if index == 0:
+		Global.byte_array[9] = 8;
 	
 func _on_MenuButton2_item_selected(index):
 	Global.byte_array[7] = index;
+	
+func _on_MenuButton3_item_selected(index):
+	Global.byte_array[33] = (index + 1) * 30;
+	Global.byte_array[34] = (index + 1) * 90;
+	pass # Replace with function body.

@@ -48,6 +48,7 @@ playing = true
 [node name="sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = SubResource( 2 )
+frame = 4
 playing = true
 
 [node name="effect" type="AnimatedSprite" parent="."]
