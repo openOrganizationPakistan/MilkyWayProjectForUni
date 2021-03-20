@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/fire_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://theme/Dyer Arts and Crafts.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://theme/CyberwayRiders-lg97d.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://kra_imported/FIRE_BUTTON_PRESSED.png" type="Texture" id=7]
 [ext_resource path="res://theme/OpenMoji-Color.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Scenes/Miscs/sounds.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
@@ -30,6 +32,10 @@ corner_radius_top_left = 7
 corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 64
@@ -86,12 +92,12 @@ __meta__ = {
 
 [node name="statusContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 480.0
-margin_bottom = 34.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
 
 [node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/statusContainer"]
-margin_right = 183.0
-margin_bottom = 34.0
+margin_right = 220.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/fg = SubResource( 1 )
@@ -110,29 +116,30 @@ __meta__ = {
 [node name="Button" type="Button" parent="VBoxContainer/statusContainer"]
 pause_mode = 2
 light_mask = 1048575
-margin_left = 191.0
-margin_right = 288.0
-margin_bottom = 34.0
+margin_left = 228.0
+margin_right = 252.0
+margin_bottom = 42.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 7 )
 toggle_mode = true
 action_mode = 0
-text = "Pause"
+text = "II"
 
 [node name="Score" parent="VBoxContainer/statusContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 296.0
+margin_left = 260.0
 margin_right = 480.0
-margin_bottom = 34.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="status_hud" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 42.0
+margin_top = 50.0
 margin_right = 480.0
-margin_bottom = 123.0
+margin_bottom = 131.0
 size_flags_horizontal = 3
 
 [node name="heartsContainer" type="HBoxContainer" parent="VBoxContainer/status_hud"]
@@ -163,9 +170,9 @@ text = "♾"
 
 [node name="bullet_count2" type="Label" parent="VBoxContainer/status_hud/HBoxContainer2"]
 margin_left = 120.0
-margin_top = 19.0
+margin_top = 15.0
 margin_right = 128.0
-margin_bottom = 53.0
+margin_bottom = 57.0
 theme = ExtResource( 4 )
 text = "♾"
 
@@ -288,6 +295,8 @@ curve = SubResource( 6 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
 position = Vector2( 18.8062, -15.9145 )
 rotation = 0.00140567
+
+[node name="sounds" parent="." instance=ExtResource( 9 )]
 [connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
 [connection signal="timeout" from="Node2D/power_ups_timer" to="." method="_on_power_ups_timer_timeout"]

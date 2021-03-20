@@ -21,6 +21,7 @@ func _on_todda_area_entered(area):
 		$sprite.hide();
 		$distroy.play("destroyed-ulq");
 		$distroy.show();
+		$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	queue_free();

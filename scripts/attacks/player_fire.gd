@@ -2,7 +2,6 @@
 extends Area2D
 
 var fire_type;
-
 var velocity = 0 setget _set_velocity;
 var laser_width = 0 setget _set_laser_width;
 

@@ -81,7 +81,9 @@ func _ready():
 	byte_array.append(100)				# 32-fighter_max_health
 	byte_array.append(60)				# 33-powerups spawn timer minimum time
 	byte_array.append(180)				# 34-powerups spawn timer maximum time
-	byte_array.append(1)				# 34-Game difficulty
+	byte_array.append(1)				# 35-Game difficulty
+	byte_array.append(1)				# 36-player_ship engine sound
+	byte_array.append(0)				# 37-value is 1 if high score is changes
 	
 	byte_array[20] = byte_array[8]/2 ;
 	high_score = int(_read_file(high_score_path));

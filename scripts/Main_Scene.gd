@@ -2,7 +2,7 @@
 #extends Node2D
 extends Container
 
-export (PackedScene) var main_levels_scn = preload("res://Scenes/Levels/Levels_main.tscn");
+export (PackedScene) var main_levels_scn = preload("res://Scenes/Levels_main.tscn");
 export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Players_Main.tscn");
 export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_Fires_Main.tscn");
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
@@ -33,10 +33,29 @@ onready var play_count = $VBoxContainer/status_hud/status_hud2/play_count;
 
 var player ;
 var temp_fire = main_fires_scn.instance();
+var laser_loop;
+var distroy_loop;
+var win_loop;
+var lose_loop;
+var high_score_loop;
 
 func _ready():
+	#Reseting everything so the experience is consistant every time use plays game.
+	laser_loop = $sounds/player_laser.stream as AudioStreamOGGVorbis;
+	laser_loop.loop = false;
+	distroy_loop = $sounds/distroy.stream as AudioStreamOGGVorbis;
+	distroy_loop.loop = false;
+	win_loop = $sounds/you_win.stream as AudioStreamOGGVorbis;
+	win_loop.loop = false;
+	lose_loop = $sounds/you_lose.stream as AudioStreamOGGVorbis;
+	lose_loop.loop = false;
+	high_score_loop = $sounds/high_score.stream as AudioStreamOGGVorbis;
+	high_score_loop.loop = false;
 	power_ups_min_timer = Global.byte_array[33];
 	power_ups_max_timer = Global.byte_array[34];
+	$sounds/music.play()
+	$sounds/music.volume_db = -5;
+	Global.byte_array[36] = 0;
 	randomize();
 	$Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
@@ -64,6 +83,16 @@ func _process(_delta):
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
 	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
+	if Global.byte_array[36] == 0:
+		if not $sounds/distroy.playing :
+			$sounds/engine.stop();
+			$sounds/distroy.play();
+			print("distroyed sound");
+	if Global.byte_array[36] == 1:
+		if not $sounds/engine.playing :
+			$sounds/engine.play();
+			$sounds/distroy.stop();
+			print("engine sound");
 	match Global.byte_array[1]:
 		0:
 			if Global.current_score == 50:
@@ -72,43 +101,44 @@ func _process(_delta):
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.15
+				player_fire_timer.wait_time =  0.15;
 			elif Global.current_score == 150:
 				_display_message("Game\nSpeed\n\t+10")
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.13
+				player_fire_timer.wait_time =  0.14;
 			elif Global.current_score == 450:
 				_display_message("Game\nSpeed\n\t+10")
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.1
+				player_fire_timer.wait_time =  0.13;
 			elif Global.current_score == 750:
 				_display_message("Game\nSpeed\n\t+10")
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.075
+				player_fire_timer.wait_time =  0.12;
 		1:
 			if Global.current_score == 0:
 				_display_message("Level 1");
-				player_fire_timer.wait_time =  0.15
+				player_fire_timer.wait_time =  0.15;
 			elif Global.current_score == 50:
 				_display_message("Level 2");
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.13
+				player_fire_timer.wait_time =  0.15
 			elif Global.current_score == 150:
 				_display_message("Level 3");
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
+				player_fire_timer.wait_time =  0.14
 				Global.current_score += 1;
 				Global._update_todda_speed();
 			elif Global.current_score == 450:
@@ -117,14 +147,14 @@ func _process(_delta):
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
 				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.1
+				player_fire_timer.wait_time =  0.13
 			elif Global.current_score == 750:
 				_display_message("Final\nBoss!!!");
 				_display_message("Game\nSpeed\n\t+10")
 				Global.byte_array[8] += 10 ;
 				Global.byte_array[24] += 10 ;
 				Global.current_score += 1;
-				player_fire_timer.wait_time =  0.075
+				player_fire_timer.wait_time =  0.12
 	
 func _add_level():
 	var temp = main_levels_scn.instance();
@@ -136,6 +166,7 @@ func _add_player():
 	temp.queue_free();
 	player.position = Vector2(240,320) * Global.universal_scale;
 	add_child(player);
+	$sounds/engine.play();
 	
 func _on_player_fire_timer_timeout():
 	_show_hud();
@@ -158,6 +189,7 @@ func _spread_fire(fire):
 	match Global.byte_array[16]:
 		0:
 			for i in (Global.byte_array[13]):
+				$sounds/player_laser.play();
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
 				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
 				if (i==0):
@@ -180,6 +212,7 @@ func _spread_fire(fire):
 			
 		1:
 			for i in (Global.byte_array[13]):
+				$sounds/player_laser.play();
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
 				var x_pos = Vector2(0,-50 * Global.x_ratio);
 				match Global.byte_array[7]:
@@ -224,7 +257,12 @@ func _show_hud():
 		player_fire_timer.stop();
 		var text = "You\nWin!!!";
 		if Global.byte_array[26] <5 :
+			if not $sounds/you_lose.playing:
+				$sounds/you_lose.play();
 			text = "You\nLose!!!";
+		else:
+			if not $sounds/you_win.playing:
+				$sounds/you_win.play();
 		label.text = text;
 		label.show();
 		message_timer.start();
@@ -256,9 +294,11 @@ func _display_message(message):
 	
 func _on_Button_toggled(button_pressed):
 	if button_pressed:
+		$VBoxContainer/statusContainer/Button.text = str("D");
 		label_2.text="PAUSED!";
 		label_2.show();
 		get_tree().paused = true;
 	else:
+		$VBoxContainer/statusContainer/Button.text = str("II");
 		label_2.hide();
 		get_tree().paused = false;

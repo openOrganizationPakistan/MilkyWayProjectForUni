@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://kra_imported/story.svg" type="Texture" id=6]
 [ext_resource path="res://kra_imported/Player_02_slq.png" type="Texture" id=7]
 [ext_resource path="res://kra_imported/Player_01_slq.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Miscs/sounds.tscn" type="PackedScene" id=9]
 
 [node name="Container" type="Container"]
 anchor_right = 1.0
@@ -72,7 +73,7 @@ selected = 0
 [node name="DifficultyButton" type="OptionButton" parent="VBoxContainer"]
 margin_top = 252.0
 margin_right = 300.0
-margin_bottom = 311.0
+margin_bottom = 294.0
 focus_neighbour_bottom = NodePath("../Button")
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
@@ -86,14 +87,20 @@ items = [ "Easy", null, false, 0, null, "Medium", null, false, 1, null, "Hard", 
 selected = 0
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
-margin_top = 341.0
+margin_top = 324.0
 margin_right = 300.0
-margin_bottom = 400.0
+margin_bottom = 366.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Play"
 expand_icon = true
+
+[node name="sounds" parent="." instance=ExtResource( 9 )]
 [connection signal="item_selected" from="VBoxContainer/ModeButton" to="." method="_on_MenuButton_item_selected"]
+[connection signal="pressed" from="VBoxContainer/ModeButton" to="." method="_on_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/PlayerButton" to="." method="_on_MenuButton2_item_selected"]
+[connection signal="pressed" from="VBoxContainer/PlayerButton" to="." method="_on_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/DifficultyButton" to="." method="_on_MenuButton3_item_selected"]
+[connection signal="pressed" from="VBoxContainer/DifficultyButton" to="." method="_on_button_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_Button_pressed"]

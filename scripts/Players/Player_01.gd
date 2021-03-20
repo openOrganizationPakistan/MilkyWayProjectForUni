@@ -8,6 +8,7 @@ var temp_fire = main_fires_scn.instance();
 onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,false);
 
 func _ready():
+	Global.byte_array[37] = 0;
 	scale = (Vector2(0.4,0.4) * Global.x_ratio);
 	Global.byte_array[6] = Global.byte_array[4]; # player current health's global status
 	_spawned();
@@ -33,7 +34,8 @@ func _on_Player_01_area_entered(area):
 		Global.byte_array[6] -= Global.byte_array[28];
 	if area.is_in_group("enemy_fire"):
 		Global.byte_array[6] -= Global.byte_array[29];
-	if Global.byte_array[6] <= 50 :
+	if Global.byte_array[6] < 51 :
+		Global.byte_array[35] = 0;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
 		$distroy.show();
@@ -46,9 +48,11 @@ func _on_distroy_animation_finished():
 	if Global.byte_array[26] < 5:
 		if ( Global.current_score  >= int(Global.high_score) ):
 			Global._set_h_s( (Global.current_score ) );
+			Global.byte_array[37] = 1;
 		Global.byte_array[0] = 1;
 	else:
 		Global.byte_array[6] = Global.byte_array[4];
+		Global.byte_array[35] = 1;
 		$sprite.show();
 		$distroy.hide();
 		$distroy.stop();
@@ -58,4 +62,3 @@ func _on_distroy_animation_finished():
 	
 func _on_Timer_timeout():
 	$shape.set_deferred("disabled",false);
-	pass # Replace with function body.

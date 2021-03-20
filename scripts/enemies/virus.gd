@@ -38,6 +38,7 @@ func _on_virus_area_entered(area):
 		$effect2.hide();
 		$distroy.play("destroyed-ulq");
 		$distroy.show();
+		$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	queue_free();

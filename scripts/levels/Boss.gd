@@ -82,11 +82,12 @@ func _on_Boss_area_entered(area):
 		$shape.set_deferred("disabled",true);
 		rotation += deg2rad(1);
 		Global.current_score += 1000;
+		$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	if ( (Global.current_score ) >= int(Global.high_score) ):
-			Global._set_h_s( (Global.current_score) );
-		
+		Global._set_h_s( (Global.current_score) );
+		Global.byte_array[37] = 1;
 	Global.byte_array[0] = 1; # game_over == 1
 	queue_free();
 	

@@ -5,10 +5,14 @@ var x_direction;
 onready var fire_scn = preload("res://Scenes/Attacks/enemy_fire.tscn");
 var health = PoolByteArray();
 
+var fire_sound_loop;
+
 func _ready():
 	health.append(Global.byte_array[32]);
 	scale = Global.universal_scale;
-	x_direction = rand_range(-1,1)
+	x_direction = rand_range(-1,1);
+	fire_sound_loop = $fire_sound.stream as AudioStreamOGGVorbis;
+	fire_sound_loop.loop = false;
 	
 func _process(_delta):
 	position += Vector2(
@@ -35,6 +39,7 @@ func _on_virus_area_entered(area):
 		$sprite.hide();
 		$distroy.play("destroyed-ulq");
 		$distroy.show();
+		$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	queue_free();
@@ -48,4 +53,4 @@ func _on_Timer_timeout():
 	fire.position = Vector2(position.x,position.y + (50 * Global.y_ratio));
 	fire.z_index = -3;
 	get_tree().get_root().add_child(fire,true);
-	pass # Replace with function body.
+	$fire_sound.play();

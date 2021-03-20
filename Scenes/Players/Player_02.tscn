@@ -20,5 +20,10 @@ polygon = PoolVector2Array( -32.2328, 22.0907, 0.294067, -116.502, 37.7708, 27.0
 
 [node name="distroy" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 15, 15 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_Player_01_area_entered"]
 [connection signal="animation_finished" from="distroy" to="." method="_on_distroy_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -9,9 +9,11 @@ onready var player_button = $VBoxContainer/PlayerButton;
 onready var difficulty_button = $VBoxContainer/DifficultyButton;
 onready var play_button = $VBoxContainer/PlayButton;
 
+var sound_loop;
 var score;
 
 func _ready():
+	$sounds/music.play();
 	v_box_container.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)
 	var v_b_c_scale = v_box_container.rect_scale;
 	v_box_container.rect_global_position = (
@@ -26,6 +28,9 @@ func _ready():
 	mode_button.select(Global.byte_array[1]);
 	player_button.select(Global.byte_array[7]);
 	difficulty_button.select(Global.byte_array[35]);
+	if Global.byte_array[37] == 1:
+		if not $sounds/high_score.playing:
+			$sounds/high_score.play();
 	
 func _on_Button_pressed():
 	#reset values to default
@@ -53,4 +58,17 @@ func _on_MenuButton2_item_selected(index):
 func _on_MenuButton3_item_selected(index):
 	Global.byte_array[33] = (index + 1) * 30;
 	Global.byte_array[34] = (index + 1) * 90;
+	Global.byte_array[5] = (15) / (index + 1);
 	pass # Replace with function body.
+	
+func _on_button_pressed():
+	sound_loop = $sounds/click_01.stream as AudioStreamOGGVorbis;
+	sound_loop.loop = false
+	$sounds/click_01.play();
+	pass # Replace with function body.
+
+
+func _on_PlayButton_focus_entered():
+	sound_loop = $sounds/click_02.stream as AudioStreamOGGVorbis;
+	sound_loop.loop = false;
+	$sounds/click_02.play();

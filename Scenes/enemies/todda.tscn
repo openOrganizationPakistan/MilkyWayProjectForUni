@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://kra_imported/todda 32x32.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Miscs/distroy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/enemies/todda.gd" type="Script" id=3]
+[ext_resource path="res://audio/explosionCrunch_000.ogg" type="AudioStream" id=4]
 
 [node name="todda" type="Area2D" groups=[
 "todda",
@@ -24,6 +25,10 @@ frame = 1
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
 rect = Rect2( -64, -64, 128, 128 )
+
+[node name="distroy_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 5.0
 [connection signal="area_entered" from="." to="." method="_on_todda_area_entered"]
 [connection signal="animation_finished" from="distroy" to="." method="_on_distroy_animation_finished"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
