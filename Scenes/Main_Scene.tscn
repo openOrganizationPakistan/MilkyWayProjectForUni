@@ -33,15 +33,15 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 64
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 outline_size = 1
 outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
@@ -49,7 +49,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 128
 outline_size = 1
 outline_color = Color( 0.12549, 0.14902, 0.529412, 1 )
@@ -57,7 +57,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="Curve2D" id=6]
+[sub_resource type="Curve2D" id=7]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 18.8062, -15.9145, 0, 0, 0, 0, 463.892, -15.2887 )
 }
@@ -122,7 +122,7 @@ margin_bottom = 42.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = true
 action_mode = 0
 text = "II"
@@ -165,7 +165,7 @@ margin_left = 40.0
 margin_right = 112.0
 margin_bottom = 73.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "♾"
 
 [node name="bullet_count2" type="Label" parent="VBoxContainer/status_hud/HBoxContainer2"]
@@ -189,7 +189,7 @@ margin_top = 89.0
 margin_right = 480.0
 margin_bottom = 123.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Health: "
 uppercase = true
 __meta__ = {
@@ -269,7 +269,7 @@ visible = false
 margin_right = 390.0
 margin_bottom = 211.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Game
 Over!!!"
 __meta__ = {
@@ -281,7 +281,7 @@ visible = false
 margin_right = 390.0
 margin_bottom = 211.0
 theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Game
 Over!!!"
 __meta__ = {
@@ -290,7 +290,7 @@ __meta__ = {
 
 [node name="Path2D" type="Path2D" parent="Node2D"]
 position = Vector2( 0, -0.8909 )
-curve = SubResource( 6 )
+curve = SubResource( 7 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
 position = Vector2( 18.8062, -15.9145 )

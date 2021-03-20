@@ -55,7 +55,8 @@ func _ready():
 	power_ups_max_timer = Global.byte_array[34];
 	$sounds/music.play()
 	$sounds/music.volume_db = -5;
-	Global.byte_array[36] = 0;
+	Global.byte_array[37] = 0;
+	Global.byte_array[36] = 1;
 	randomize();
 	$Control2.rect_scale=Global.universal_scale;
 	path.curve.set_point_position(1, Vector2(Global._get_viewport_rect().x - 50, -15) );
