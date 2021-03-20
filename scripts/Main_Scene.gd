@@ -7,7 +7,6 @@ export (PackedScene) var main_players_scn = preload("res://Scenes/Players/Player
 export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_Fires_Main.tscn");
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 export (PackedScene) var main_power_up_scn = preload("res://Scenes/Miscs/Power_ups_main.tscn")
-export (PackedScene) var heart_tex_scn = preload("res://Scenes/Miscs/heart_tex.tscn");
 export (float,1,60) var power_ups_min_timer ;
 export (float,5,240) var power_ups_max_timer ;
 
@@ -24,7 +23,6 @@ onready var player_fire_timer = $Node2D/player_fire_timer;
 onready var message_timer = $Node2D/message_timer;
 onready var bullet_count_label_inf = $VBoxContainer/status_hud/HBoxContainer2/bullet_count;
 onready var bullet_count_label_num = $VBoxContainer/status_hud/HBoxContainer2/bullet_count2;
-onready var heart_placer = $VBoxContainer/status_hud/heartsContainer;
 onready var status_hud = $VBoxContainer/status_hud/status_hud2;
 onready var mem = $VBoxContainer/status_hud/status_hud2/mem;
 onready var cpu = $VBoxContainer/status_hud/status_hud2/cpu;
@@ -78,7 +76,7 @@ func _ready():
 	_add_level();
 	
 func _process(_delta):
-#	print(power_ups_timer.time_left);
+#	print_stray_nodes();
 #	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health
 	p_health_bar.value = Global.byte_array[6] - 50
 	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
@@ -94,68 +92,55 @@ func _process(_delta):
 			$sounds/engine.play();
 			$sounds/distroy.stop();
 			print("engine sound");
-	match Global.byte_array[1]:
-		0:
-			if Global.current_score == 50:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.15;
-			elif Global.current_score == 150:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.14;
-			elif Global.current_score == 450:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.13;
-			elif Global.current_score == 750:
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.12;
-		1:
-			if Global.current_score == 0:
+	
+	if Global.current_score == 0:
+		match Global.byte_array[1]:
+			1:
 				_display_message("Level 1");
-				player_fire_timer.wait_time =  0.15;
-			elif Global.current_score == 50:
+		player_fire_timer.wait_time =  0.15;
+	elif Global.current_score == 50:
+		match Global.byte_array[1]:
+			1:
 				_display_message("Level 2");
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.15
-			elif Global.current_score == 150:
+			0:
+				_display_message("Game\nSpeed\n\t=10");
+		Global.byte_array[8] += 10 ;
+		Global.byte_array[24] += 10 ;
+		Global.current_score += 1;
+		Global._update_todda_speed();
+		player_fire_timer.wait_time =  0.15
+	elif Global.current_score == 150:
+		match Global.byte_array[1]:
+			1:
 				_display_message("Level 3");
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				player_fire_timer.wait_time =  0.14
-				Global.current_score += 1;
-				Global._update_todda_speed();
-			elif Global.current_score == 450:
+			0:
+				_display_message("Game\nSpeed\n\t=10");
+		Global.byte_array[8] += 10 ;
+		Global.byte_array[24] += 10 ;
+		player_fire_timer.wait_time =  0.14
+		Global.current_score += 1;
+		Global._update_todda_speed();
+	elif Global.current_score == 450:
+		match Global.byte_array[1]:
+			1:
 				_display_message("Level 4");
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				Global._update_todda_speed();
-				player_fire_timer.wait_time =  0.13
-			elif Global.current_score == 750:
+			0:
+				_display_message("Game\nSpeed\n\t=10");
+		Global.byte_array[8] += 10 ;
+		Global.byte_array[24] += 10 ;
+		Global.current_score += 1;
+		Global._update_todda_speed();
+		player_fire_timer.wait_time =  0.13
+	elif Global.current_score == 750:
+		match Global.byte_array[1]:
+			1:
 				_display_message("Final\nBoss!!!");
-				_display_message("Game\nSpeed\n\t+10")
-				Global.byte_array[8] += 10 ;
-				Global.byte_array[24] += 10 ;
-				Global.current_score += 1;
-				player_fire_timer.wait_time =  0.12
+			0:
+				_display_message("Game\nSpeed\n\t=10");
+		Global.byte_array[8] += 10 ;
+		Global.byte_array[24] += 10 ;
+		Global.current_score += 1;
+		player_fire_timer.wait_time =  0.12
 	
 func _add_level():
 	var temp = main_levels_scn.instance();
@@ -164,6 +149,7 @@ func _add_level():
 func _add_player():
 	var temp = main_players_scn.instance();
 	player = temp._get_player(Global.byte_array[7]); # get player index
+#	add_child(temp);
 	temp.queue_free();
 	player.position = Vector2(240,320) * Global.universal_scale;
 	add_child(player);
@@ -191,7 +177,7 @@ func _spread_fire(fire):
 		0:
 			for i in (Global.byte_array[13]):
 				$sounds/player_laser.play();
-				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
+				fire.append(temp_fire._get_player_fire(Global.byte_array[2]));
 				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
 				if (i==0):
 					fire[i].rotation = deg2rad(i);
@@ -214,7 +200,7 @@ func _spread_fire(fire):
 		1:
 			for i in (Global.byte_array[13]):
 				$sounds/player_laser.play();
-				fire.append(temp_fire._get_player_fire(Global.byte_array[2]) );
+				fire.append(temp_fire._get_player_fire(Global.byte_array[2]));
 				var x_pos = Vector2(0,-50 * Global.x_ratio);
 				match Global.byte_array[7]:
 					0:
@@ -249,12 +235,13 @@ func _show_hud():
 		bullet_count_label_inf.hide();
 		bullet_count_label_num.show();
 		bullet_count_label_num.text = str(Global.bullets)
-	
 		label_2.hide();
 	var score = Global.current_score ;
 	score_scn._set_score("Score: ",score);
 #	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
 	if Global.byte_array[0] == 1:
+		add_child(temp_fire);
+		temp_fire.queue_free();
 		player_fire_timer.stop();
 		var text = "You\nWin!!!";
 		if Global.byte_array[26] <5 :
@@ -274,14 +261,13 @@ func _on_power_ups_timer_timeout():
 	power_ups_timer.wait_time = rand_range(power_ups_min_timer,power_ups_max_timer);
 	var temp_instance = main_power_up_scn.instance();
 	var power_up = temp_instance._get_power_up( int(rand_range(0,Global.byte_array[15]) ) );
+#	add_child(temp_instance)
 	temp_instance.queue_free();
 	path_follow.offset = randi();
 	power_up.position = path_follow.position;
 	add_child(power_up);
-	print("test");
 	
 func _on_message_timer_timeout():
-	temp_fire.queue_free();
 	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
 func _on_level_changed_timeout():
@@ -300,6 +286,6 @@ func _on_Button_toggled(button_pressed):
 		label_2.show();
 		get_tree().paused = true;
 	else:
-		$VBoxContainer/statusContainer/Button.text = str("II");
+		$VBoxContainer/statusContainer/Button.text = str(" I I ");
 		label_2.hide();
 		get_tree().paused = false;

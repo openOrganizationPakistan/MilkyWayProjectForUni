@@ -1,10 +1,8 @@
 #script: player_01
 extends "res://scripts/Players/player_controls.gd"
 
-export (PackedScene) var main_fires_scn = preload("res://Scenes/Attacks/Player_Fires_Main.tscn");
 export (PackedScene) var hearts_tex_scn = preload("res://Scenes/Miscs/heart_tex.tscn");
 
-var temp_fire = main_fires_scn.instance();
 onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,false);
 
 func _ready():
@@ -15,8 +13,7 @@ func _ready():
 	for i in (Global.byte_array[26] - 5 ):
 		var test = hearts_tex_scn.instance();
 		hearts_loc.add_child(test);
-		i+=1;
-
+	
 func _spawned():
 	$shape.set_deferred("disabled",true);
 	$Timer.start();

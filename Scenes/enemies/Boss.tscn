@@ -77,7 +77,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="distroy_sound" type="AudioStreamPlayer2D" parent="."]
+[node name="distroy_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 [connection signal="area_entered" from="." to="." method="_on_Boss_area_entered"]
 [connection signal="timeout" from="fly_down" to="." method="_on_fly_down_timeout"]

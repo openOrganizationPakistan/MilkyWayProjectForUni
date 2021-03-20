@@ -18,7 +18,7 @@ func _process(_delta):
 	position += Vector2(
 		Global.byte_array[8]/5 * x_direction  ,
 		int(Global.byte_array[8]/9)
-	)
+	);
 	if (position.x > Global._get_viewport_rect().x 
 		or 
 		position.x < 1
@@ -29,10 +29,8 @@ func _on_virus_area_entered(area):
 	
 	if area.is_in_group("player_fire"):
 		health[0] -= Global.byte_array[5];
-		print("fire hit")
 	if area.is_in_group("player"):
 		health[0] -= 50;
-		print("player hit")
 	if health[0] < 51:
 		Global.current_score +=1;
 		$shape.set_deferred("disabled",true);
@@ -46,8 +44,7 @@ func _on_distroy_animation_finished():
 	
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free();
-
-
+	
 func _on_Timer_timeout():
 	var fire = fire_scn.instance();
 	fire.position = Vector2(position.x,position.y + (50 * Global.y_ratio));
