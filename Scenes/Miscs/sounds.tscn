@@ -14,16 +14,15 @@
 
 [node name="engine" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="distroy" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = 5.0
 pitch_scale = 0.5
 
 [node name="player_laser" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -3.0
+volume_db = -10.0
 
 [node name="click_01" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -33,18 +32,16 @@ stream = ExtResource( 5 )
 
 [node name="high_score" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = 5.0
 
 [node name="you_win" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = 24.0
 mix_target = 2
 
 [node name="you_lose" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 20.0
 mix_target = 2
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 9 )
+volume_db = -15.0

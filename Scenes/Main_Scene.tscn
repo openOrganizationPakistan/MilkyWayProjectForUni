@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Main_Scene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/fire_button.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://kra_imported/FIRE_BUTTON_PRESSED.png" type="Texture" id=7]
 [ext_resource path="res://theme/OpenMoji-Color.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Scenes/Miscs/sounds.tscn" type="PackedScene" id=9]
+[ext_resource path="res://kra_imported/back-normal.png" type="Texture" id=10]
+[ext_resource path="res://kra_imported/back-pressed.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
@@ -96,7 +98,7 @@ margin_bottom = 42.0
 size_flags_horizontal = 3
 
 [node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/statusContainer"]
-margin_right = 211.0
+margin_right = 191.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -116,8 +118,8 @@ __meta__ = {
 [node name="Button" type="Button" parent="VBoxContainer/statusContainer"]
 pause_mode = 2
 light_mask = 1048575
-margin_left = 219.0
-margin_right = 261.0
+margin_left = 199.0
+margin_right = 241.0
 margin_bottom = 42.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
@@ -127,12 +129,22 @@ toggle_mode = true
 action_mode = 0
 text = " I I "
 
+[node name="Button2" type="TextureButton" parent="VBoxContainer/statusContainer"]
+margin_left = 249.0
+margin_right = 281.0
+margin_bottom = 42.0
+focus_mode = 1
+enabled_focus_mode = 1
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+
 [node name="Score" parent="VBoxContainer/statusContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 269.0
+margin_left = 289.0
 margin_right = 480.0
 margin_bottom = 42.0
+grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -278,12 +290,17 @@ __meta__ = {
 
 [node name="Label2" type="Label" parent="Node2D"]
 visible = false
-margin_right = 390.0
-margin_bottom = 211.0
+margin_left = 15.0153
+margin_top = 414.454
+margin_right = 472.015
+margin_bottom = 728.454
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 6 )
-text = "Game
-Over!!!"
+text = "Paused!"
+align = 1
+uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -298,6 +315,7 @@ rotation = 0.00140567
 
 [node name="sounds" parent="." instance=ExtResource( 9 )]
 [connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
+[connection signal="pressed" from="VBoxContainer/statusContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]
 [connection signal="timeout" from="Node2D/power_ups_timer" to="." method="_on_power_ups_timer_timeout"]
 [connection signal="timeout" from="Node2D/level_changed" to="." method="_on_level_changed_timeout"]

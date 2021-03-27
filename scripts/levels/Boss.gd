@@ -47,7 +47,7 @@ func _process(delta):
 			dir_y = -1;
 			anim_down_done = true
 		position.y += fly_down_spd * Global.byte_array[8]  * dir_y * delta;
-	position.x += h_movement_spd * Global.byte_array[8] * dir_x * delta;
+	position.x += h_movement_spd * Global.byte_array[8]* Global.x_ratio * dir_x * delta;
 	
 func _on_fly_down_timeout():
 	boss_fire_cd.stop();
@@ -82,7 +82,9 @@ func _on_Boss_area_entered(area):
 		$shape.set_deferred("disabled",true);
 		rotation += deg2rad(1);
 		Global.current_score += 1000;
-		$distroy_sound.play();
+		match Global.byte_array[38]:
+			1:
+				$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	if ( (Global.current_score ) >= int(Global.high_score) ):

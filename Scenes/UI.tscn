@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Miscs/Score.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://kra_imported/Player_02_slq.png" type="Texture" id=7]
 [ext_resource path="res://kra_imported/Player_01_slq.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Miscs/sounds.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Miscs/soundButton.tscn" type="PackedScene" id=10]
 
 [node name="Container" type="Container"]
 anchor_right = 1.0
@@ -96,6 +97,8 @@ text = "Play"
 expand_icon = true
 
 [node name="sounds" parent="." instance=ExtResource( 9 )]
+
+[node name="soundButton" parent="." instance=ExtResource( 10 )]
 [connection signal="item_selected" from="VBoxContainer/ModeButton" to="." method="_on_MenuButton_item_selected"]
 [connection signal="pressed" from="VBoxContainer/ModeButton" to="." method="_on_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/PlayerButton" to="." method="_on_MenuButton2_item_selected"]
@@ -104,3 +107,4 @@ expand_icon = true
 [connection signal="pressed" from="VBoxContainer/DifficultyButton" to="." method="_on_button_pressed"]
 [connection signal="focus_entered" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_Button_pressed"]
+[connection signal="toggled" from="soundButton" to="." method="_on_soundButton_toggled"]

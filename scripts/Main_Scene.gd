@@ -51,8 +51,11 @@ func _ready():
 	high_score_loop.loop = false;
 	power_ups_min_timer = Global.byte_array[33];
 	power_ups_max_timer = Global.byte_array[34];
-	$sounds/music.play()
-	$sounds/music.volume_db = -5;
+#	$VBoxContainer/statusContainer/soundButton.pressed = bool(Global.byte_array[38]);
+	match Global.byte_array[38]:
+		1:
+			$sounds/music.play()
+			$sounds/music.volume_db = -15;
 	Global.byte_array[37] = 0;
 	Global.byte_array[36] = 1;
 	randomize();
@@ -84,14 +87,18 @@ func _process(_delta):
 	fps.text = "FPS: " + str(Performance.get_monitor(0));
 	if Global.byte_array[36] == 0:
 		if not $sounds/distroy.playing :
-			$sounds/engine.stop();
-			$sounds/distroy.play();
-			print("distroyed sound");
+			match Global.byte_array[38]:
+				1:
+					$sounds/engine.stop();
+					$sounds/distroy.play();
+					print("distroyed sound");
 	if Global.byte_array[36] == 1:
 		if not $sounds/engine.playing :
-			$sounds/engine.play();
-			$sounds/distroy.stop();
-			print("engine sound");
+			match Global.byte_array[38]:
+				1:
+					$sounds/engine.play();
+					$sounds/distroy.stop();
+					print("engine sound");
 	
 	if Global.current_score == 0:
 		match Global.byte_array[1]:
@@ -153,7 +160,9 @@ func _add_player():
 	temp.queue_free();
 	player.position = Vector2(240,320) * Global.universal_scale;
 	add_child(player);
-	$sounds/engine.play();
+	match Global.byte_array[38]:
+		1:
+			$sounds/engine.play();
 	
 func _on_player_fire_timer_timeout():
 	_show_hud();
@@ -176,7 +185,9 @@ func _spread_fire(fire):
 	match Global.byte_array[16]:
 		0:
 			for i in (Global.byte_array[13]):
-				$sounds/player_laser.play();
+				match Global.byte_array[38]:
+					1:
+						$sounds/player_laser.play();
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]));
 				fire[i].position = player.position + Vector2(0,-50 * Global.x_ratio);
 				if (i==0):
@@ -199,7 +210,9 @@ func _spread_fire(fire):
 			
 		1:
 			for i in (Global.byte_array[13]):
-				$sounds/player_laser.play();
+				match Global.byte_array[38]:
+					1:
+						$sounds/player_laser.play();
 				fire.append(temp_fire._get_player_fire(Global.byte_array[2]));
 				var x_pos = Vector2(0,-50 * Global.x_ratio);
 				match Global.byte_array[7]:
@@ -245,12 +258,16 @@ func _show_hud():
 		player_fire_timer.stop();
 		var text = "You\nWin!!!";
 		if Global.byte_array[26] <5 :
-			if not $sounds/you_lose.playing:
-				$sounds/you_lose.play();
+			match Global.byte_array[38]:
+				1:
+					if not $sounds/you_lose.playing:
+						$sounds/you_lose.play();
 			text = "You\nLose!!!";
 		else:
-			if not $sounds/you_win.playing:
-				$sounds/you_win.play();
+			match Global.byte_array[38]:
+				1:
+					if not $sounds/you_win.playing:
+						$sounds/you_win.play();
 		label.text = text;
 		label.show();
 		message_timer.start();
@@ -289,3 +306,6 @@ func _on_Button_toggled(button_pressed):
 		$VBoxContainer/statusContainer/Button.text = str(" I I ");
 		label_2.hide();
 		get_tree().paused = false;
+	
+func _on_Button2_pressed():
+	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");

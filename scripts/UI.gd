@@ -13,7 +13,10 @@ var sound_loop;
 var score;
 
 func _ready():
-	$sounds/music.play();
+	$soundButton.rect_scale = Vector2(Global.x_ratio,Global.x_ratio);
+	match Global.byte_array[38]:
+		1:
+			$sounds/music.play();
 	v_box_container.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)
 	var v_b_c_scale = v_box_container.rect_scale;
 	v_box_container.rect_global_position = (
@@ -29,8 +32,11 @@ func _ready():
 	player_button.select(Global.byte_array[7]);
 	difficulty_button.select(Global.byte_array[35]);
 	if Global.byte_array[37] == 1:
-		if not $sounds/high_score.playing:
-			$sounds/high_score.play();
+		match Global.byte_array[38]:
+			1:
+				if not $sounds/high_score.playing:
+					$sounds/high_score.play();
+	$soundButton.pressed = not bool(Global.byte_array[38]);
 	
 func _on_Button_pressed():
 	#reset values to default
@@ -58,18 +64,33 @@ func _on_MenuButton2_item_selected(index):
 	
 func _on_MenuButton3_item_selected(index):
 	Global.byte_array[33] = (index + 1) * 30;
+#	Global.byte_array[33] = (index + 1) * 1;
 	Global.byte_array[34] = (index + 1) * 90;
+#	Global.byte_array[34] = (index + 1) * 5;
 	Global.byte_array[5] = (15) / (index + 1);
-	pass # Replace with function body.
+	Global.byte_array[21] = (5) * (index +1);
+	Global.byte_array[28] = Global.byte_array[21];
+	Global.byte_array[11] = (10) * (index +1);
+	Global.byte_array[32] = 50 + (20 * (index + 1));
 	
 func _on_button_pressed():
-	sound_loop = $sounds/click_01.stream as AudioStreamOGGVorbis;
-	sound_loop.loop = false
-	$sounds/click_01.play();
-	pass # Replace with function body.
-
-
+	match Global.byte_array[38]:
+		1:
+			sound_loop = $sounds/click_01.stream as AudioStreamOGGVorbis;
+			sound_loop.loop = false
+			$sounds/click_01.play();
+	
 func _on_PlayButton_focus_entered():
-	sound_loop = $sounds/click_02.stream as AudioStreamOGGVorbis;
-	sound_loop.loop = false;
-	$sounds/click_02.play();
+	match Global.byte_array[38]:
+		1:
+			sound_loop = $sounds/click_02.stream as AudioStreamOGGVorbis;
+			sound_loop.loop = false;
+			$sounds/click_02.play();
+	
+func _on_soundButton_toggled(button_pressed):
+	if not button_pressed:
+		Global.byte_array[38] = 1;
+		$sounds/music.play();
+	else:
+		Global.byte_array[38] = 0;
+		$sounds/music.stop();

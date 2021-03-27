@@ -19,9 +19,12 @@ func _on_todda_area_entered(area):
 		Global.current_score +=1;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
+		$engine_fire.hide();
 		$distroy.play("destroyed-ulq");
 		$distroy.show();
-		$distroy_sound.play();
+		match Global.byte_array[38]:
+			1:
+				$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	queue_free();

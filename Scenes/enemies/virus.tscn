@@ -43,19 +43,18 @@ script = ExtResource( 3 )
 rotation = 1.72089
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = SubResource( 2 )
-frame = 5
 playing = true
 
 [node name="effect" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="shape" type="CollisionShape2D" parent="."]
@@ -71,7 +70,7 @@ rect = Rect2( -64, -64, 128, 128 )
 
 [node name="distroy_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
-volume_db = 5.0
+pitch_scale = 0.5
 [connection signal="area_entered" from="." to="." method="_on_virus_area_entered"]
 [connection signal="animation_finished" from="distroy" to="." method="_on_distroy_animation_finished"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

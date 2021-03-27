@@ -3,6 +3,7 @@ extends Area2D
 
 var health = PoolByteArray();
 var x_direction;
+var speed;
 
 func _ready():
 	health.append(Global.byte_array[30]);
@@ -11,12 +12,14 @@ func _ready():
 	$sprite.play("default",false);
 	scale = Global.universal_scale;
 	x_direction = rand_range(-1,1)
+	speed = Vector2(
+		Global.byte_array[8]/8 * Global.x_ratio ,
+		int(Global.byte_array[8]/10) * Global.y_ratio
+	)
 	
 func _process(_delta):
-	position += Vector2(
-		Global.byte_array[8]/5 * x_direction  ,
-		int(Global.byte_array[8]/9)
-	)
+	position.x += (speed.x * x_direction);
+	position.y += (speed.y);
 	if (position.x > Global._get_viewport_rect().x 
 		or 
 		position.x < 0
@@ -38,7 +41,9 @@ func _on_virus_area_entered(area):
 		$effect2.hide();
 		$distroy.play("destroyed-ulq");
 		$distroy.show();
-		$distroy_sound.play();
+		match Global.byte_array[38]:
+			1:
+				$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
 	queue_free();
