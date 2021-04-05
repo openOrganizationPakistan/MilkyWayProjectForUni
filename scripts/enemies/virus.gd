@@ -39,7 +39,7 @@ func _on_virus_area_entered(area):
 		$sprite.hide();
 		$effect.hide();
 		$effect2.hide();
-		$distroy.play("destroyed-ulq");
+		$distroy.play("virus_dying");
 		$distroy.show();
 		match Global.byte_array[38]:
 			1:

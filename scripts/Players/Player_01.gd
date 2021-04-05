@@ -35,24 +35,27 @@ func _on_Player_01_area_entered(area):
 	if area.is_in_group("boss"):
 		Global.byte_array[6] -= Global.byte_array[3];
 		mat.set_shader_param("health",Global.byte_array[6]);
+		_start_blinking(1.0);
 	if area.is_in_group("boss_fire"):
 		Global.byte_array[6] -= Global.byte_array[10];
+		_start_blinking(1.0);
 		mat.set_shader_param("health",Global.byte_array[6]);
 	if area.is_in_group("virus"):
 		Global.byte_array[6] -= Global.byte_array[11]; 
+		_start_blinking(1.0);
 		mat.set_shader_param("health",Global.byte_array[6]);
 	if area.is_in_group("todda"):
 		Global.byte_array[6] -= Global.byte_array[21];
+		_start_blinking(1.0);
 		mat.set_shader_param("health",Global.byte_array[6]);
 	if area.is_in_group("fighter"):
 		Global.byte_array[6] -= Global.byte_array[28];
+		_start_blinking(1.0);
 		mat.set_shader_param("health",Global.byte_array[6]);
 	if area.is_in_group("enemy_fire"):
 		Global.byte_array[6] -= Global.byte_array[29];
-		mat.set_shader_param("health",Global.byte_array[6]);
-		
-	if Global.byte_array[6] >50:
 		_start_blinking(1.0);
+		mat.set_shader_param("health",Global.byte_array[6]);
 		
 	if Global.byte_array[6] < 51 :
 		Global.byte_array[36] = 0;

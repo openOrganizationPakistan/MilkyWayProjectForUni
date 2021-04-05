@@ -13,7 +13,7 @@ var sound_loop;
 var score;
 
 func _ready():
-	$soundButton.rect_scale = Vector2(Global.x_ratio,Global.x_ratio);
+	$soundButton.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)*2;
 	match Global.byte_array[38]:
 		1:
 			$sounds/music.play();
@@ -72,6 +72,7 @@ func _on_MenuButton3_item_selected(index):
 	Global.byte_array[28] = Global.byte_array[21];
 	Global.byte_array[11] = (10) * (index +1);
 	Global.byte_array[32] = 50 + (20 * (index + 1));
+	Global.byte_array[35] = (index);
 	
 func _on_button_pressed():
 	match Global.byte_array[38]:

@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://kra_imported/explosion_anim_ulq/2.png" type="Texture" id=1]
+[ext_resource path="res://kra_imported/virus_spread_ulq_anim/0003.png" type="Texture" id=2]
+[ext_resource path="res://kra_imported/virus_spread_ulq_anim/0001.png" type="Texture" id=3]
 [ext_resource path="res://kra_imported/explosion_anim_ulq/0.png" type="Texture" id=4]
 [ext_resource path="res://kra_imported/explosion_anim_ulq/1.png" type="Texture" id=5]
+[ext_resource path="res://kra_imported/virus_spread_ulq_anim/0002.png" type="Texture" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -15,10 +18,14 @@ animations = [ {
 "loop": true,
 "name": "destroyed",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "virus_dying",
+"speed": 5.0
 } ]
 
 [node name="distroy" type="AnimatedSprite"]
 visible = false
 frames = SubResource( 1 )
 animation = "destroyed"
-frame = 2

@@ -98,7 +98,7 @@ margin_bottom = 42.0
 size_flags_horizontal = 3
 
 [node name="pHealthBar" type="ProgressBar" parent="VBoxContainer/statusContainer"]
-margin_right = 191.0
+margin_right = 188.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -118,8 +118,8 @@ __meta__ = {
 [node name="Button" type="Button" parent="VBoxContainer/statusContainer"]
 pause_mode = 2
 light_mask = 1048575
-margin_left = 199.0
-margin_right = 241.0
+margin_left = 196.0
+margin_right = 238.0
 margin_bottom = 42.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
@@ -130,8 +130,8 @@ action_mode = 0
 text = " I I "
 
 [node name="Button2" type="TextureButton" parent="VBoxContainer/statusContainer"]
-margin_left = 249.0
-margin_right = 281.0
+margin_left = 246.0
+margin_right = 284.0
 margin_bottom = 42.0
 focus_mode = 1
 enabled_focus_mode = 1
@@ -141,7 +141,7 @@ texture_pressed = ExtResource( 11 )
 [node name="Score" parent="VBoxContainer/statusContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 289.0
+margin_left = 292.0
 margin_right = 480.0
 margin_bottom = 42.0
 grow_horizontal = 0

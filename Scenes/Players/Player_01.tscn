@@ -12,6 +12,7 @@
 script = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.34379 )
 material = ExtResource( 5 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
@@ -20,7 +21,7 @@ texture = ExtResource( 1 )
 visible = false
 modulate = Color( 0.996078, 0.00392157, 0.00392157, 1 )
 self_modulate = Color( 0.627451, 0.0313726, 0.0156863, 1 )
-polygon = PoolVector2Array( -85.8306, -131.509, 0, -102, 84.3615, -132.177, 114.395, -70.7741, 125.074, -10.0389, 92.3705, 38.0154, 44.9837, 72.0538, 24.9611, 94.746, -19.756, 94.0786, -41.7809, 64.7122, -85.1632, 48.6941, -119.869, -4.0321, -121.204, -47.4144, -107.855, -84.1225 )
+polygon = PoolVector2Array( -85.8306, -131.509, 0, -102, 84.3615, -132.177, 114.395, -70.7741, 125.074, -10.0389, 92.3705, 38.0154, 44.9837, 72.0538, 24.4635, 86.7911, -21.8632, 85.4548, -41.7809, 64.7122, -85.1632, 48.6941, -119.869, -4.0321, -121.204, -47.4144, -107.855, -84.1225 )
 disabled = true
 
 [node name="distroy" parent="." instance=ExtResource( 3 )]
@@ -31,10 +32,11 @@ wait_time = 2.0
 one_shot = true
 
 [node name="engine_fire" parent="." instance=ExtResource( 4 )]
+position = Vector2( -18.2689, 91.9992 )
 scale = Vector2( 2, 2 )
 
 [node name="engine_fire2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20.4415, 87.4896 )
+position = Vector2( 20.4415, 90.6644 )
 scale = Vector2( 2, 2 )
 [connection signal="area_entered" from="." to="." method="_on_Player_01_area_entered"]
 [connection signal="animation_finished" from="distroy" to="." method="_on_distroy_animation_finished"]

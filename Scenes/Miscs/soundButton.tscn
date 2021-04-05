@@ -9,5 +9,8 @@ margin_right = 24.0
 margin_bottom = 37.0
 theme = ExtResource( 2 )
 toggle_mode = true
-texture_normal = ExtResource( 1 )
-texture_pressed = ExtResource( 3 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

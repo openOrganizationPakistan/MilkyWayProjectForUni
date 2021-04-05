@@ -16,4 +16,5 @@ emission_shape = 2
 emission_rect_extents = Vector2( 1, 1 )
 scale_amount = 4.0
 scale_amount_random = 1.0
+hue_variation = 1.0
 hue_variation_random = 1.0

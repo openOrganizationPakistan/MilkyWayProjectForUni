@@ -43,18 +43,19 @@ script = ExtResource( 3 )
 rotation = 1.72089
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = SubResource( 2 )
+frame = 5
 playing = true
 
 [node name="effect" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="shape" type="CollisionShape2D" parent="."]
@@ -63,6 +64,7 @@ shape = SubResource( 3 )
 
 [node name="distroy" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 5, 5 )
+animation = "virus_dying"
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
