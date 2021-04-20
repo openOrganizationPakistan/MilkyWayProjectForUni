@@ -99,55 +99,36 @@ func _process(_delta):
 					$sounds/engine.play();
 					$sounds/distroy.stop();
 					print("engine sound");
-	
-	if Global.current_score == 0:
-		match Global.byte_array[1]:
-			1:
+	match (Global.byte_array[1]):
+		0:
+			if Global.current_score == 0:
 				_display_message("Level 1");
-		player_fire_timer.wait_time =  0.15;
-	elif Global.current_score == 50:
-		match Global.byte_array[1]:
-			1:
+				player_fire_timer.wait_time =  0.15;
+			elif Global.current_score == 50:
 				_display_message("Level 2");
-			0:
-				_display_message("Game\nSpeed\n\t=10");
-		Global.byte_array[8] += 10 ;
-		Global.byte_array[24] += 10 ;
-		Global.current_score += 1;
-		Global._update_todda_speed();
-		player_fire_timer.wait_time =  0.15
-	elif Global.current_score == 150:
-		match Global.byte_array[1]:
-			1:
+				_update_speed_with_level();
+			elif Global.current_score == 150:
 				_display_message("Level 3");
-			0:
-				_display_message("Game\nSpeed\n\t=10");
-		Global.byte_array[8] += 10 ;
-		Global.byte_array[24] += 10 ;
-		player_fire_timer.wait_time =  0.14
-		Global.current_score += 1;
-		Global._update_todda_speed();
-	elif Global.current_score == 450:
-		match Global.byte_array[1]:
-			1:
+				_update_speed_with_level();
+			elif Global.current_score == 450:
 				_display_message("Level 4");
-			0:
-				_display_message("Game\nSpeed\n\t=10");
-		Global.byte_array[8] += 10 ;
-		Global.byte_array[24] += 10 ;
-		Global.current_score += 1;
-		Global._update_todda_speed();
-		player_fire_timer.wait_time =  0.13
-	elif Global.current_score == 750:
-		match Global.byte_array[1]:
-			1:
+				_update_speed_with_level();
+			elif Global.current_score == 750:
 				_display_message("Final\nBoss!!!");
-			0:
-				_display_message("Game\nSpeed\n\t=10");
-		Global.byte_array[8] += 10 ;
-		Global.byte_array[24] += 10 ;
-		Global.current_score += 1;
-		player_fire_timer.wait_time =  0.12
+				_update_speed_with_level();
+		1:
+			if (Global.current_score != 0):
+				if (Global.current_score % 20 == 0):
+					_update_speed_with_level();
+	
+func _update_speed_with_level():
+	Global.byte_array[8] *= Global.speed_increament_fac ;
+	Global.byte_array[24] *= Global.speed_increament_fac ;
+	Global.current_score += 1;
+	Global._update_todda_speed();
+	print(Global.byte_array[8]);
+	if (player_fire_timer.wait_time >0.1):
+		player_fire_timer.wait_time -=  0.01
 	
 func _add_level():
 	var temp = main_levels_scn.instance();

@@ -44,20 +44,21 @@ func _on_Button_pressed():
 	Global.enemy_c_health= 0;
 	Global.byte_array[0] = 0;
 	Global.byte_array[9] = 0;
-	Global.byte_array[8] = 25;
+	Global.byte_array[8] = 16;
 	Global.byte_array[16] = 0;
 	Global.byte_array[19] += 1;
 	Global.byte_array[13] = 1;
 	Global.byte_array[26] = 7;
 	Global.bullets = 0;
-	print_stray_nodes();
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 #	Global.byte_array[1] = index;
 	
 func _on_MenuButton_item_selected(index):
 	Global.byte_array[1] = index;
 	if index == 0:
-		Global.byte_array[9] = 8;
+		 pass;
+	else:
+		Global.speed_increament_fac = 1.1;
 	
 func _on_MenuButton2_item_selected(index):
 	Global.byte_array[7] = index;
@@ -73,6 +74,8 @@ func _on_MenuButton3_item_selected(index):
 	Global.byte_array[11] = (10) * (index +1);
 	Global.byte_array[32] = 50 + (20 * (index + 1));
 	Global.byte_array[35] = (index);
+	Global.speed_increament_fac = ((index + 1) * 0.1) + 1.2 - Global.byte_array[1] ;
+	print(Global.speed_increament_fac);
 	
 func _on_button_pressed():
 	match Global.byte_array[38]:

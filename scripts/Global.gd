@@ -10,6 +10,7 @@ var boss_health = 3000;
 var enemy_c_health = 0b0;
 
 var bullets = 0;
+var speed_increament_fac = float(1.1);
 
 onready var x_ratio;
 onready var y_ratio;
@@ -53,7 +54,7 @@ func _ready():
 	byte_array.append(5) 				# 5-player_fire_damage
 	byte_array.append(150) 				# 6-player_c_health
 	byte_array.append(0) 				# 7-player_index
-	byte_array.append(15) 				# 8-game_speed
+	byte_array.append(16) 				# 8-game_speed
 	byte_array.append(0)				# 9-current_level
 	byte_array.append(10)				# 10-boss_fire_damage
 	byte_array.append(30)				# 11-virus_damage
@@ -65,7 +66,7 @@ func _ready():
 	byte_array.append(1)				# 17-screen_touch index
 	byte_array.append(1)				# 18-temp screen_touch index
 	byte_array.append(0)				# 19-non-stop number of games
-	byte_array.append(1)				# 20-todda ship speed
+	byte_array.append(4)				# 20-todda ship speed
 	byte_array.append(10)				# 21-todda ship damage to player
 	byte_array.append(0)				# 22-fire button
 	byte_array.append(1)				# 23-Global Speed Factor
@@ -116,4 +117,4 @@ func _set_h_s(new_value):		# high score setter
 	_write_file(high_score_path,str(high_score));
 	
 func _update_todda_speed():
-	byte_array[20] = byte_array[8]/2 * x_ratio;
+	byte_array[20] = byte_array[8]/2 * y_ratio;
