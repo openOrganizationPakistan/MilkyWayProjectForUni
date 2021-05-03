@@ -16,7 +16,7 @@ func _ready():
 func _input(event):
 	match Global.byte_array[2]:
 		0:
-			pass;
+			return;
 		1:
 			if event is InputEventScreenTouch or event is InputEventScreenDrag:
 				position = get_node("/root/Main_Scene/Player_01").position + Vector2(0,-30 * Global.y_ratio);
@@ -26,7 +26,6 @@ func _fire(delta):
 		0:
 			position -= Vector2(velocity * Global.byte_array[23] ,Global.byte_array[8] * 30 ) * delta ;
 		1:
-			
 			position.y -= (Global.byte_array[8] * 25 ) * delta ;
 	
 func _set_laser_width(new_value):
@@ -39,14 +38,13 @@ func _on_player_fire_01_area_entered(area):
 	or 
 	area.is_in_group("power_up")
 	):
-		pass
-	else:
-		match Global.byte_array[2]:
-			0:
-#				Global.current_score += 1;
-				queue_free();
-			1:
-				pass
+		return;
+	match Global.byte_array[2]:
+		0:
+#			Global.current_score += 1;
+			queue_free();
+		1:
+			return;
 	
 func _set_velocity(new_value):
 	velocity = (new_value);

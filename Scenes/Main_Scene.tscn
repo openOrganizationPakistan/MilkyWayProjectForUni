@@ -314,6 +314,7 @@ position = Vector2( 18.8062, -15.9145 )
 rotation = 0.00140567
 
 [node name="sounds" parent="." instance=ExtResource( 9 )]
+
 [connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
 [connection signal="pressed" from="VBoxContainer/statusContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]

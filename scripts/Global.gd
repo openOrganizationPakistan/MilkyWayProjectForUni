@@ -1,6 +1,7 @@
 #script: Global.
 extends Node
 
+################### GLOBAL VARIABLE DECLARATION ######################################
 var byte_array = PoolByteArray();
 
 var movement_speed = 5;
@@ -21,16 +22,15 @@ onready var global_ratio;
 var h_s_file = File.new()
 var high_score_path = "user://HS.data" 
 var universal_scale = Vector2();
-
+######################################################################################
+######################### called on game startup #####################################
 func _ready():
-	
 #	if not h_s_file.file_exists(high_score_path):
 #		_write_file(high_score_path,str(high_score));
 #	_write_file(high_score_path,str(0));
 
-
 # Using byte array for all the tasks that requires
-# numbers between 0 and 255 since var uses 8 bytes
+# numbers between 0 and 255 since var uses 20 bytes
 # which results in perfomance loss and hence an 
 # array of bytes may be difficult to work with but
 # its very friendly to computer and actual size is
@@ -43,16 +43,16 @@ func _ready():
 # loss and this the sceret souce to the game working
 # with more than 50 FPS on 512MB RAM and dual core
 # processor mobile phones as well (These test result 
-# numbers are from my personal tests and can varry
+# numbers are from my personal tests and can vary
 # according to your equipments). 
 
 	byte_array.append(0) 				# 0-game_over
 	byte_array.append(0) 				# 1-game_mode
 	byte_array.append(0) 				# 2-fire_type
 	byte_array.append(25) 				# 3-boss_damage
-	byte_array.append(150) 				# 4-player_max_health much like const but is variable
+	byte_array.append(150) 				# 4-player_max_health
 	byte_array.append(5) 				# 5-player_fire_damage
-	byte_array.append(150) 				# 6-player_c_health
+	byte_array.append(150) 				# 6-player_current_health
 	byte_array.append(0) 				# 7-player_index
 	byte_array.append(16) 				# 8-game_speed
 	byte_array.append(0)				# 9-current_level
@@ -72,7 +72,7 @@ func _ready():
 	byte_array.append(1)				# 23-Global Speed Factor
 	byte_array.append(byte_array[8])	# 24-Global Speed Constant
 	byte_array.append(1)				# 25-timers allowation
-	byte_array.append(7)				# 26-lifes counts form 5 to above to overcome overflow or underflow
+	byte_array.append(7)				# 26-lifes counts form 5 to above
 	byte_array.append(6)				# 27-player distroy animation finished on 5 and unfinished otherwise.
 	byte_array.append(10)				# 28-fighter damage
 	byte_array.append(10)				# 29-enemy bullet.
@@ -94,9 +94,13 @@ func _ready():
 #	fire_scale = Vector2(x_ratio,x_ratio);
 	universal_scale = Vector2(x_ratio,x_ratio);
 	
+######################################################################################
+########################## get device screen resolution ##############################
 func _get_viewport_rect():
 	return get_viewport().get_visible_rect().size
 	
+######################################################################################
+########################### read and write file ######################################
 func _read_file(path):		#function to read file highscore only in this case
 	var file = File.new();								# new file object declaration
 	if not file.file_exists(high_score_path) : 			# checking if file not exists
@@ -112,9 +116,15 @@ func _write_file(path,towrite):		# function to write files in storeage
 	file.store_string(towrite);
 	file.close();
 	
+###############################################################################
+######################## high score set #######################################
 func _set_h_s(new_value):		# high score setter
 	high_score = int(new_value);
 	_write_file(high_score_path,str(high_score));
 	
+###############################################################################
+######################### update toda speed ###################################
 func _update_todda_speed():
 	byte_array[20] = byte_array[8]/2 * y_ratio;
+	
+###############################################################################
