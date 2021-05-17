@@ -24,8 +24,6 @@ func _ready():
 func _process(_delta):
 	match Global.byte_array[1]:
 		0:
-			pass;
-		1:
 			match Global.byte_array[9]:
 				0:
 					if Global.current_score > 49:
@@ -46,6 +44,8 @@ func _process(_delta):
 						fighter_timer.stop();
 						Global.byte_array[9] += 1;
 						$boss_commings.start();
+		1:
+			pass;
 	
 func _on_virus_timeout():
 	if Global.byte_array[0] == 1:

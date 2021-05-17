@@ -117,13 +117,13 @@ func _process(_delta):
 				_display_message("Final\nBoss!!!");
 				_update_speed_with_level();
 		1:
-			if (Global.current_score != 0):
-				if (Global.current_score % 20 == 0):
-					_update_speed_with_level();
+			if (Global.current_score == 0):
+				return;
+			if (Global.current_score % 20 == 0):
+				_update_speed_with_level();
 	
 func _update_speed_with_level():
-	Global.byte_array[8] *= Global.speed_increament_fac ;
-	Global.byte_array[24] *= Global.speed_increament_fac ;
+	Global.byte_array[8] += Global.speed_increament_fac ;
 	Global.current_score += 1;
 	Global._update_todda_speed();
 	print(Global.byte_array[8]);

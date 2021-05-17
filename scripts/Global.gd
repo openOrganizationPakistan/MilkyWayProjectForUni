@@ -10,7 +10,7 @@ var boss_health = 3000;
 var enemy_c_health = 0b0;
 
 var bullets = 0;
-var speed_increament_fac = float(1.1);
+var speed_increament_fac = int(0b11110011);
 
 onready var x_ratio;
 onready var y_ratio;

@@ -10,9 +10,13 @@ onready var difficulty_button = $VBoxContainer/DifficultyButton;
 onready var play_button = $VBoxContainer/PlayButton;
 
 var sound_loop;
-var score;
+var score = 0;
+var spd_tmp_fac;
 
 func _ready():
+	spd_tmp_fac = 3;
+	if Global.byte_array[1] == 1:
+		spd_tmp_fac = 2;
 	$soundButton.rect_scale = Vector2(Global.x_ratio,Global.x_ratio)*2;
 	match Global.byte_array[38]:
 		1:
@@ -55,10 +59,10 @@ func _on_Button_pressed():
 	
 func _on_MenuButton_item_selected(index):
 	Global.byte_array[1] = index;
+	spd_tmp_fac = 2;
 	if index == 0:
-		 pass;
-	else:
-		Global.speed_increament_fac = 1.1;
+		 spd_tmp_fac = 3;
+	print(spd_tmp_fac);
 	
 func _on_MenuButton2_item_selected(index):
 	Global.byte_array[7] = index;
@@ -74,8 +78,7 @@ func _on_MenuButton3_item_selected(index):
 	Global.byte_array[11] = (10) * (index +1);
 	Global.byte_array[32] = 50 + (20 * (index + 1));
 	Global.byte_array[35] = (index);
-	Global.speed_increament_fac = ((index + 1) * 0.1) + 1.2 - Global.byte_array[1] ;
-	print(Global.speed_increament_fac);
+	Global.speed_increament_fac = (spd_tmp_fac * (index + 1)) * abs(Global.byte_array[1]-(2-(Global.byte_array[1]-1)));
 	
 func _on_button_pressed():
 	match Global.byte_array[38]:
