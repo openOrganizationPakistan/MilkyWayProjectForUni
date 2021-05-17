@@ -1,6 +1,7 @@
 #script:ui
 extends Container
 
+################ variables initialization and declaration ###############
 export (PackedScene) var bg_env_scn = preload("res://Scenes/env/BG_Particles.tscn");
 onready var score_scn = $Score;
 onready var v_box_container = $VBoxContainer;
@@ -13,6 +14,7 @@ var sound_loop;
 var score = 0;
 var spd_tmp_fac;
 
+############## _ready starts at loading time ##################
 func _ready():
 	spd_tmp_fac = 3;
 	if Global.byte_array[1] == 1:
@@ -42,6 +44,7 @@ func _ready():
 					$sounds/high_score.play();
 	$soundButton.pressed = not bool(Global.byte_array[38]);
 	
+############# play button pressed actions ########
 func _on_Button_pressed():
 	#reset values to default
 	Global.current_score= 0;
@@ -57,6 +60,8 @@ func _on_Button_pressed():
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
 #	Global.byte_array[1] = index;
 	
+############################################################################
+############### on_MenuButton_item_selected is connected to game mode #
 func _on_MenuButton_item_selected(index):
 	Global.byte_array[1] = index;
 	spd_tmp_fac = 2;
@@ -67,6 +72,7 @@ func _on_MenuButton_item_selected(index):
 func _on_MenuButton2_item_selected(index):
 	Global.byte_array[7] = index;
 	
+################### Game difficulty ##########
 func _on_MenuButton3_item_selected(index):
 	Global.byte_array[33] = (index + 1) * 30;
 #	Global.byte_array[33] = (index + 1) * 1;
@@ -79,7 +85,9 @@ func _on_MenuButton3_item_selected(index):
 	Global.byte_array[32] = 50 + (20 * (index + 1));
 	Global.byte_array[35] = (index);
 	Global.speed_increament_fac = (spd_tmp_fac * (index + 1)) * abs(Global.byte_array[1]-(2-(Global.byte_array[1]-1)));
-	
+	print (Global.speed_increament_fac);
+	print(Global.byte_array[8]);
+########### play button sound #######
 func _on_button_pressed():
 	match Global.byte_array[38]:
 		1:
@@ -87,13 +95,9 @@ func _on_button_pressed():
 			sound_loop.loop = false
 			$sounds/click_01.play();
 	
-func _on_PlayButton_focus_entered():
-	match Global.byte_array[38]:
-		1:
-			sound_loop = $sounds/click_02.stream as AudioStreamOGGVorbis;
-			sound_loop.loop = false;
-			$sounds/click_02.play();
-	
+#######################################
+
+############### mute button ################3
 func _on_soundButton_toggled(button_pressed):
 	if not button_pressed:
 		Global.byte_array[38] = 1;

@@ -79,6 +79,7 @@ __meta__ = {
 
 [node name="distroy_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
 [connection signal="area_entered" from="." to="." method="_on_Boss_area_entered"]
 [connection signal="timeout" from="fly_down" to="." method="_on_fly_down_timeout"]
 [connection signal="timeout" from="boss_fire_cd" to="." method="_on_boss_fire_cd_timeout"]

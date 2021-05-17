@@ -27,5 +27,6 @@ autostart = true
 [node name="rotate_laser" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]
 [connection signal="timeout" from="rotate_laser" to="." method="_on_rotate_laser_timeout"]

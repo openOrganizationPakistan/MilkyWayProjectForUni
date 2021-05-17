@@ -2,26 +2,13 @@
 extends Area2D
 
 var fire_type;
-
-var velocity = 0 setget _set_velocity;
-var laser_width = 0 setget _set_laser_width;
+var velocity = 0 ;
+var laser_width = 0 ;
 
 func _ready():
 	scale = Global.universal_scale;
 	var _temp = connect("area_entered",self,"_on_player_fire_01_area_entered")
 	
-
-func _input(event):
-	match Global.byte_array[2]:
-		0:
-			pass;
-		1:
-			if event is InputEventScreenTouch or event is InputEventScreenDrag:
-				position = get_node("/root/Main_Scene/Player_01").position + Vector2(0,-30 * Global.y_ratio);
-				
-			
-	
-
 func _process(delta):
 	match Global.byte_array[2]:
 		0:
@@ -31,13 +18,7 @@ func _process(delta):
 			position.y = (Global.byte_array[8] * 25 ) * delta ;
 			
 		
-		
 	
-
-func _set_laser_width(new_value):
-	laser_width = new_value;
-	
-
 func _on_player_fire_01_area_entered(area):
 	if (area.is_in_group("virus") 
 	or
@@ -47,14 +28,10 @@ func _on_player_fire_01_area_entered(area):
 	or
 	area.is_in_group("power_up")
 	):
-		pass
+		return;
 	else:
 		queue_free();
 		
-	
-
-func _set_velocity(new_value):
-	velocity = (new_value);
 	
 
 func _on_VisibilityNotifier2D_screen_exited():
