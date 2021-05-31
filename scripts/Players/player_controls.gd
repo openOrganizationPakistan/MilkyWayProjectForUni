@@ -12,8 +12,8 @@ func _input(event):
 					pos = event.position;
 			
 #			position = Vector2(
-#				lerp(position.x,event.position.x,Global.movement_speed)
-#				,lerp(position.y,event.position.y,Global.movement_speed)
+#				lerp(position.x,event.position.x,Global.integer_array[0])
+#				,lerp(position.y,event.position.y,Global.integer_array[0])
 #			) ;
 	
 func _process(delta):
@@ -21,7 +21,7 @@ func _process(delta):
 		Global.byte_array[27] = 6;
 		pos = Vector2(Global._get_viewport_rect().x/2,Global._get_viewport_rect().y/1.2);
 	position = Vector2(
-		lerp(position.x,pos.x,Global.movement_speed * delta)
-		, lerp(position.y,pos.y,Global.movement_speed * delta )
+		lerp(position.x,pos.x,Global.integer_array[0] * delta)
+		, lerp(position.y,pos.y,Global.integer_array[0] * delta )
 	);
 	

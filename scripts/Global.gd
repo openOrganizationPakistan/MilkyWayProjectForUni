@@ -4,14 +4,16 @@ extends Node
 ################### GLOBAL VARIABLE DECLARATION ######################################
 var byte_array = PoolByteArray();
 
-var movement_speed = 5;
-var current_score=0b0;
-var high_score = 0b0 setget _set_h_s;
-var boss_health = 3000;
-var enemy_c_health = 0b0;
+var integer_array = PoolIntArray();
 
-var bullets = 0;
-var speed_increament_fac = int(0b11110011);
+#var movement_speed = 5;
+#var current_score=0b0;
+#var high_score = 0b0 setget _set_h_s;
+#var boss_health = 3000;
+#var enemy_c_health = 0b0;
+
+#var bullets = 0;
+#var speed_increament_fac = int(0b11110011);
 
 onready var x_ratio;
 onready var y_ratio;
@@ -86,8 +88,17 @@ func _ready():
 	byte_array.append(0)				# 37-value is 1 if high score is changes
 	byte_array.append(1)				# 38-sound boolean
 	
+	# Just like byte_array using integer_array for integer values.
+	integer_array.append(5) 			# 0-movement_speed
+	integer_array.append(0) 			# 1-current_score
+	integer_array.append(0) 			# 2-high_score
+	integer_array.append(3000)			# 3-boss_health
+	integer_array.append(0) 			# 4-bullets
+	integer_array.append(18) 			# 5-speed_increament_factor
+
+
 	byte_array[20] = byte_array[8]/2 ;
-	high_score = int(_read_file(high_score_path));
+	integer_array[2] = int(_read_file(high_score_path));
 	x_ratio = _get_viewport_rect().x/480;
 	y_ratio = _get_viewport_rect().y/640;
 	global_ratio = Vector2(x_ratio,y_ratio);
@@ -104,7 +115,7 @@ func _get_viewport_rect():
 func _read_file(path):		#function to read file highscore only in this case
 	var file = File.new();								# new file object declaration
 	if not file.file_exists(high_score_path) : 			# checking if file not exists
-		_write_file(high_score_path,str(high_score));	# setting high score
+		_write_file(high_score_path,str(integer_array[2]));	# setting high score
 	file.open(path, File.READ);							# opening file as read only
 	var data = file.get_as_text();						# getting text fom file
 	file.close();
@@ -119,8 +130,8 @@ func _write_file(path,towrite):		# function to write files in storeage
 ###############################################################################
 ######################## high score set #######################################
 func _set_h_s(new_value):		# high score setter
-	high_score = int(new_value);
-	_write_file(high_score_path,str(high_score));
+	integer_array[2] = int(new_value);
+	_write_file(high_score_path,str(integer_array[2]));
 	
 ###############################################################################
 ######################### update toda speed ###################################

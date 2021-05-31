@@ -4,7 +4,7 @@ export (PackedScene) onready var hearts_scn = preload("res://Scenes/Miscs/heart_
 onready var hearts_loc = get_tree().get_root().find_node("heartsContainer",true,false);
 
 func _process(delta):
-	position.y += Global.byte_array[8] * Global.movement_speed * delta;
+	position.y += Global.byte_array[8] * Global.integer_array[0] * delta;
 	
 func _ready():
 	print_stray_nodes();

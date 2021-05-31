@@ -6,8 +6,8 @@ var velocity = 0 setget _set_velocity;
 var laser_width = 0 setget _set_laser_width;
 
 func _ready():
-	if Global.bullets > 0:
-		Global.bullets -=1;
+	if Global.integer_array[4] > 0:
+		Global.integer_array[4] -=1;
 	else:
 		Global.byte_array[13] = 1
 	scale = Global.universal_scale;

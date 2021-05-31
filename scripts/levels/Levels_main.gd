@@ -17,7 +17,7 @@ func _ready():
 	print($Path2D.curve.get_point_position(1))
 	virus_timer.start();
 	match Global.byte_array[1]:
-		0:
+		1:
 			todda_timer.start();
 			fighter_timer.start();
 	
@@ -26,19 +26,19 @@ func _process(_delta):
 		0:
 			match Global.byte_array[9]:
 				0:
-					if Global.current_score > 49:
+					if Global.integer_array[1] > 49:
 						Global.byte_array[9] += 1;
 						todda_timer.start();
 				1:
-					if Global.current_score > 149:
+					if Global.integer_array[1] > 149:
 						Global.byte_array[9] += 1;
 						fighter_timer.start();
 		#					$boss_commings.start();
 				2:
-					if Global.current_score > 349:
+					if Global.integer_array[1] > 349:
 						Global.byte_array[9] += 1;
 				3:
-					if Global.current_score > 749:
+					if Global.integer_array[1] > 749:
 						virus_timer.stop();
 						todda_timer.stop();
 						fighter_timer.stop();

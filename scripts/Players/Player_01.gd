@@ -69,8 +69,8 @@ func _on_Player_01_area_entered(area):
 func _on_distroy_animation_finished():
 	Global.byte_array[26] -= 1;
 	if Global.byte_array[26] < 5:
-		if ( Global.current_score  >= int(Global.high_score) ):
-			Global._set_h_s( (Global.current_score ) );
+		if ( Global.integer_array[1]  >= int(Global.integer_array[2]) ):
+			Global._set_h_s( (Global.integer_array[1] ) );
 			Global.byte_array[37] = 1;
 		Global.byte_array[0] = 1;
 	else:

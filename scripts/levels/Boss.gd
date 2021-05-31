@@ -87,8 +87,8 @@ func _on_Boss_area_entered(area):
 				$distroy_sound.play();
 	
 func _on_distroy_animation_finished():
-	if ( (Global.current_score ) >= int(Global.high_score) ):
-		Global._set_h_s( (Global.current_score) );
+	if ( (Global.integer_array[1] ) >= int(Global.integer_array[2]) ):
+		Global._set_h_s( (Global.integer_array[1]) );
 		Global.byte_array[37] = 1;
 	Global.byte_array[0] = 1; # game_over == 1
 	queue_free();

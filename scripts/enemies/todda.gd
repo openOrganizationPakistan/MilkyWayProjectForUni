@@ -16,7 +16,7 @@ func _on_todda_area_entered(area):
 	):
 		health[0] -= Global.byte_array[5];
 	if ( health[0] < 51) :
-		Global.current_score +=1;
+		Global.integer_array[1] +=1;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
 		$engine_fire.hide();

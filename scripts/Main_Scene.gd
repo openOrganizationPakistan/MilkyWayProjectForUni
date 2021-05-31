@@ -116,31 +116,31 @@ func _process(_delta):
 ##################### checking for game mode ####
 	match (Global.byte_array[1]):
 		0:
-			if Global.current_score == 0:
+			if Global.integer_array[1] == 0:
 				_display_message("Level 1");
 				player_fire_timer.wait_time =  0.15;
-			elif Global.current_score == 50:
+			elif Global.integer_array[1] == 50:
 				_display_message("Level 2");
 				_update_speed_with_level();
-			elif Global.current_score == 150:
+			elif Global.integer_array[1] == 150:
 				_display_message("Level 3");
 				_update_speed_with_level();
-			elif Global.current_score == 450:
+			elif Global.integer_array[1] == 450:
 				_display_message("Level 4");
 				_update_speed_with_level();
-			elif Global.current_score == 750:
+			elif Global.integer_array[1] == 750:
 				_display_message("Final\nBoss!!!");
 				_update_speed_with_level();
 		1:
-			if (Global.current_score == 0):
+			if (Global.integer_array[1] == 0):
 				return;
-			if (Global.current_score % 20 == 0):
+			if (Global.integer_array[1] % 20 == 0):
 				_update_speed_with_level();
 	
 ################### updating level 
 func _update_speed_with_level():
-	Global.byte_array[8] += Global.speed_increament_fac ;
-	Global.current_score += 1;
+	Global.byte_array[8] += Global.integer_array[5] ;
+	Global.integer_array[1] += 1;
 	Global._update_todda_speed();
 	print(Global.byte_array[8]);
 	if (player_fire_timer.wait_time >0.1):
@@ -171,9 +171,8 @@ func _on_player_fire_timer_timeout():
 	var fire = [];
 	if (
 		Global.byte_array[25] == 1
-#		Global.bullets > 0 
-		and 
-		Global.byte_array[6] > 51	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100 to overcome issue of health accidiental regeneration but remember to keep all damages less than 51 at any cost if damage exceed 51 it may cause the same glitch or error or bug or whatever.
+#		and Global.integer_array[4] > 0 
+		and Global.byte_array[6] > 51	# It means player's current health is greater than 0 since bytes donot allow negative numbers so using limit 50-150 instead of 0-100 to overcome issue of health accidiental regeneration but remember to keep all damages less than 51 at any cost if damage exceed 51 it may cause the same glitch or error or bug or whatever.
 		and Global.byte_array[22] != 0
 		):
 		match Global.byte_array[2]: # works as Global.fire_type Read Global script to know y its done.
@@ -196,7 +195,7 @@ func _spread_fire(fire):
 				if (i==0):
 					fire[i].rotation = deg2rad(i);
 					fire[i]._set_velocity(i);
-				elif i>0 and Global.bullets>0:
+				elif i>0 and Global.integer_array[4]>0:
 					if (i==1):
 						fire[i]._set_velocity(i*- (Global.byte_array[14] * Global.x_ratio));
 						fire[i].rotation = deg2rad(1.4*Global.x_ratio);
@@ -222,7 +221,7 @@ func _spread_fire(fire):
 					0:
 						if (i==0b0):
 							x_pos.x = i;
-						elif i>0 and Global.bullets>0:
+						elif i>0 and Global.integer_array[4]>0:
 							if (i==0b01):
 								x_pos.x = (i*- (Global.byte_array[14] * Global.x_ratio));
 							elif (i%0b10==0b0):
@@ -232,7 +231,7 @@ func _spread_fire(fire):
 					1:
 						if (i==0b0):
 							x_pos.x = i;
-						elif i>0 and Global.bullets>0:
+						elif i>0 and Global.integer_array[4]>0:
 							x_pos.y = -10 * Global.x_ratio;
 							if (i==0b01):
 								x_pos.x = (i*- (Global.byte_array[14] * Global.x_ratio));
@@ -246,16 +245,17 @@ func _spread_fire(fire):
 ###########################################
 ########### update hud during gameplay ####
 func _show_hud():
-	if Global.bullets == 0:
+	if Global.integer_array[4] == 0:
 		bullet_count_label_inf.show();
 		bullet_count_label_num.hide();
 	else:
 		bullet_count_label_inf.hide();
 		bullet_count_label_num.show();
-		bullet_count_label_num.text = str(Global.bullets)
+		bullet_count_label_num.text = str(Global.integer_array[4])
 		label_2.hide();
-	var score = Global.current_score ;
-	score_scn._set_score("Score: ",score);
+	var score = PoolIntArray() ;
+	score.append(Global.integer_array[1]);
+	score_scn._set_score("Score: ",score[0]);
 #	e_health_indic.text = "enemy health: " + str(Global.enemy_c_health);
 	if Global.byte_array[0] == 1:
 		add_child(temp_fire);
@@ -304,7 +304,7 @@ func _on_level_changed_timeout():
 ###########################################################
 ############### Showing message ###########################
 func _display_message(message):
-	Global.current_score +=1 ;
+	Global.integer_array[1] +=1 ;
 	label.text= str(message);
 	label.show();
 	level_changed_timer.start();

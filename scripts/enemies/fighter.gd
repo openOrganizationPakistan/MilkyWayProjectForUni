@@ -34,7 +34,7 @@ func _on_virus_area_entered(area):
 	if area.is_in_group("player"):
 		health[0] -= 50;
 	if health[0] < 51:
-		Global.current_score +=1;
+		Global.integer_array[1] +=1;
 		$shape.set_deferred("disabled",true);
 		$sprite.hide();
 		$engine_fire.hide();
