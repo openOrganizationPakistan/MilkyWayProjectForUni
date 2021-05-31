@@ -6,14 +6,7 @@ var byte_array = PoolByteArray();
 
 var integer_array = PoolIntArray();
 
-#var movement_speed = 5;
-#var current_score=0b0;
-#var high_score = 0b0 setget _set_h_s;
-#var boss_health = 3000;
-#var enemy_c_health = 0b0;
 
-#var bullets = 0;
-#var speed_increament_fac = int(0b11110011);
 
 onready var x_ratio;
 onready var y_ratio;
