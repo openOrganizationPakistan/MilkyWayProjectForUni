@@ -43,6 +43,7 @@ func _ready():
 				if not $sounds/high_score.playing:
 					$sounds/high_score.play();
 	$soundButton.pressed = not bool(Global.byte_array[38]);
+	_calc_spd_inc_fac(Global.byte_array[35]);
 	
 ############# play button pressed actions ########
 func _on_Button_pressed():

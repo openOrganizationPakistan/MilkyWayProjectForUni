@@ -100,6 +100,7 @@ expand_icon = true
 
 [node name="soundButton" parent="." instance=ExtResource( 10 )]
 rect_scale = Vector2( 2, 2 )
+
 [connection signal="item_selected" from="VBoxContainer/ModeButton" to="." method="_on_MenuButton_item_selected"]
 [connection signal="pressed" from="VBoxContainer/ModeButton" to="." method="_on_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/PlayerButton" to="." method="_on_MenuButton2_item_selected"]
