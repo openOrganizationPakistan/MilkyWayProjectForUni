@@ -47,6 +47,12 @@ func _process(_delta):
 		1:
 			pass;
 	
+func _instanciate_object(obj):
+	path_follow_2d.offset = randi();
+	var obj_instance = obj.instance();
+	obj_instance.position = path_follow_2d.position;
+	add_child(obj_instance);
+	
 func _on_virus_timeout():
 	if Global.byte_array[0] == 1:
 		queue_free();
@@ -54,17 +60,11 @@ func _on_virus_timeout():
 #		print("virus running");
 		virus_timer.wait_time = rand_range(1,6);
 		if Global.byte_array[25] == 1 :
-			path_follow_2d.offset = randi();
-			var virus_instance = virus_scn.instance();
-			virus_instance.position = path_follow_2d.position;
-			add_child(virus_instance);
+			_instanciate_object(virus_scn);
 		virus_timer.start();
 	
 func _load_boss():
-	var boss = boss_scn.instance();
-	path_follow_2d.offset = randi();
-	boss.position = path_follow_2d.position;
-	add_child(boss);
+	_instanciate_object(boss_scn);
 	
 func _on_boss_commings_timeout():
 	_load_boss();
@@ -73,17 +73,11 @@ func _on_todda_timeout():
 #	print("todda comming")
 	todda_timer.wait_time = rand_range(5,10);
 	if Global.byte_array[25] == 1:
-		var todda = todda_scn.instance();
-		path_follow_2d.offset = randi();
-		todda.position = path_follow_2d.position;
-		add_child(todda);
+		_instanciate_object(todda_scn);
 #		todda_timer.wait_time( int(rand_range(randi()%(50/Global.byte_array[8]),randi()%(150/Global.byte_array[8])) ));
 	todda_timer.start();
 	
 func _on_fighter_timer_timeout():
 	fighter_timer.wait_time = rand_range(3,10);
-	var fighter = fighter_scn.instance();
-	path_follow_2d.offset = randi();
-	fighter.position = path_follow_2d.position;
-	add_child(fighter);
+	_instanciate_object(fighter_scn);
 	fighter_timer.start();

@@ -192,7 +192,7 @@ text = "♾"
 visible = false
 margin_top = 89.0
 margin_right = 480.0
-margin_bottom = 180.0
+margin_bottom = 213.0
 size_flags_horizontal = 3
 
 [node name="phealth" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
@@ -250,10 +250,9 @@ __meta__ = {
 }
 
 [node name="play_count" type="Label" parent="VBoxContainer/status_hud/status_hud2"]
-visible = false
-margin_top = 188.0
+margin_top = 99.0
 margin_right = 480.0
-margin_bottom = 213.0
+margin_bottom = 124.0
 text = "play count: "
 uppercase = true
 __meta__ = {
@@ -314,6 +313,7 @@ position = Vector2( 18.8062, -15.9145 )
 rotation = 0.00140567
 
 [node name="sounds" parent="." instance=ExtResource( 9 )]
+
 [connection signal="toggled" from="VBoxContainer/statusContainer/Button" to="." method="_on_Button_toggled"]
 [connection signal="pressed" from="VBoxContainer/statusContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="timeout" from="Node2D/player_fire_timer" to="." method="_on_player_fire_timer_timeout"]

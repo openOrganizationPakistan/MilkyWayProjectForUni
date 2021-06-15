@@ -49,7 +49,6 @@ func _ready():
 func _on_Button_pressed():
 	#reset values to default
 	Global.integer_array[1]= 0;
-#	Global.enemy_c_health= 0;
 	Global.byte_array[0] = 0;
 	Global.byte_array[9] = 0;
 	Global.byte_array[8] = 16;
@@ -59,9 +58,7 @@ func _on_Button_pressed():
 	Global.byte_array[26] = 7;
 	Global.integer_array[4] = 0;
 	var _levels_scn = get_tree().change_scene("res://Scenes/Main_Scene.tscn");
-#	Global.byte_array[1] = index;
 	
-############################################################################
 ############### on_MenuButton_item_selected is connected to game mode #
 func _on_MenuButton_item_selected(index):
 	Global.byte_array[1] = index;
@@ -79,9 +76,7 @@ func _on_MenuButton2_item_selected(index):
 ################### Game difficulty ##########
 func _on_MenuButton3_item_selected(index):
 	Global.byte_array[33] = (index + 1) * 30;
-#	Global.byte_array[33] = (index + 1) * 1;
 	Global.byte_array[34] = (index + 1) * 90;
-#	Global.byte_array[34] = (index + 1) * 5;
 	Global.byte_array[5] = (15) / (index + 1);
 	Global.byte_array[21] = (5) * (index +1);
 	Global.byte_array[28] = Global.byte_array[21];
@@ -104,8 +99,6 @@ func _on_button_pressed():
 			sound_loop.loop = false
 			$sounds/click_01.play();
 	
-#######################################
-
 ############### mute button ################3
 func _on_soundButton_toggled(button_pressed):
 	if not button_pressed:

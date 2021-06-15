@@ -32,6 +32,7 @@ one_shot = true
 [node name="fighter_timer" type="Timer" parent="."]
 wait_time = 15.0
 one_shot = true
+
 [connection signal="timeout" from="virus" to="." method="_on_virus_timeout"]
 [connection signal="timeout" from="todda" to="." method="_on_todda_timeout"]
 [connection signal="timeout" from="boss_commings" to="." method="_on_boss_commings_timeout"]

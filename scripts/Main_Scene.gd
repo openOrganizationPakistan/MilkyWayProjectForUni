@@ -89,10 +89,10 @@ func _ready():
 	
 ########################### process is called every frame ###
 func _process(_delta):
+	p_health_bar.value = Global.byte_array[6] - 50 #Global.byte_array[6] contains player's current health.
+	########### below lines are for debugging purpose ########
 #	print_stray_nodes(); # to see if any memory leaks occure. ##########
 #	p_health_indic.text = "Health: " + str(Global.byte_array[6]-50); 	# Global.palyer_c_health p_health_inidc was a label which showed text instead of graphical bars.
-	p_health_bar.value = Global.byte_array[6] - 50 #Global.byte_array[6] contains player's current health.
-	########### below three lines for debugging purpose and to see cpu times and mamory leaks and fps perfomance
 #	cpu.text = "CPU: " + str(floor(Performance.get_monitor(1)*1000)) + " ms";
 #	mem.text = "Orphans: " + str(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT));
 #	fps.text = "FPS: " + str(Performance.get_monitor(0));
