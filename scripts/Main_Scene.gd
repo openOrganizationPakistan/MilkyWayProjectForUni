@@ -164,7 +164,6 @@ func _add_player():
 		1:
 			$sounds/engine.play();
 	
-###############################################
 ################### player fires ##############
 func _on_player_fire_timer_timeout():
 	_show_hud();
@@ -182,7 +181,7 @@ func _on_player_fire_timer_timeout():
 			1:
 				pass;
 	
-		######### logic for proceedural firespreading ######
+######### logic for proceedural firespreading ######
 func _spread_fire(fire):
 	match Global.byte_array[16]:
 		0:
@@ -242,7 +241,6 @@ func _spread_fire(fire):
 				fire[i].position = player.position + x_pos ;
 				add_child(fire[i]);
 	
-###########################################
 ########### update hud during gameplay ####
 func _show_hud():
 	if Global.integer_array[4] == 0:
@@ -279,7 +277,6 @@ func _show_hud():
 	if Global.byte_array[6] < 1:
 		player_fire_timer.stop();
 	
-##########################################################
 ############ instancing a powerup on timeout #############
 func _on_power_ups_timer_timeout():
 	power_ups_timer.wait_time = rand_range(power_ups_min_timer,power_ups_max_timer);
@@ -291,17 +288,14 @@ func _on_power_ups_timer_timeout():
 	power_up.position = path_follow.position;
 	add_child(power_up);
 	
-###########################################################
 ########### changing to main menu after gameover delay#####
 func _on_message_timer_timeout():
 	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
-###########################################################
 ################# hiding message indicating level #########
 func _on_level_changed_timeout():
 	label.hide();
 	
-###########################################################
 ############### Showing message ###########################
 func _display_message(message):
 	Global.integer_array[1] +=1 ;
@@ -309,7 +303,6 @@ func _display_message(message):
 	label.show();
 	level_changed_timer.start();
 	
-###########################################################
 ############## pause button ###############################
 func _on_Button_toggled(button_pressed):
 	if button_pressed:
@@ -326,4 +319,3 @@ func _on_Button_toggled(button_pressed):
 func _on_Button2_pressed():
 	var _temp = get_tree().change_scene("res://Scenes/UI.tscn");
 	
-###############################################################

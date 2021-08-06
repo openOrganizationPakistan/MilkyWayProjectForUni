@@ -81,7 +81,7 @@ func _on_Boss_area_entered(area):
 		$distroy.play("destroyed");
 		$shape.set_deferred("disabled",true);
 		rotation += deg2rad(1);
-		Global.current_score += 1000;
+		Global.integer_array[1] += 1000;
 		match Global.byte_array[38]:
 			1:
 				$distroy_sound.play();

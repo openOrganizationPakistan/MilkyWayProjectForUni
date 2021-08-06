@@ -66,7 +66,7 @@ func _on_virus_timeout():
 func _load_boss():
 	_instanciate_object(boss_scn);
 	
-func _on_boss_commings_timeout():
+func _on_boss_commings_timeout(): 
 	_load_boss();
 
 func _on_todda_timeout():
